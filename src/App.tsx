@@ -256,10 +256,16 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="border-t border-line">
-        <div className="mx-auto max-w-6xl px-5 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
-          <p className="font-semibold text-text">Leonardo Brasil</p>
-          <p>© {new Date().getFullYear()} Leonardo Brasil · Estrutura de vendas para negócio local.</p>
-          <a href="https://funilcomercial.com" target="_blank" rel="noreferrer" className="hover:text-text transition-colors">Funil Comercial ↗</a>
+        <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-muted">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="font-semibold text-text">Leonardo Brasil</p>
+            <a href="mailto:contato@leonardobrasil.com.br" className="hover:text-text transition-colors">contato@leonardobrasil.com.br</a>
+            <a href="https://funilcomercial.com" target="_blank" rel="noreferrer" className="hover:text-text transition-colors">Funil Comercial ↗</a>
+          </div>
+          <div className="mt-6 pt-6 border-t border-line text-center text-xs leading-relaxed text-muted/80">
+            <p>LEONARDO FERRAZ DA SILVA BRASIL · CNPJ 65.993.728/0001-07</p>
+            <p className="mt-1">© {new Date().getFullYear()} · Estrutura de vendas para negócio local · leonardobrasil.com.br</p>
+          </div>
         </div>
       </footer>
 
