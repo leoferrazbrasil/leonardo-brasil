@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).
 const WHATSAPP_NUMBER = "5551992568861";
@@ -263,6 +264,13 @@ export default function App() {
             <a href="https://funilcomercial.com" target="_blank" rel="noreferrer" className="hover:text-text transition-colors">Funil Comercial ↗</a>
           </div>
           <div className="mt-6 pt-6 border-t border-line text-center text-xs leading-relaxed text-muted/80">
+            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 mb-3">
+              <Link to="/termos" className="hover:text-text transition-colors">Termos</Link>
+              <span className="text-line-strong">·</span>
+              <Link to="/privacidade" className="hover:text-text transition-colors">Privacidade</Link>
+              <span className="text-line-strong">·</span>
+              <Link to="/exclusao-de-dados" className="hover:text-text transition-colors">Exclusão de Dados</Link>
+            </div>
             <p>LEONARDO FERRAZ DA SILVA BRASIL · CNPJ 65.993.728/0001-07</p>
             <p className="mt-1">© {new Date().getFullYear()} · Estrutura de vendas para negócio local · leonardobrasil.com.br</p>
           </div>
