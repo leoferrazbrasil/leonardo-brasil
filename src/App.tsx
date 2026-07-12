@@ -143,11 +143,11 @@ export default function App() {
 
         {/* FAIXA 4 CAMADAS (resumo) */}
         <section className="border-y border-line bg-panel/40">
-          <div className="mx-auto max-w-6xl px-5 py-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-semibold tracking-wide">
+          <div className="mx-auto max-w-6xl px-5 py-5 grid grid-cols-2 place-items-center gap-x-6 gap-y-3 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-6 sm:gap-y-2 text-sm font-semibold tracking-wide">
             {CAMADAS.map((c, i) => (
               <span key={c.nome} className="flex items-center gap-6 text-muted">
                 <span><span className="text-accent-400">{c.nome}</span></span>
-                {i < CAMADAS.length - 1 && <span className="text-line-strong">·</span>}
+                {i < CAMADAS.length - 1 && <span className="hidden sm:inline text-line-strong">·</span>}
               </span>
             ))}
           </div>
