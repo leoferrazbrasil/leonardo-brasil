@@ -246,8 +246,8 @@ export default function App() {
             <div className="relative">
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight">Vamos montar a sua estrutura?</h2>
               <p className="mt-4 text-muted text-lg max-w-xl mx-auto">Comece pelo diagnóstico gratuito. Em poucos minutos no WhatsApp eu te mostro onde está a venda que você perde hoje.</p>
-              <a href={WA_DIAG} target="_blank" rel="noreferrer" className="mt-8 inline-flex justify-center items-center gap-2.5 rounded-full bg-accent px-9 py-4 text-lg font-bold text-white hover:bg-accent-600 transition-all active:scale-95 shadow-[0_0_50px_rgba(59,130,246,0.4)]">
-                <WhatsApp className="w-6 h-6" /> Diagnóstico gratuito no WhatsApp
+              <a href={WA_DIAG} target="_blank" rel="noreferrer" className="mt-8 inline-flex w-full sm:w-auto justify-center items-center gap-2 sm:gap-2.5 rounded-full bg-accent px-6 py-3.5 text-sm sm:px-9 sm:py-4 sm:text-lg font-bold text-white hover:bg-accent-600 transition-all active:scale-95 shadow-[0_0_50px_rgba(59,130,246,0.4)]">
+                <WhatsApp className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" /> Diagnóstico gratuito no WhatsApp
               </a>
             </div>
           </div>
