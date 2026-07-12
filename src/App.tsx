@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-// ⚠️ TODO Leonardo Brasil: troque pelo SEU número pessoal de WhatsApp (só dígitos, com DDI 55).
-// Enquanto não trocar, os CTAs apontam para o número atual como placeholder.
-const WHATSAPP_NUMBER = "5551996737359";
+// WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).
+const WHATSAPP_NUMBER = "5551992568861";
 
 const waLink = (msg: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WA_DIAG = waLink("Olá, Leonardo! Quero um diagnóstico gratuito da estrutura de vendas do meu negócio.");
