@@ -1,0 +1,167 @@
+import express from 'express';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { getIntegrationStatus, sanitizeClaudeMessages } from './config.mjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const defaultDistDir = path.resolve(__dirname, '..', 'dist');
+
+function jsonError(response, status, error) {
+  response.status(status).json({ error });
+}
+
+function readRawBody(request) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    request.on('data', (chunk) => chunks.push(chunk));
+    request.on('end', () => resolve(Buffer.concat(chunks)));
+    request.on('error', reject);
+  });
+}
+
+function extractAnthropicText(data) {
+  return data?.content?.map((part) => part.text).filter(Boolean).join('\n') || '';
+}
+
+export function createBrasaApp(options = {}) {
+  const env = options.env || process.env;
+  const fetchImpl = options.fetchImpl || fetch;
+  const distDir = options.distDir || defaultDistDir;
+  const app = express();
+
+  app.disable('x-powered-by');
+  app.use(express.json({ limit: '1mb' }));
+
+  app.get('/api/health', (_request, response) => {
+    response.json({
+      ok: true,
+      version: env.npm_package_version || '0.1.0',
+      integrations: getIntegrationStatus(env)
+    });
+  });
+
+  app.post('/api/anthropic/messages', async (request, response) => {
+    if (!env.ANTHROPIC_API_KEY || !env.ANTHROPIC_MODEL) {
+      jsonError(response, 503, 'Anthropic não configurado.');
+      return;
+    }
+
+    const userText = String(request.body?.userText || '').trim();
+    const messages = sanitizeClaudeMessages(request.body?.messages);
+    if (userText) {
+      messages.push({ role: 'user', content: userText });
+    }
+
+    const anthropicResponse = await fetchImpl('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: env.ANTHROPIC_MODEL,
+        max_tokens: 900,
+        system: String(request.body?.systemPrompt || ''),
+        messages
+      })
+    });
+
+    const data = await anthropicResponse.json();
+    if (!anthropicResponse.ok) {
+      jsonError(response, anthropicResponse.status, data?.error?.message || 'Falha ao chamar Anthropic.');
+      return;
+    }
+
+    response.json({ text: extractAnthropicText(data) });
+  });
+
+  app.post('/api/elevenlabs/tts', async (request, response) => {
+    if (!env.ELEVENLABS_API_KEY || !env.ELEVENLABS_VOICE_ID) {
+      jsonError(response, 503, 'ElevenLabs não configurado.');
+      return;
+    }
+
+    const text = String(request.body?.text || '').trim();
+    if (!text) {
+      jsonError(response, 400, 'Texto vazio para TTS.');
+      return;
+    }
+
+    const ttsResponse = await fetchImpl(`https://api.elevenlabs.io/v1/text-to-speech/${env.ELEVENLABS_VOICE_ID}/stream`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'xi-api-key': env.ELEVENLABS_API_KEY
+      },
+      body: JSON.stringify({
+        text,
+        model_id: env.ELEVENLABS_MODEL_ID || 'eleven_multilingual_v2',
+        voice_settings: { stability: 0.48, similarity_boost: 0.78, style: 0.18, use_speaker_boost: true }
+      })
+    });
+
+    if (!ttsResponse.ok) {
+      jsonError(response, ttsResponse.status, 'Falha ao chamar ElevenLabs.');
+      return;
+    }
+
+    const audio = Buffer.from(await ttsResponse.arrayBuffer());
+    response.status(200).type(ttsResponse.headers.get('Content-Type') || 'audio/mpeg').send(audio);
+  });
+
+  app.post('/api/stt/transcribe', async (request, response) => {
+    if (!env.STT_API_KEY) {
+      jsonError(response, 503, 'STT não configurado.');
+      return;
+    }
+
+    const audio = await readRawBody(request);
+    const sttResponse = await fetchImpl('https://api.deepgram.com/v1/listen?model=nova-2&language=pt-BR&smart_format=true', {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${env.STT_API_KEY}`,
+        'Content-Type': request.headers['content-type'] || 'audio/webm'
+      },
+      body: audio
+    });
+
+    const data = await sttResponse.json();
+    if (!sttResponse.ok) {
+      jsonError(response, sttResponse.status, 'Falha ao chamar STT.');
+      return;
+    }
+
+    response.json({ text: data.results?.channels?.[0]?.alternatives?.[0]?.transcript || '' });
+  });
+
+  app.post('/api/webhooks/automation', async (request, response) => {
+    if (!env.BRASA_AUTOMATION_WEBHOOK_URL) {
+      response.json({ ok: true, skipped: true });
+      return;
+    }
+
+    try {
+      await fetchImpl(env.BRASA_AUTOMATION_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(request.body || {})
+      });
+      response.json({ ok: true, skipped: false });
+    } catch {
+      response.status(202).json({ ok: false, skipped: false });
+    }
+  });
+
+  if (existsSync(distDir)) {
+    app.use('/assets', express.static(path.join(distDir, 'assets'), { immutable: true, maxAge: '1y' }));
+    app.use(express.static(distDir, { maxAge: '1h' }));
+    app.get(/.*/, (_request, response) => {
+      response.sendFile(path.join(distDir, 'index.html'));
+    });
+  }
+
+  return app;
+}
