@@ -31,12 +31,52 @@ test('health returns integration booleans without secrets', async () => {
     version: '1.0.0',
     integrations: {
       anthropic: true,
+      geminiTts: false,
       elevenLabs: false,
       stt: false,
       automationWebhook: false
     }
   });
   assert.equal(JSON.stringify(body).includes('secret'), false);
+});
+
+test('tts route uses Gemini TTS first and returns wav audio', async () => {
+  const calls = [];
+  const app = createMainApp({
+    env: {
+      GEMINI_API_KEY: 'gemini-secret',
+      GEMINI_TTS_MODEL: 'gemini-2.5-flash-preview-tts',
+      GEMINI_TTS_VOICE: 'Charon'
+    },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      const pcm = Buffer.alloc(8, 1).toString('base64');
+      return new Response(JSON.stringify({ output_audio: { data: pcm } }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Senhor, voz Gemini ativa.' })
+  });
+
+  const audio = Buffer.from(await response.arrayBuffer());
+  const sent = JSON.parse(calls[0].init.body);
+
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('content-type'), 'audio/wav');
+  assert.equal(audio.subarray(0, 4).toString('ascii'), 'RIFF');
+  assert.equal(audio.subarray(8, 12).toString('ascii'), 'WAVE');
+  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/interactions');
+  assert.equal(calls[0].init.headers['x-goog-api-key'], 'gemini-secret');
+  assert.equal(sent.model, 'gemini-2.5-flash-preview-tts');
+  assert.equal(sent.input, 'Say in Portuguese with a formal, strategic and warm executive tone: Senhor, voz Gemini ativa.');
+  assert.deepEqual(sent.response_format, { type: 'audio' });
+  assert.deepEqual(sent.generation_config, { speech_config: [{ voice: 'Charon' }] });
 });
 
 test('cors allows the Brasa subdomain', async () => {

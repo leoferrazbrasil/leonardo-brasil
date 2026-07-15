@@ -22,6 +22,7 @@ function jsonError(response, status, error) {
 function getIntegrationStatus(env = process.env) {
   return {
     anthropic: Boolean(env.ANTHROPIC_API_KEY && env.ANTHROPIC_MODEL),
+    geminiTts: Boolean(env.GEMINI_API_KEY && env.GEMINI_TTS_MODEL),
     elevenLabs: Boolean(env.ELEVENLABS_API_KEY && env.ELEVENLABS_VOICE_ID),
     stt: Boolean(env.STT_API_KEY),
     automationWebhook: Boolean(env.BRASA_AUTOMATION_WEBHOOK_URL)
@@ -50,6 +51,93 @@ function readRawBody(request) {
 
 function extractAnthropicText(data) {
   return data?.content?.map((part) => part.text).filter(Boolean).join('\n') || '';
+}
+
+function extractGeminiAudioBase64(data) {
+  return (
+    data?.output_audio?.data ||
+    data?.outputAudio?.data ||
+    data?.candidates?.[0]?.content?.parts?.find((part) => part.inlineData?.data)?.inlineData?.data ||
+    ''
+  );
+}
+
+function createWavFromPcm(pcm, { channels = 1, sampleRate = 24000, bitsPerSample = 16 } = {}) {
+  const header = Buffer.alloc(44);
+  const byteRate = (sampleRate * channels * bitsPerSample) / 8;
+  const blockAlign = (channels * bitsPerSample) / 8;
+
+  header.write('RIFF', 0);
+  header.writeUInt32LE(36 + pcm.length, 4);
+  header.write('WAVE', 8);
+  header.write('fmt ', 12);
+  header.writeUInt32LE(16, 16);
+  header.writeUInt16LE(1, 20);
+  header.writeUInt16LE(channels, 22);
+  header.writeUInt32LE(sampleRate, 24);
+  header.writeUInt32LE(byteRate, 28);
+  header.writeUInt16LE(blockAlign, 32);
+  header.writeUInt16LE(bitsPerSample, 34);
+  header.write('data', 36);
+  header.writeUInt32LE(pcm.length, 40);
+
+  return Buffer.concat([header, pcm]);
+}
+
+async function requestGeminiTts({ env, fetchImpl, text }) {
+  const promptPrefix =
+    env.GEMINI_TTS_PROMPT_PREFIX || 'Say in Portuguese with a formal, strategic and warm executive tone:';
+  const geminiResponse = await fetchImpl('https://generativelanguage.googleapis.com/v1beta/interactions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': env.GEMINI_API_KEY
+    },
+    body: JSON.stringify({
+      model: env.GEMINI_TTS_MODEL,
+      input: `${promptPrefix} ${text}`,
+      response_format: { type: 'audio' },
+      generation_config: {
+        speech_config: [{ voice: env.GEMINI_TTS_VOICE || 'Charon' }]
+      }
+    })
+  });
+
+  const data = await geminiResponse.json();
+  if (!geminiResponse.ok) {
+    throw new Error(data?.error?.message || 'Falha ao chamar Gemini TTS.');
+  }
+
+  const audioBase64 = extractGeminiAudioBase64(data);
+  if (!audioBase64) {
+    throw new Error('Gemini TTS nao retornou audio.');
+  }
+
+  return createWavFromPcm(Buffer.from(audioBase64, 'base64'));
+}
+
+async function requestElevenLabsTts({ env, fetchImpl, text }) {
+  const ttsResponse = await fetchImpl(`https://api.elevenlabs.io/v1/text-to-speech/${env.ELEVENLABS_VOICE_ID}/stream`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'xi-api-key': env.ELEVENLABS_API_KEY
+    },
+    body: JSON.stringify({
+      text,
+      model_id: env.ELEVENLABS_MODEL_ID || 'eleven_multilingual_v2',
+      voice_settings: { stability: 0.48, similarity_boost: 0.78, style: 0.18, use_speaker_boost: true }
+    })
+  });
+
+  if (!ttsResponse.ok) {
+    throw new Error('Falha ao chamar ElevenLabs.');
+  }
+
+  return {
+    audio: Buffer.from(await ttsResponse.arrayBuffer()),
+    contentType: ttsResponse.headers.get('Content-Type') || 'audio/mpeg'
+  };
 }
 
 function applyCors(request, response, next) {
@@ -125,37 +213,36 @@ export function createMainApp(options = {}) {
   });
 
   app.post('/api/elevenlabs/tts', async (request, response) => {
-    if (!env.ELEVENLABS_API_KEY || !env.ELEVENLABS_VOICE_ID) {
-      jsonError(response, 503, 'ElevenLabs nao configurado.');
-      return;
-    }
-
     const text = String(request.body?.text || '').trim();
     if (!text) {
       jsonError(response, 400, 'Texto vazio para TTS.');
       return;
     }
 
-    const ttsResponse = await fetchImpl(`https://api.elevenlabs.io/v1/text-to-speech/${env.ELEVENLABS_VOICE_ID}/stream`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'xi-api-key': env.ELEVENLABS_API_KEY
-      },
-      body: JSON.stringify({
-        text,
-        model_id: env.ELEVENLABS_MODEL_ID || 'eleven_multilingual_v2',
-        voice_settings: { stability: 0.48, similarity_boost: 0.78, style: 0.18, use_speaker_boost: true }
-      })
-    });
+    if (env.GEMINI_API_KEY && env.GEMINI_TTS_MODEL) {
+      try {
+        const audio = await requestGeminiTts({ env, fetchImpl, text });
+        response.status(200).type('audio/wav').send(audio);
+        return;
+      } catch {
+        if (!env.ELEVENLABS_API_KEY || !env.ELEVENLABS_VOICE_ID) {
+          jsonError(response, 502, 'Falha ao chamar Gemini TTS.');
+          return;
+        }
+      }
+    }
 
-    if (!ttsResponse.ok) {
-      jsonError(response, ttsResponse.status, 'Falha ao chamar ElevenLabs.');
+    if (!env.ELEVENLABS_API_KEY || !env.ELEVENLABS_VOICE_ID) {
+      jsonError(response, 503, 'TTS nao configurado.');
       return;
     }
 
-    const audio = Buffer.from(await ttsResponse.arrayBuffer());
-    response.status(200).type(ttsResponse.headers.get('Content-Type') || 'audio/mpeg').send(audio);
+    try {
+      const { audio, contentType } = await requestElevenLabsTts({ env, fetchImpl, text });
+      response.status(200).type(contentType).send(audio);
+    } catch {
+      jsonError(response, 502, 'Falha ao chamar ElevenLabs.');
+    }
   });
 
   app.post('/api/stt/transcribe', async (request, response) => {
