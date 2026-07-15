@@ -22,6 +22,7 @@ function jsonError(response, status, error) {
 function getIntegrationStatus(env = process.env) {
   return {
     anthropic: Boolean(env.ANTHROPIC_API_KEY && env.ANTHROPIC_MODEL),
+    geminiBrain: Boolean(env.GEMINI_API_KEY),
     geminiTts: Boolean(env.GEMINI_API_KEY && env.GEMINI_TTS_MODEL),
     elevenLabs: Boolean(env.ELEVENLABS_API_KEY && env.ELEVENLABS_VOICE_ID),
     stt: Boolean(env.STT_API_KEY),
@@ -53,6 +54,28 @@ function extractAnthropicText(data) {
   return data?.content?.map((part) => part.text).filter(Boolean).join('\n') || '';
 }
 
+function buildGeminiBrainInput(messages, userText) {
+  const lines = sanitizeClaudeMessages(messages).map((message) => `${message.role.toUpperCase()}: ${message.content}`);
+  const command = String(userText || '').trim();
+  if (command) {
+    lines.push(`USER: ${command}`);
+  }
+
+  return lines.join('\n');
+}
+
+function extractGeminiText(data) {
+  return (
+    data?.output_text ||
+    data?.outputText ||
+    data?.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text)
+      .filter(Boolean)
+      .join('\n') ||
+    ''
+  );
+}
+
 function extractGeminiAudioBase64(data) {
   return (
     data?.output_audio?.data ||
@@ -82,6 +105,34 @@ function createWavFromPcm(pcm, { channels = 1, sampleRate = 24000, bitsPerSample
   header.writeUInt32LE(pcm.length, 40);
 
   return Buffer.concat([header, pcm]);
+}
+
+async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, userText }) {
+  const geminiResponse = await fetchImpl('https://generativelanguage.googleapis.com/v1beta/interactions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': env.GEMINI_API_KEY
+    },
+    body: JSON.stringify({
+      model: env.GEMINI_MODEL || 'gemini-3.5-flash',
+      system_instruction: systemPrompt,
+      input: buildGeminiBrainInput(messages, userText),
+      store: false
+    })
+  });
+
+  const data = await geminiResponse.json();
+  if (!geminiResponse.ok) {
+    throw new Error(data?.error?.message || 'Falha ao chamar Gemini.');
+  }
+
+  const text = extractGeminiText(data);
+  if (!text) {
+    throw new Error('Gemini nao retornou texto.');
+  }
+
+  return text;
 }
 
 async function requestGeminiTts({ env, fetchImpl, text }) {
@@ -177,15 +228,35 @@ export function createMainApp(options = {}) {
   });
 
   app.post('/api/anthropic/messages', async (request, response) => {
-    if (!env.ANTHROPIC_API_KEY || !env.ANTHROPIC_MODEL) {
-      jsonError(response, 503, 'Anthropic nao configurado.');
-      return;
-    }
-
     const userText = String(request.body?.userText || '').trim();
     const messages = sanitizeClaudeMessages(request.body?.messages);
     if (userText) {
       messages.push({ role: 'user', content: userText });
+    }
+    const systemPrompt = String(request.body?.systemPrompt || '');
+
+    if (env.GEMINI_API_KEY) {
+      try {
+        const text = await requestGeminiBrain({
+          env,
+          fetchImpl,
+          systemPrompt,
+          messages: request.body?.messages,
+          userText
+        });
+        response.json({ text });
+        return;
+      } catch {
+        if (!env.ANTHROPIC_API_KEY || !env.ANTHROPIC_MODEL) {
+          jsonError(response, 502, 'Falha ao chamar Gemini.');
+          return;
+        }
+      }
+    }
+
+    if (!env.ANTHROPIC_API_KEY || !env.ANTHROPIC_MODEL) {
+      jsonError(response, 503, 'IA nao configurada.');
+      return;
     }
 
     const anthropicResponse = await fetchImpl('https://api.anthropic.com/v1/messages', {
@@ -198,7 +269,7 @@ export function createMainApp(options = {}) {
       body: JSON.stringify({
         model: env.ANTHROPIC_MODEL,
         max_tokens: 900,
-        system: String(request.body?.systemPrompt || ''),
+        system: systemPrompt,
         messages
       })
     });

@@ -31,6 +31,7 @@ test('health returns integration booleans without secrets', async () => {
     version: '1.0.0',
     integrations: {
       anthropic: true,
+      geminiBrain: false,
       geminiTts: false,
       elevenLabs: false,
       stt: false,
@@ -38,6 +39,47 @@ test('health returns integration booleans without secrets', async () => {
     }
   });
   assert.equal(JSON.stringify(body).includes('secret'), false);
+});
+
+test('assistant route uses Gemini brain first and returns text', async () => {
+  const calls = [];
+  const app = createMainApp({
+    env: {
+      GEMINI_API_KEY: 'gemini-secret',
+      GEMINI_MODEL: 'gemini-3.5-flash'
+    },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      return new Response(JSON.stringify({ output_text: 'Resposta Gemini.' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/anthropic/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      systemPrompt: 'Sistema do Brasa',
+      userText: 'Comando atual',
+      messages: [{ role: 'assistant', content: 'Resposta anterior' }, { role: 'user', content: 'Oi' }]
+    })
+  });
+
+  const body = await response.json();
+  const sent = JSON.parse(calls[0].init.body);
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(body, { text: 'Resposta Gemini.' });
+  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/interactions');
+  assert.equal(calls[0].init.headers['x-goog-api-key'], 'gemini-secret');
+  assert.equal(sent.model, 'gemini-3.5-flash');
+  assert.equal(sent.system_instruction, 'Sistema do Brasa');
+  assert.equal(sent.store, false);
+  assert.match(sent.input, /ASSISTANT: Resposta anterior/);
+  assert.match(sent.input, /USER: Oi/);
+  assert.match(sent.input, /USER: Comando atual/);
 });
 
 test('tts route uses Gemini TTS first and returns wav audio', async () => {
@@ -88,7 +130,7 @@ test('cors allows the Brasa subdomain', async () => {
   assert.equal(response.headers.get('access-control-allow-origin'), 'https://brasa.leonardobrasil.com.br');
 });
 
-test('anthropic route sends sanitized messages and returns text', async () => {
+test('assistant route falls back to Anthropic and returns text', async () => {
   const calls = [];
   const app = createMainApp({
     env: { ANTHROPIC_API_KEY: 'secret', ANTHROPIC_MODEL: 'claude-test' },
