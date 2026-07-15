@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "node server/index.mjs",
+    "start": "node app.js",
     "test": "node --test server/*.test.mjs",
     "verify": "npm run typecheck && npm run build && npm test",
     "preview": "vite preview",

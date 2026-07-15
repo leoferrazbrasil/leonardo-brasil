@@ -53,7 +53,9 @@ Como a Hostinger conecta a implantacao apenas ao dominio principal, a API segura
 - Front-end Brasa: `https://brasa.leonardobrasil.com.br`
 - API Node/Express: `https://leonardobrasil.com.br/api/*`
 - Configuracao Hostinger: Root `./`, build `npm run build`, saida `dist`, branch `main`
-- Runtime: o script `npm start` inicia `server/index.mjs`
+- Framework/preset da Hostinger: `Express.js` ou `Other`, nao `Vite`
+- Entrada/entry file: `app.js`
+- Runtime: o script `npm start` inicia `app.js`, que sobe `server/index.mjs`
 
 Variaveis necessarias no hPanel, sem commitar chaves reais:
 
