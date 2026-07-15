@@ -5,7 +5,7 @@ Landing de conversão para o domínio **leonardobrasil.com.br**.
 
 > Projeto **independente** do Funil Comercial (repositório e hospedagem separados). Vende o mesmo método (4 camadas: Presença · Aquisição · Conversão · Escala), com enquadramento de marca pessoal, para testar estratégias de conversão.
 
-**Stack:** Vite + React 18 + TypeScript + Tailwind 3. Estático, sem backend.
+**Stack:** Vite + React 18 + TypeScript + Tailwind 3 + Express para `/api/*`.
 
 ## Antes de publicar (2 ajustes)
 
@@ -43,7 +43,30 @@ O `public/.htaccess` (SPA + cache) é publicado junto no build. Duas formas:
 1. `npm run build` local.
 2. Suba o conteúdo de **`dist/`** (incluindo o `.htaccess`) para a pasta pública do domínio (`public_html` ou a raiz do site `leonardobrasil.com.br`).
 
-> Variáveis de ambiente: **nenhuma** (site estático, sem Supabase/segredos).
+> O site principal não usa segredos no front-end. As variáveis sensíveis do Brasa ficam apenas no ambiente da Hostinger.
+
+## Brasa no subdominio
+
+O Brasa vive como artefato estatico em `public/brasa/`, publicado junto ao build raiz em `dist/brasa/`.
+Como a Hostinger conecta a implantacao apenas ao dominio principal, a API segura roda no dominio raiz:
+
+- Front-end Brasa: `https://brasa.leonardobrasil.com.br`
+- API Node/Express: `https://leonardobrasil.com.br/api/*`
+- Configuracao Hostinger: Root `./`, build `npm run build`, saida `dist`, branch `main`
+- Runtime: o script `npm start` inicia `server/index.mjs`
+
+Variaveis necessarias no hPanel, sem commitar chaves reais:
+
+```env
+NODE_ENV=production
+ANTHROPIC_API_KEY=
+ANTHROPIC_MODEL=claude-sonnet-4-5
+ELEVENLABS_API_KEY=
+ELEVENLABS_VOICE_ID=
+ELEVENLABS_MODEL_ID=eleven_multilingual_v2
+STT_API_KEY=
+BRASA_AUTOMATION_WEBHOOK_URL=
+```
 
 ## Estrutura
 

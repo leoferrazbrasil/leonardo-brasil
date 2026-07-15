@@ -1,5 +1,6 @@
 import { buildSystemPrompt } from '../lib/systemPrompt';
 import type { BrainNote, ChatMessage } from '../types/brain';
+import { getApiUrl } from './apiBase';
 
 export interface AssistantReplyInput {
   notes: BrainNote[];
@@ -16,7 +17,7 @@ export async function requestAssistantReply(input: AssistantReplyInput): Promise
   });
 
   try {
-    const response = await fetch('/api/anthropic/messages', {
+    const response = await fetch(getApiUrl('/api/anthropic/messages'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

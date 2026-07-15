@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
+import { getApiUrl } from '../services/apiBase';
 
 interface SpeechCaptureOptions {
   disabled: boolean;
@@ -34,7 +35,7 @@ export function useSpeechCapture({ disabled, onTranscript }: SpeechCaptureOption
       stream.getTracks().forEach((track) => track.stop());
       const audio = new Blob(chunksRef.current, { type: 'audio/webm' });
       try {
-        const response = await fetch('/api/stt/transcribe', {
+        const response = await fetch(getApiUrl('/api/stt/transcribe'), {
           method: 'POST',
           headers: { 'Content-Type': 'audio/webm' },
           body: audio

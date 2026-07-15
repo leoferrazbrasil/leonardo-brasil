@@ -1,10 +1,12 @@
+import { getApiUrl } from './apiBase';
+
 export async function speakWithElevenLabs(text: string, signal?: AbortSignal): Promise<void> {
   if (!text.trim()) {
     return;
   }
 
   try {
-    const response = await fetch('/api/elevenlabs/tts', {
+    const response = await fetch(getApiUrl('/api/elevenlabs/tts'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
