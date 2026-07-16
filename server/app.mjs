@@ -6,6 +6,15 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const defaultDistDir = path.resolve(__dirname, '..', 'dist');
+const defaultBrainTimeoutMs = 15000;
+const defaultTtsTimeoutMs = 9000;
+const defaultTtsCircuitOpenMs = 300000;
+
+const ttsCircuit = {
+  openUntil: 0,
+  status: 0,
+  reason: ''
+};
 
 const allowedOrigins = new Set([
   'https://brasa.leonardobrasil.com.br',
@@ -19,6 +28,42 @@ function jsonError(response, status, error) {
   response.status(status).json({ error });
 }
 
+class TimeoutError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'TimeoutError';
+    this.status = 504;
+  }
+}
+
+function parsePositiveInteger(value, fallback) {
+  const parsed = Number(value);
+  if (Number.isFinite(parsed) && parsed > 0) {
+    return parsed;
+  }
+
+  return fallback;
+}
+
+function getTtsCircuitSnapshot(now = Date.now()) {
+  if (ttsCircuit.openUntil <= now) {
+    return { open: false, openUntil: null, status: 0, reason: '' };
+  }
+
+  return {
+    open: true,
+    openUntil: new Date(ttsCircuit.openUntil).toISOString(),
+    status: ttsCircuit.status || 503,
+    reason: ttsCircuit.reason
+  };
+}
+
+export function resetTtsCircuitForTests() {
+  ttsCircuit.openUntil = 0;
+  ttsCircuit.status = 0;
+  ttsCircuit.reason = '';
+}
+
 function getIntegrationStatus(env = process.env) {
   return {
     anthropic: Boolean(env.ANTHROPIC_API_KEY && env.ANTHROPIC_MODEL),
@@ -28,6 +73,49 @@ function getIntegrationStatus(env = process.env) {
     stt: Boolean(env.STT_API_KEY),
     automationWebhook: Boolean(env.BRASA_AUTOMATION_WEBHOOK_URL)
   };
+}
+
+function getRuntimeStatus() {
+  const circuit = getTtsCircuitSnapshot();
+  return {
+    ttsCircuitOpen: circuit.open,
+    ttsCircuitOpenUntil: circuit.openUntil
+  };
+}
+
+function logTelemetry(event, fields = {}) {
+  console.info('[Brasa telemetry]', JSON.stringify({ event, at: new Date().toISOString(), ...fields }));
+}
+
+async function fetchWithTimeout(fetchImpl, url, init, timeoutMs, timeoutMessage) {
+  const controller = new AbortController();
+  const timeoutError = new TimeoutError(timeoutMessage);
+  let timeoutId;
+
+  try {
+    return await Promise.race([
+      fetchImpl(url, { ...init, signal: controller.signal }),
+      new Promise((_resolve, reject) => {
+        timeoutId = setTimeout(() => {
+          controller.abort();
+          reject(timeoutError);
+        }, timeoutMs);
+      })
+    ]);
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+function shouldOpenTtsCircuit(status) {
+  return status === 403 || status === 429 || status === 504 || status >= 500;
+}
+
+function openTtsCircuit(env, error) {
+  const openMs = parsePositiveInteger(env.BRASA_TTS_CIRCUIT_OPEN_MS, defaultTtsCircuitOpenMs);
+  ttsCircuit.openUntil = Date.now() + openMs;
+  ttsCircuit.status = error.status || 503;
+  ttsCircuit.reason = error.message || 'TTS indisponivel.';
 }
 
 function sanitizeClaudeMessages(messages) {
@@ -135,7 +223,8 @@ function createWavFromPcm(pcm, { channels = 1, sampleRate = 24000, bitsPerSample
 
 async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, userText }) {
   const model = env.GEMINI_MODEL || 'gemini-3.5-flash';
-  const geminiResponse = await fetchImpl(
+  const geminiResponse = await fetchWithTimeout(
+    fetchImpl,
     `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
     {
       method: 'POST',
@@ -151,7 +240,9 @@ async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, user
           temperature: 0.7
         }
       })
-    }
+    },
+    parsePositiveInteger(env.BRASA_BRAIN_TIMEOUT_MS, defaultBrainTimeoutMs),
+    'Gemini demorou demais.'
   );
 
   const data = await geminiResponse.json();
@@ -175,23 +266,29 @@ async function requestGeminiTts({ env, fetchImpl, text }) {
   const configuredModel = env.GEMINI_TTS_MODEL || 'gemini-3.1-flash-tts-preview';
   const model =
     configuredModel === 'gemini-2.5-flash-preview-tts' ? 'gemini-3.1-flash-tts-preview' : configuredModel;
-  const geminiResponse = await fetchImpl('https://generativelanguage.googleapis.com/v1beta/interactions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-goog-api-key': env.GEMINI_API_KEY
+  const geminiResponse = await fetchWithTimeout(
+    fetchImpl,
+    'https://generativelanguage.googleapis.com/v1beta/interactions',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': env.GEMINI_API_KEY
+      },
+      body: JSON.stringify({
+        model,
+        input: `${promptPrefix} ${text}`,
+        response_format: { type: 'audio' },
+        generation_config: {
+          speech_config: [{ voice: env.GEMINI_TTS_VOICE || 'Charon' }]
+        }
+      })
     },
-    body: JSON.stringify({
-      model,
-      input: `${promptPrefix} ${text}`,
-      response_format: { type: 'audio' },
-      generation_config: {
-        speech_config: [{ voice: env.GEMINI_TTS_VOICE || 'Charon' }]
-      }
-    })
-  });
+    parsePositiveInteger(env.BRASA_TTS_TIMEOUT_MS, defaultTtsTimeoutMs),
+    'Gemini TTS demorou demais.'
+  );
 
-  const data = await geminiResponse.json();
+  const data = await geminiResponse.json().catch(() => ({}));
   if (!geminiResponse.ok) {
     const error = new Error(data?.error?.message || 'Falha ao chamar Gemini TTS.');
     error.status = geminiResponse.status;
@@ -262,7 +359,8 @@ export function createMainApp(options = {}) {
     response.json({
       ok: true,
       version: env.npm_package_version || '1.0.0',
-      integrations: getIntegrationStatus(env)
+      integrations: getIntegrationStatus(env),
+      runtime: getRuntimeStatus()
     });
   });
 
@@ -275,6 +373,7 @@ export function createMainApp(options = {}) {
     const systemPrompt = String(request.body?.systemPrompt || '');
 
     if (env.GEMINI_API_KEY) {
+      const startedAt = Date.now();
       try {
         const text = await requestGeminiBrain({
           env,
@@ -283,9 +382,21 @@ export function createMainApp(options = {}) {
           messages: request.body?.messages,
           userText
         });
+        logTelemetry('brain_success', {
+          provider: 'gemini',
+          durationMs: Date.now() - startedAt,
+          inputChars: userText.length,
+          outputChars: text.length
+        });
         response.json({ text });
         return;
       } catch (error) {
+        logTelemetry('brain_failure', {
+          provider: 'gemini',
+          durationMs: Date.now() - startedAt,
+          status: error.status || 502,
+          error: error.message || 'Falha ao chamar Gemini.'
+        });
         jsonError(response, error.status || 502, error.message || 'Falha ao chamar Gemini.');
         return;
       }
@@ -328,11 +439,47 @@ export function createMainApp(options = {}) {
     }
 
     if (env.GEMINI_API_KEY) {
+      const circuit = getTtsCircuitSnapshot();
+      if (circuit.open) {
+        logTelemetry('tts_circuit_skip', {
+          provider: 'gemini',
+          status: circuit.status,
+          openUntil: circuit.openUntil,
+          reason: circuit.reason
+        });
+        jsonError(response, circuit.status, `Circuito de voz temporariamente aberto ate ${circuit.openUntil}.`);
+        return;
+      }
+
+      const startedAt = Date.now();
       try {
         const audio = await requestGeminiTts({ env, fetchImpl, text });
+        logTelemetry('tts_success', {
+          provider: 'gemini',
+          durationMs: Date.now() - startedAt,
+          textChars: text.length,
+          bytes: audio.length
+        });
         response.status(200).type('audio/wav').send(audio);
         return;
       } catch (error) {
+        if (shouldOpenTtsCircuit(error.status || 502)) {
+          openTtsCircuit(env, error);
+          const openedCircuit = getTtsCircuitSnapshot();
+          logTelemetry('tts_circuit_open', {
+            provider: 'gemini',
+            status: openedCircuit.status,
+            openUntil: openedCircuit.openUntil,
+            reason: openedCircuit.reason
+          });
+        }
+
+        logTelemetry('tts_failure', {
+          provider: 'gemini',
+          durationMs: Date.now() - startedAt,
+          status: error.status || 502,
+          error: error.message || 'Falha ao chamar Gemini TTS.'
+        });
         jsonError(response, error.status || 502, error.message || 'Falha ao chamar Gemini TTS.');
         return;
       }

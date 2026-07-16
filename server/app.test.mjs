@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
-import { createMainApp } from './app.mjs';
+import test, { afterEach } from 'node:test';
+import { createMainApp, resetTtsCircuitForTests } from './app.mjs';
+
+afterEach(() => {
+  resetTtsCircuitForTests();
+});
 
 async function request(app, path, options = {}) {
   const server = app.listen(0);
@@ -36,6 +40,10 @@ test('health returns integration booleans without secrets', async () => {
       elevenLabs: false,
       stt: false,
       automationWebhook: false
+    },
+    runtime: {
+      ttsCircuitOpen: false,
+      ttsCircuitOpenUntil: null
     }
   });
   assert.equal(JSON.stringify(body).includes('secret'), false);
@@ -282,6 +290,71 @@ test('tts route reports Gemini TTS errors without masking them with ElevenLabs f
 
   assert.equal(response.status, 404);
   assert.deepEqual(body, { error: 'Gemini TTS unavailable.' });
+  assert.equal(calls.length, 1);
+});
+
+test('tts route times out slow Gemini TTS requests', async () => {
+  const app = createMainApp({
+    env: {
+      GEMINI_API_KEY: 'gemini-secret',
+      BRASA_TTS_TIMEOUT_MS: '1'
+    },
+    fetchImpl: async (_url, init) =>
+      new Promise((_resolve, reject) => {
+        init.signal.addEventListener('abort', () => {
+          const error = new Error('aborted');
+          error.name = 'AbortError';
+          reject(error);
+        });
+      })
+  });
+
+  const response = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Teste lento.' })
+  });
+
+  const body = await response.json();
+
+  assert.equal(response.status, 504);
+  assert.deepEqual(body, { error: 'Gemini TTS demorou demais.' });
+});
+
+test('tts route opens a circuit after Gemini TTS quota errors', async () => {
+  const calls = [];
+  const app = createMainApp({
+    env: {
+      GEMINI_API_KEY: 'gemini-secret',
+      BRASA_TTS_CIRCUIT_OPEN_MS: '60000'
+    },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      return new Response(JSON.stringify({ error: { message: 'Resource exhausted.' } }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const firstResponse = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Primeira tentativa.' })
+  });
+  const secondResponse = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Segunda tentativa.' })
+  });
+
+  const firstBody = await firstResponse.json();
+  const secondBody = await secondResponse.json();
+
+  assert.equal(firstResponse.status, 429);
+  assert.deepEqual(firstBody, { error: 'Resource exhausted.' });
+  assert.equal(secondResponse.status, 429);
+  assert.match(secondBody.error, /circuito de voz/i);
   assert.equal(calls.length, 1);
 });
 

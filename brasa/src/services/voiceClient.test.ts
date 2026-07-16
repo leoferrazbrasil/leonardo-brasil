@@ -51,6 +51,7 @@ describe('speakWithElevenLabs', () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
     vi.restoreAllMocks();
     globalThis.fetch = originalFetch;
     vi.stubGlobal('Audio', originalAudio);
@@ -91,6 +92,26 @@ describe('speakWithElevenLabs', () => {
     );
 
     await speakWithElevenLabs('Senhor, teste.');
+
+    expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(1);
+  });
+
+  it('falls back to browser speech when the remote TTS proxy hangs', async () => {
+    vi.useFakeTimers();
+    globalThis.fetch = vi.fn(
+      (_url, init) =>
+        new Promise<Response>((_resolve, reject) => {
+          const signal = (init as RequestInit).signal as AbortSignal;
+          signal.addEventListener('abort', () => {
+            reject(new DOMException('aborted', 'AbortError'));
+          });
+        })
+    );
+
+    const speechPromise = speakWithElevenLabs('Senhor, teste.');
+
+    await vi.advanceTimersByTimeAsync(10_001);
+    await speechPromise;
 
     expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(1);
   });
