@@ -134,7 +134,9 @@ async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, user
 
   const data = await geminiResponse.json();
   if (!geminiResponse.ok) {
-    throw new Error(data?.error?.message || 'Falha ao chamar Gemini.');
+    const error = new Error(data?.error?.message || 'Falha ao chamar Gemini.');
+    error.status = geminiResponse.status;
+    throw error;
   }
 
   const text = extractGeminiText(data);
@@ -256,11 +258,9 @@ export function createMainApp(options = {}) {
         });
         response.json({ text });
         return;
-      } catch {
-        if (!env.ANTHROPIC_API_KEY || !env.ANTHROPIC_MODEL) {
-          jsonError(response, 502, 'Falha ao chamar Gemini.');
-          return;
-        }
+      } catch (error) {
+        jsonError(response, error.status || 502, error.message || 'Falha ao chamar Gemini.');
+        return;
       }
     }
 

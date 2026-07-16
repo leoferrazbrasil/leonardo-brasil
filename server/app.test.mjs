@@ -109,6 +109,36 @@ test('assistant route uses stable Gemini 2.5 Flash by default', async () => {
   assert.equal(sent.contents[0].parts[0].text, 'Oi');
 });
 
+test('assistant route reports Gemini errors without masking them with Anthropic fallback', async () => {
+  const calls = [];
+  const app = createMainApp({
+    env: {
+      GEMINI_API_KEY: 'gemini-secret',
+      ANTHROPIC_API_KEY: 'anthropic-secret',
+      ANTHROPIC_MODEL: 'claude-test'
+    },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      return new Response(JSON.stringify({ error: { message: 'Gemini model unavailable.' } }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/anthropic/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userText: 'Oi' })
+  });
+
+  const body = await response.json();
+
+  assert.equal(response.status, 400);
+  assert.deepEqual(body, { error: 'Gemini model unavailable.' });
+  assert.equal(calls.length, 1);
+});
+
 test('tts route uses Gemini TTS first and returns wav audio', async () => {
   const calls = [];
   const app = createMainApp({
