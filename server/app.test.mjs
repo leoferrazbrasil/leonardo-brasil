@@ -77,9 +77,12 @@ test('assistant route uses Gemini brain first and returns text', async () => {
   assert.equal(sent.model, 'gemini-3.5-flash');
   assert.equal(sent.system_instruction, 'Sistema do Brasa');
   assert.equal(sent.store, false);
-  assert.match(sent.input, /ASSISTANT: Resposta anterior/);
-  assert.match(sent.input, /USER: Oi/);
-  assert.match(sent.input, /USER: Comando atual/);
+  assert.deepEqual(sent.input, [
+    {
+      type: 'user_input',
+      content: 'ASSISTANT: Resposta anterior\nUSER: Oi\nUSER: Comando atual'
+    }
+  ]);
 });
 
 test('tts route uses Gemini TTS first and returns wav audio', async () => {

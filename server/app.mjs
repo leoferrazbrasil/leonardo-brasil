@@ -61,7 +61,7 @@ function buildGeminiBrainInput(messages, userText) {
     lines.push(`USER: ${command}`);
   }
 
-  return lines.join('\n');
+  return [{ type: 'user_input', content: lines.join('\n') }];
 }
 
 function extractGeminiText(data) {
