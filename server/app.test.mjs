@@ -82,7 +82,7 @@ test('assistant route uses Gemini brain first and returns text', async () => {
   ]);
 });
 
-test('assistant route uses stable Gemini 2.5 Flash by default', async () => {
+test('assistant route uses Gemini 3.5 Flash by default', async () => {
   const calls = [];
   const app = createMainApp({
     env: { GEMINI_API_KEY: 'gemini-secret' },
@@ -104,7 +104,7 @@ test('assistant route uses stable Gemini 2.5 Flash by default', async () => {
   const sent = JSON.parse(calls[0].init.body);
 
   assert.equal(response.status, 200);
-  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent');
+  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent');
   assert.equal(sent.contents[0].role, 'user');
   assert.equal(sent.contents[0].parts[0].text, 'Oi');
 });

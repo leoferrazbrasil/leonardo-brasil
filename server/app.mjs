@@ -112,7 +112,7 @@ function createWavFromPcm(pcm, { channels = 1, sampleRate = 24000, bitsPerSample
 }
 
 async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, userText }) {
-  const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const model = env.GEMINI_MODEL || 'gemini-3.5-flash';
   const geminiResponse = await fetchImpl(
     `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
     {
