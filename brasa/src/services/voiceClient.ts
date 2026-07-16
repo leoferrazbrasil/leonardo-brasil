@@ -1,5 +1,23 @@
 import { getApiUrl } from './apiBase';
 
+async function speakWithBrowserVoice(text: string): Promise<void> {
+  if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+    return;
+  }
+
+  await new Promise<void>((resolve) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 0.94;
+    utterance.pitch = 0.86;
+    utterance.onend = () => resolve();
+    utterance.onerror = () => resolve();
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
 export async function speakWithElevenLabs(text: string, signal?: AbortSignal): Promise<void> {
   if (!text.trim()) {
     return;
@@ -14,7 +32,12 @@ export async function speakWithElevenLabs(text: string, signal?: AbortSignal): P
     });
 
     if (!response.ok) {
-      throw new Error(`ElevenLabs proxy respondeu ${response.status}`);
+      throw new Error(`TTS proxy respondeu ${response.status}`);
+    }
+
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.startsWith('audio/')) {
+      throw new Error(`TTS proxy retornou ${contentType || 'conteudo desconhecido'}`);
     }
 
     const audioBlob = await response.blob();
@@ -22,17 +45,30 @@ export async function speakWithElevenLabs(text: string, signal?: AbortSignal): P
     const audio = new Audio(audioUrl);
 
     await new Promise<void>((resolve, reject) => {
-      audio.onended = () => {
+      const cleanup = () => {
         URL.revokeObjectURL(audioUrl);
+      };
+
+      audio.onended = () => {
+        cleanup();
         resolve();
       };
       audio.onerror = () => {
-        URL.revokeObjectURL(audioUrl);
+        cleanup();
         reject(new Error('Falha ao reproduzir TTS'));
       };
-      void audio.play();
+
+      audio.play().catch((error) => {
+        cleanup();
+        reject(error);
+      });
     });
-  } catch {
-    console.info('[Brasa] TTS ElevenLabs indisponível no momento. Texto:', text);
+  } catch (error) {
+    if (signal?.aborted) {
+      return;
+    }
+
+    console.info('[Brasa] TTS remoto indisponivel; usando voz local. Texto:', text, error);
+    await speakWithBrowserVoice(text);
   }
 }
