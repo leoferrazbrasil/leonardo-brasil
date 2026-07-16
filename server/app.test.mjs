@@ -206,6 +206,54 @@ test('tts route maps deprecated Gemini TTS model to current preview model', asyn
   assert.equal(sent.model, 'gemini-3.1-flash-tts-preview');
 });
 
+test('tts route accepts Gemini audio from output arrays', async () => {
+  const app = createMainApp({
+    env: { GEMINI_API_KEY: 'gemini-secret' },
+    fetchImpl: async () => {
+      const pcm = Buffer.alloc(8, 2).toString('base64');
+      return new Response(JSON.stringify({ output: [{ type: 'audio', data: pcm }] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Teste.' })
+  });
+
+  const audio = Buffer.from(await response.arrayBuffer());
+
+  assert.equal(response.status, 200);
+  assert.equal(audio.subarray(0, 4).toString('ascii'), 'RIFF');
+});
+
+test('tts route accepts Gemini audio nested in interaction steps', async () => {
+  const app = createMainApp({
+    env: { GEMINI_API_KEY: 'gemini-secret' },
+    fetchImpl: async () => {
+      const pcm = Buffer.alloc(8, 3).toString('base64');
+      return new Response(JSON.stringify({ steps: [{ output: [{ type: 'audio', data: pcm }] }] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Teste.' })
+  });
+
+  const audio = Buffer.from(await response.arrayBuffer());
+
+  assert.equal(response.status, 200);
+  assert.equal(audio.subarray(0, 4).toString('ascii'), 'RIFF');
+});
+
 test('tts route reports Gemini TTS errors without masking them with ElevenLabs fallback', async () => {
   const calls = [];
   const app = createMainApp({

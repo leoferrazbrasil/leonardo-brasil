@@ -81,12 +81,34 @@ function extractGeminiText(data) {
 }
 
 function extractGeminiAudioBase64(data) {
-  return (
+  const directAudio =
     data?.output_audio?.data ||
     data?.outputAudio?.data ||
-    data?.candidates?.[0]?.content?.parts?.find((part) => part.inlineData?.data)?.inlineData?.data ||
-    ''
-  );
+    data?.candidates?.[0]?.content?.parts?.find((part) => part.inlineData?.data)?.inlineData?.data;
+  if (directAudio) {
+    return directAudio;
+  }
+
+  const stack = [data];
+  while (stack.length > 0) {
+    const current = stack.pop();
+    if (!current || typeof current !== 'object') {
+      continue;
+    }
+
+    const type = String(current.type || current.mime_type || current.mimeType || '').toLowerCase();
+    if (type.includes('audio') && typeof current.data === 'string') {
+      return current.data;
+    }
+
+    for (const value of Object.values(current)) {
+      if (value && typeof value === 'object') {
+        stack.push(value);
+      }
+    }
+  }
+
+  return '';
 }
 
 function createWavFromPcm(pcm, { channels = 1, sampleRate = 24000, bitsPerSample = 16 } = {}) {
