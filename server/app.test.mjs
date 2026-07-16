@@ -50,7 +50,7 @@ test('assistant route uses Gemini brain first and returns text', async () => {
     },
     fetchImpl: async (url, init) => {
       calls.push({ url, init });
-      return new Response(JSON.stringify({ output_text: 'Resposta Gemini.' }), {
+      return new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: 'Resposta Gemini.' }] } }] }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -72,16 +72,13 @@ test('assistant route uses Gemini brain first and returns text', async () => {
 
   assert.equal(response.status, 200);
   assert.deepEqual(body, { text: 'Resposta Gemini.' });
-  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/interactions');
+  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent');
   assert.equal(calls[0].init.headers['x-goog-api-key'], 'gemini-secret');
-  assert.equal(sent.model, 'gemini-3.5-flash');
-  assert.equal(sent.system_instruction, 'Sistema do Brasa');
-  assert.equal(sent.store, false);
-  assert.deepEqual(sent.input, [
-    {
-      type: 'user_input',
-      content: 'ASSISTANT: Resposta anterior\nUSER: Oi\nUSER: Comando atual'
-    }
+  assert.deepEqual(sent.systemInstruction, { parts: [{ text: 'Sistema do Brasa' }] });
+  assert.deepEqual(sent.contents, [
+    { role: 'model', parts: [{ text: 'Resposta anterior' }] },
+    { role: 'user', parts: [{ text: 'Oi' }] },
+    { role: 'user', parts: [{ text: 'Comando atual' }] }
   ]);
 });
 
@@ -91,7 +88,7 @@ test('assistant route uses stable Gemini 2.5 Flash by default', async () => {
     env: { GEMINI_API_KEY: 'gemini-secret' },
     fetchImpl: async (url, init) => {
       calls.push({ url, init });
-      return new Response(JSON.stringify({ output_text: 'Resposta Gemini.' }), {
+      return new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: 'Resposta Gemini.' }] } }] }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -107,7 +104,9 @@ test('assistant route uses stable Gemini 2.5 Flash by default', async () => {
   const sent = JSON.parse(calls[0].init.body);
 
   assert.equal(response.status, 200);
-  assert.equal(sent.model, 'gemini-2.5-flash');
+  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent');
+  assert.equal(sent.contents[0].role, 'user');
+  assert.equal(sent.contents[0].parts[0].text, 'Oi');
 });
 
 test('tts route uses Gemini TTS first and returns wav audio', async () => {

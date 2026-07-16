@@ -54,14 +54,17 @@ function extractAnthropicText(data) {
   return data?.content?.map((part) => part.text).filter(Boolean).join('\n') || '';
 }
 
-function buildGeminiBrainInput(messages, userText) {
-  const lines = sanitizeClaudeMessages(messages).map((message) => `${message.role.toUpperCase()}: ${message.content}`);
+function buildGeminiBrainContents(messages, userText) {
+  const contents = sanitizeClaudeMessages(messages).map((message) => ({
+    role: message.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: message.content }]
+  }));
   const command = String(userText || '').trim();
   if (command) {
-    lines.push(`USER: ${command}`);
+    contents.push({ role: 'user', parts: [{ text: command }] });
   }
 
-  return [{ type: 'user_input', content: lines.join('\n') }];
+  return contents;
 }
 
 function extractGeminiText(data) {
@@ -72,6 +75,7 @@ function extractGeminiText(data) {
       ?.map((part) => part.text)
       .filter(Boolean)
       .join('\n') ||
+    data?.candidates?.[0]?.content?.parts?.[0]?.text ||
     ''
   );
 }
@@ -108,19 +112,25 @@ function createWavFromPcm(pcm, { channels = 1, sampleRate = 24000, bitsPerSample
 }
 
 async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, userText }) {
-  const geminiResponse = await fetchImpl('https://generativelanguage.googleapis.com/v1beta/interactions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-goog-api-key': env.GEMINI_API_KEY
-    },
-    body: JSON.stringify({
-      model: env.GEMINI_MODEL || 'gemini-2.5-flash',
-      system_instruction: systemPrompt,
-      input: buildGeminiBrainInput(messages, userText),
-      store: false
-    })
-  });
+  const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const geminiResponse = await fetchImpl(
+    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': env.GEMINI_API_KEY
+      },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+        contents: buildGeminiBrainContents(messages, userText),
+        generationConfig: {
+          maxOutputTokens: 900,
+          temperature: 0.7
+        }
+      })
+    }
+  );
 
   const data = await geminiResponse.json();
   if (!geminiResponse.ok) {
