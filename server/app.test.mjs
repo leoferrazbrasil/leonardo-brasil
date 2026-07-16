@@ -144,7 +144,6 @@ test('tts route uses Gemini TTS first and returns wav audio', async () => {
   const app = createMainApp({
     env: {
       GEMINI_API_KEY: 'gemini-secret',
-      GEMINI_TTS_MODEL: 'gemini-2.5-flash-preview-tts',
       GEMINI_TTS_VOICE: 'Charon'
     },
     fetchImpl: async (url, init) => {
@@ -172,10 +171,70 @@ test('tts route uses Gemini TTS first and returns wav audio', async () => {
   assert.equal(audio.subarray(8, 12).toString('ascii'), 'WAVE');
   assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/interactions');
   assert.equal(calls[0].init.headers['x-goog-api-key'], 'gemini-secret');
-  assert.equal(sent.model, 'gemini-2.5-flash-preview-tts');
+  assert.equal(sent.model, 'gemini-3.1-flash-tts-preview');
   assert.equal(sent.input, 'Say in Portuguese with a formal, strategic and warm executive tone: Senhor, voz Gemini ativa.');
   assert.deepEqual(sent.response_format, { type: 'audio' });
   assert.deepEqual(sent.generation_config, { speech_config: [{ voice: 'Charon' }] });
+});
+
+test('tts route maps deprecated Gemini TTS model to current preview model', async () => {
+  const calls = [];
+  const app = createMainApp({
+    env: {
+      GEMINI_API_KEY: 'gemini-secret',
+      GEMINI_TTS_MODEL: 'gemini-2.5-flash-preview-tts'
+    },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      const pcm = Buffer.alloc(8, 1).toString('base64');
+      return new Response(JSON.stringify({ output_audio: { data: pcm } }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Teste.' })
+  });
+
+  const sent = JSON.parse(calls[0].init.body);
+
+  assert.equal(response.status, 200);
+  assert.equal(sent.model, 'gemini-3.1-flash-tts-preview');
+});
+
+test('tts route reports Gemini TTS errors without masking them with ElevenLabs fallback', async () => {
+  const calls = [];
+  const app = createMainApp({
+    env: {
+      GEMINI_API_KEY: 'gemini-secret',
+      GEMINI_TTS_MODEL: 'gemini-3.1-flash-tts-preview',
+      ELEVENLABS_API_KEY: 'eleven-secret',
+      ELEVENLABS_VOICE_ID: 'voice-id'
+    },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      return new Response(JSON.stringify({ error: { message: 'Gemini TTS unavailable.' } }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/elevenlabs/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Teste.' })
+  });
+
+  const body = await response.json();
+
+  assert.equal(response.status, 404);
+  assert.deepEqual(body, { error: 'Gemini TTS unavailable.' });
+  assert.equal(calls.length, 1);
 });
 
 test('cors allows the Brasa subdomain', async () => {

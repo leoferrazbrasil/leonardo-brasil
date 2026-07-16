@@ -23,7 +23,7 @@ function getIntegrationStatus(env = process.env) {
   return {
     anthropic: Boolean(env.ANTHROPIC_API_KEY && env.ANTHROPIC_MODEL),
     geminiBrain: Boolean(env.GEMINI_API_KEY),
-    geminiTts: Boolean(env.GEMINI_API_KEY && env.GEMINI_TTS_MODEL),
+    geminiTts: Boolean(env.GEMINI_API_KEY),
     elevenLabs: Boolean(env.ELEVENLABS_API_KEY && env.ELEVENLABS_VOICE_ID),
     stt: Boolean(env.STT_API_KEY),
     automationWebhook: Boolean(env.BRASA_AUTOMATION_WEBHOOK_URL)
@@ -150,6 +150,9 @@ async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, user
 async function requestGeminiTts({ env, fetchImpl, text }) {
   const promptPrefix =
     env.GEMINI_TTS_PROMPT_PREFIX || 'Say in Portuguese with a formal, strategic and warm executive tone:';
+  const configuredModel = env.GEMINI_TTS_MODEL || 'gemini-3.1-flash-tts-preview';
+  const model =
+    configuredModel === 'gemini-2.5-flash-preview-tts' ? 'gemini-3.1-flash-tts-preview' : configuredModel;
   const geminiResponse = await fetchImpl('https://generativelanguage.googleapis.com/v1beta/interactions', {
     method: 'POST',
     headers: {
@@ -157,7 +160,7 @@ async function requestGeminiTts({ env, fetchImpl, text }) {
       'x-goog-api-key': env.GEMINI_API_KEY
     },
     body: JSON.stringify({
-      model: env.GEMINI_TTS_MODEL,
+      model,
       input: `${promptPrefix} ${text}`,
       response_format: { type: 'audio' },
       generation_config: {
@@ -168,7 +171,9 @@ async function requestGeminiTts({ env, fetchImpl, text }) {
 
   const data = await geminiResponse.json();
   if (!geminiResponse.ok) {
-    throw new Error(data?.error?.message || 'Falha ao chamar Gemini TTS.');
+    const error = new Error(data?.error?.message || 'Falha ao chamar Gemini TTS.');
+    error.status = geminiResponse.status;
+    throw error;
   }
 
   const audioBase64 = extractGeminiAudioBase64(data);
@@ -300,16 +305,14 @@ export function createMainApp(options = {}) {
       return;
     }
 
-    if (env.GEMINI_API_KEY && env.GEMINI_TTS_MODEL) {
+    if (env.GEMINI_API_KEY) {
       try {
         const audio = await requestGeminiTts({ env, fetchImpl, text });
         response.status(200).type('audio/wav').send(audio);
         return;
-      } catch {
-        if (!env.ELEVENLABS_API_KEY || !env.ELEVENLABS_VOICE_ID) {
-          jsonError(response, 502, 'Falha ao chamar Gemini TTS.');
-          return;
-        }
+      } catch (error) {
+        jsonError(response, error.status || 502, error.message || 'Falha ao chamar Gemini TTS.');
+        return;
       }
     }
 
