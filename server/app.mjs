@@ -115,7 +115,7 @@ async function requestGeminiBrain({ env, fetchImpl, systemPrompt, messages, user
       'x-goog-api-key': env.GEMINI_API_KEY
     },
     body: JSON.stringify({
-      model: env.GEMINI_MODEL || 'gemini-3.5-flash',
+      model: env.GEMINI_MODEL || 'gemini-2.5-flash',
       system_instruction: systemPrompt,
       input: buildGeminiBrainInput(messages, userText),
       store: false

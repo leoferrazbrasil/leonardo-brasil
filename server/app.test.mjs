@@ -85,6 +85,31 @@ test('assistant route uses Gemini brain first and returns text', async () => {
   ]);
 });
 
+test('assistant route uses stable Gemini 2.5 Flash by default', async () => {
+  const calls = [];
+  const app = createMainApp({
+    env: { GEMINI_API_KEY: 'gemini-secret' },
+    fetchImpl: async (url, init) => {
+      calls.push({ url, init });
+      return new Response(JSON.stringify({ output_text: 'Resposta Gemini.' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  });
+
+  const response = await request(app, '/api/anthropic/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userText: 'Oi' })
+  });
+
+  const sent = JSON.parse(calls[0].init.body);
+
+  assert.equal(response.status, 200);
+  assert.equal(sent.model, 'gemini-2.5-flash');
+});
+
 test('tts route uses Gemini TTS first and returns wav audio', async () => {
   const calls = [];
   const app = createMainApp({
