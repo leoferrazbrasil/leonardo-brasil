@@ -29,7 +29,7 @@ const Chevron = ({ className = "" }: { className?: string }) => (
 const CAMADAS = [
   { n: "01", nome: "Presença", frase: "Ser encontrado", desc: "Site profissional e Google Meu Negócio, quando procuram, é você que aparece, não o concorrente." },
   { n: "02", nome: "Aquisição", frase: "Atrair clientes", desc: "Anúncios e tráfego que trazem gente certa, com verba que trabalha, não botão impulsionado no escuro." },
-  { n: "03", nome: "Conversão", frase: "Fechar mais", desc: "WhatsApp organizado e CRM, cada lead acompanhado do primeiro 'oi' ao fechamento, sem venda perdida na gaveta." },
+  { n: "03", nome: "Conversão", frase: "Vender mais", desc: "WhatsApp organizado e CRM, cada lead acompanhado do primeiro 'oi' ao fechamento, sem venda perdida na gaveta." },
   { n: "04", nome: "Escala", frase: "Crescer sem caos", desc: "IA, rotina e processo para o funil rodar todo dia, sem depender de você lembrar de tudo." },
 ];
 
