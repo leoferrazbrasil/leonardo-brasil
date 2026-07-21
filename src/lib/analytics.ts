@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export function initAnalytics() {
   if (typeof window === "undefined") return;
 
@@ -35,6 +41,16 @@ export function initAnalytics() {
           if (!textParam.includes("Origem:")) {
             waUrl.searchParams.set("text", textParam + tracker);
             target.href = waUrl.toString();
+          }
+
+          // Dispara evento de conversão de Lead no GA4
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', {
+              event_category: 'WhatsApp',
+              event_label: 'Clique WhatsApp',
+              utm_source: source,
+              utm_campaign: campaign
+            });
           }
         } catch (err) {
           console.error("Erro ao rastrear clique no WhatsApp:", err);
