@@ -38,7 +38,18 @@ const PASSOS = [
   { t: "Acompanhamento", d: "Ajusto até o funil rodar de verdade: cliente te encontra, chama no WhatsApp e fecha com consistência." },
 ];
 
-const SEGMENTOS = ["Médicos e Clínicas", "Advogados", "Contadores", "Estética e Beleza", "Arquitetos e Engenheiros", "Prestadores de Serviço", "Comércio Local", "Autônomos"];
+const SEGMENTOS = [
+  "Nutricionistas", 
+  "Psicólogas", 
+  "Dentistas", 
+  "Fisioterapeutas", 
+  "Terapeutas", 
+  "Massoterapeutas", 
+  "Profissionais Liberais", 
+  "Prestadores de Serviço", 
+  "Autônomos", 
+  "Comércio Local"
+];
 
 const FAQ = [
   { q: "Isso é uma agência de marketing?", a: "Não. Agência entrega postagem. Eu monto estrutura de vendas: o caminho inteiro entre o cliente te encontrar, chamar no WhatsApp e fechar. Presença, aquisição, conversão e escala funcionando juntas." },
