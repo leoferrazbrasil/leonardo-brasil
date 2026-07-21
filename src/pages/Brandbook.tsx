@@ -361,9 +361,16 @@ export default function Brandbook() {
                     <Target size={24} />
                   </div>
                   <h3 className="text-xl font-bold text-text mb-3">O Cliente Ideal</h3>
-                  <p className="text-sm leading-relaxed text-muted">
-                    Profissionais da saúde e negócios locais (Psicólogas, Nutricionistas, Dentistas, Médicos). Operações que atendem e recebem leads pelo WhatsApp, mas que sofrem com a dependência de indicações e desorganização no follow-up.
+                  <p className="text-sm leading-relaxed text-muted mb-4">
+                    Negócios que atendem e recebem leads pelo WhatsApp, mas que sofrem com a dependência de indicações e desorganização no follow-up comercial.
                   </p>
+                  <div className="flex flex-wrap gap-2.5">
+                    {['Nutricionistas', 'Psicólogas', 'Dentistas', 'Fisioterapeutas', 'Terapeutas', 'Massoterapeutas', 'Profissionais Liberais', 'Prestadores de Serviço', 'Autônomos', 'Comércio Local'].map((badge) => (
+                      <span key={badge} className="px-3 py-1.5 rounded-lg border border-line bg-ink text-xs font-semibold text-text">
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 
                 <div className="rounded-2xl border border-line bg-panel p-8">
