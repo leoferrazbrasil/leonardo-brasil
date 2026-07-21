@@ -14,6 +14,7 @@ Bem-vindo ao cofre estratégico do projeto de marca pessoal **Leonardo Brasil** 
 
 ### [[1. Gestão e Produto]]
 Diretrizes gerais sobre o escopo da "Consultoria de Estrutura de Vendas", precificação, onboarding de clientes e planejamento de expansão.
+- **Nova oferta (2026-07-21):** [[Consultoria_Comercial_Estrategica]] — segunda linha de produto, divulgada via faixa de anúncio global no site.
 
 ### [[2. Engenharia]]
 Documentação técnica do site, decisões de arquitetura (Vite, React, Tailwind), deploy e scripts customizados.

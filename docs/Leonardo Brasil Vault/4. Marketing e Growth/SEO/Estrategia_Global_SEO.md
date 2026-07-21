@@ -52,3 +52,7 @@ Para gerar tração geográfica orgânica escalável (e fugir do alto CPC de Ads
 ## 5. Sitemaps Inteligentes
 
 O script `scripts/generate-sitemap.mjs` cruza os 7 nichos da saúde com as 25 cidades chave a cada novo *build*, e indexa todas as matrizes juntamente com os artigos do Blog. Atualmente, com um comando, disparamos centenas de Landing Pages únicas instantaneamente para o Google rastrear, sem necessidade de CMS manual.
+
+## 6. Cross-sell interno para a Consultoria Comercial Estratégica
+
+Desde 2026-07-21, uma faixa de anúncio global (topo de todas as páginas) direciona tráfego já capturado pelas Landing Pages de nicho para a nova oferta `/consultoria` (ver [[Consultoria_Comercial_Estrategica]]). É uma rota estática, adicionada manualmente a `STATIC_ROUTES` em `generate-sitemap.mjs` (não é gerada por cruzamento de dicionários como as LPs de nicho).

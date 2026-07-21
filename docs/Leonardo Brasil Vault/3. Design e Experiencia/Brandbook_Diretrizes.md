@@ -15,6 +15,7 @@ Esta página tem dupla funcionalidade:
   - **Fundo / Backgrounds:** Ink (#0a0a0a) e Panel (#171717)
   - **Destaque / Ação:** Accent Blue (#3b82f6)
   - **Legibilidade:** Text Primary (#fafafa) e Muted (#a1a1aa)
+  - **Destaque Premium (Gold):** #f2b705, adicionada em 2026-07-21 para diferenciar a oferta de [[Consultoria_Comercial_Estrategica]] (faixa de anúncio, CTAs e badges dessa página) do azul usado na oferta principal de Estrutura de Vendas.
 
 ## 🗣️ Tom de Voz & Posicionamento
 - **Somos:** Consultivos, pragmáticos, focados em processo comercial.
