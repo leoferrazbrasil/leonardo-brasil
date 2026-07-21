@@ -4,7 +4,8 @@
 // Site de marca pessoal (sem contas de usuário/CRM) — o contato ocorre via WhatsApp.
 
 import { useEffect, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { SeoHead } from "../components/SeoHead";
 
 const COMPANY = {
   brand: "Leonardo Brasil",
@@ -27,9 +28,11 @@ function Mark() {
 }
 
 function LegalLayout({ title, children }: { title: string; children: ReactNode }) {
+  const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <div className="min-h-screen bg-ink text-text flex flex-col font-sans">
+      <SeoHead title={title} canonicalUrl={`https://leonardobrasil.com.br${pathname}`} />
       <header className="sticky top-0 z-40 w-full border-b border-line bg-ink/80 backdrop-blur-xl">
         <div className="max-w-4xl mx-auto px-5 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 font-extrabold tracking-tight">

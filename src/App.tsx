@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { SeoHead } from "./components/SeoHead";
 
 // WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).
 const WHATSAPP_NUMBER = "5551992568861";
@@ -62,8 +63,22 @@ export default function App() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-ink text-text overflow-x-hidden">
+      <SeoHead schema={faqSchema} />
       {/* HEADER */}
       <header className="sticky top-0 z-40 border-b border-line bg-ink/80 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between">
