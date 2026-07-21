@@ -42,7 +42,13 @@ Para capturar leads Topo de Funil (dúvidas genéricas) e transferir Autoridade 
 - **Foco Primário (Saúde):** Os artigos iniciais foram pivotados para focar fortemente na captação High-Ticket de **Psicólogas** e **Nutricionistas**, atacando dores profundas (ex: desmame de planos de saúde, venda de programas vs consultas avulsas).
 - **Sinalização E-E-A-T:** Implementamos a exibição dinâmica do **Avatar do Autor** nas páginas do blog para reforçar a Experiência, Especialidade, Autoridade e Confiabilidade (E-E-A-T) exigidas pelo algoritmo atual do Google para nichos *YMYL* (Your Money or Your Life).
 
-## 4. Sitemaps Inteligentes
+## 4. SEO Programático (Multi-City SEO)
 
-O script `scripts/generate-sitemap.mjs` escaneia os dois dicionários (`niches.ts` e `blogData.ts`) via expressão regular (RegEx) a cada novo *build* (`npm run build`).
-Isso garante que **100% das páginas publicadas (tanto LPs quanto Artigos do Blog) sejam instantaneamente reportadas ao Google**, sem necessidade de manutenção humana no arquivo XML.
+Para gerar tração geográfica orgânica escalável (e fugir do alto CPC de Ads nas capitais), a estrutura agora roda uma malha de **Gerador Programático Local**.
+- **Cruzamento em Lote:** O sistema possui um dicionário de nichos (`niches.ts`) e um de regiões/cidades (`locations.ts`).
+- **Rotas Bivalentes:** A Landing Page principal agora atende tanto por rotas genéricas (`/estrutura-de-vendas-para-psicologas`) quanto por rotas locais (`/estrutura-de-vendas-para-psicologas-em-sao-paulo`).
+- **Injeção de Copy Dinâmica:** Quando a rota local é acionada, o React injeta o nome da cidade no `<title>` da aba e no `<H1>` da página de forma transparente, gerando hiper-relevância pro Lead local.
+
+## 5. Sitemaps Inteligentes
+
+O script `scripts/generate-sitemap.mjs` cruza os 7 nichos da saúde com as 25 cidades chave a cada novo *build*, e indexa todas as matrizes juntamente com os artigos do Blog. Atualmente, com um comando, disparamos centenas de Landing Pages únicas instantaneamente para o Google rastrear, sem necessidade de CMS manual.

@@ -286,6 +286,8 @@ export default function App() {
               <Link to="/privacidade" className="hover:text-text transition-colors">Privacidade</Link>
               <span className="text-line-strong">·</span>
               <Link to="/exclusao-de-dados" className="hover:text-text transition-colors">Exclusão de Dados</Link>
+              <span className="text-line-strong">·</span>
+              <Link to="/brandbook" className="hover:text-text transition-colors">Brandbook</Link>
             </div>
             <p>LEONARDO FERRAZ DA SILVA BRASIL · CNPJ 65.993.728/0001-07</p>
             <p className="mt-1">© {new Date().getFullYear()} · Estrutura de vendas para negócio local · leonardobrasil.com.br</p>

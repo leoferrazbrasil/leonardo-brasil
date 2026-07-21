@@ -59,8 +59,12 @@ function LegalLayout({ title, children }: { title: string; children: ReactNode }
           <p>© {new Date().getFullYear()} {COMPANY.legalName} · CNPJ {COMPANY.cnpj}</p>
           <div className="flex gap-5">
             <Link to="/termos" className="hover:text-text transition-colors">Termos</Link>
+            <span className="text-line-strong">·</span>
             <Link to="/privacidade" className="hover:text-text transition-colors">Privacidade</Link>
+            <span className="text-line-strong">·</span>
             <Link to="/exclusao-de-dados" className="hover:text-text transition-colors">Exclusão de Dados</Link>
+            <span className="text-line-strong">·</span>
+            <Link to="/brandbook" className="hover:text-text transition-colors">Brandbook</Link>
           </div>
         </div>
       </footer>
