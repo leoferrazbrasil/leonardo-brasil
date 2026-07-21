@@ -34,12 +34,14 @@ O componente genérico `NicheLanding.tsx` mapeia dinamicamente esse dicionário,
 5. **Nutricionistas (`/estrutura-de-vendas-para-nutricionistas`):** Fechamento de planos de acompanhamento longo prazo.
 6. **Contabilidade (`/estrutura-de-vendas-para-contabilidade`):** Captação B2B (Lucro Real/Presumido).
 
-## 3. Sitemaps Inteligentes
+## 3. O Blog: Topic Clusters (Headless Markdown)
 
-O script `scripts/generate-sitemap.mjs` escaneia o dicionário de nichos via expressão regular (RegEx) a cada novo *build* (`npm run build`).
-Isso garante que **100% das páginas publicadas sejam instantaneamente reportadas ao Google**, sem necessidade de manutenção humana no arquivo XML.
+Para capturar leads Topo de Funil (dúvidas genéricas) e transferir Autoridade para as LPs de Nicho, implementamos um sistema de Blog focado em performance absoluta.
+- Não usamos Banco de Dados ou CMS pesado; os artigos são lidos em tempo real via Markdown (`react-markdown`).
+- **Arquitetura Hub & Spoke:** O dicionário `blogData.ts` mapeia dois tipos de artigos: **Pilares** (Guias completos e definitivos) e **Satélites** (Dúvidas pontuais, ex: "Limites da OAB no Marketing").
+- Artigos Satélites interlinkam e transferem autoridade automaticamente para o respectivo Artigo Pilar, e o Artigo Pilar encaminha a intenção de compra para a **Landing Page de Nicho**.
 
----
+## 4. Sitemaps Inteligentes
 
-> [!SUCCESS] O Próximo Passo
-> Com a malha de Landing Pages base criada, o passo seguinte da estratégia de **Autoridade de Tópico (Topical Authority)** é a criação do Blog (Conteúdo Satélite) interlinkado de volta para essas LPs.
+O script `scripts/generate-sitemap.mjs` escaneia os dois dicionários (`niches.ts` e `blogData.ts`) via expressão regular (RegEx) a cada novo *build* (`npm run build`).
+Isso garante que **100% das páginas publicadas (tanto LPs quanto Artigos do Blog) sejam instantaneamente reportadas ao Google**, sem necessidade de manutenção humana no arquivo XML.

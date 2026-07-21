@@ -4,6 +4,7 @@ export interface BlogPost {
   excerpt: string;
   date: string;
   author: string;
+  authorAvatar?: string;
   category: string;
   imageUrl?: string;
   clusterType?: 'pillar' | 'satellite';
@@ -13,87 +14,86 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    slug: "como-captar-clientes-advocacia",
-    title: "Como Captar Clientes na Advocacia pela Internet (Guia Definitivo 2026)",
-    excerpt: "Pare de depender apenas de indicação. Aprenda a estruturar um funil comercial ético e alinhado ao provimento da OAB para atrair causas rentáveis.",
+    slug: "como-captar-pacientes-psicologia-particular",
+    title: "Como Captar Pacientes Particulares de Psicologia (Sem Ferir o CRP)",
+    excerpt: "Guia passo a passo para psicólogas saírem das plataformas de convênio e lotarem a agenda particular usando o Google.",
     date: "2026-07-20",
     author: "Leonardo Brasil",
-    category: "Advogados",
+    authorAvatar: "/avatar-leonardo-brasil.jpg",
+    category: "Psicólogas",
     clusterType: "pillar",
     content: `
-A maioria dos advogados são excelentes juristas, mas péssimos vendedores. Se o seu escritório depende exclusivamente de clientes indicados por amigos ou parentes, você não tem uma empresa: você tem um emprego instável.
+Muitas psicólogas entram em um ciclo perigoso de exaustão: trabalham horas seguidas atendendo por convênios ou plataformas de terapia online que pagam R$ 30 ou R$ 40 por sessão. Isso não é escalável e leva rapidamente ao *Burnout*.
 
-No mercado jurídico atual, a **captação de clientes na internet** não é mais um diferencial, é questão de sobrevivência. Mas como fazer isso sem ferir o Código de Ética e Disciplina da OAB?
+A verdade é dolorosa, mas simples: se a sua agenda não tem pacientes particulares dispostos a pagar o valor justo pela sua sessão, você tem um problema de **Aquisição e Posicionamento**. 
 
-Neste guia completo, vou te mostrar a estrutura de vendas exata que aplicamos para escritórios B2B e High-Ticket.
+Neste guia, vou te mostrar a estrutura exata que implementamos para psicólogas pararem de depender de indicações e começarem a atrair pacientes de alto valor éticamente (sem ferir o Código de Ética do CRP).
 
-## 1. O Paradoxo da OAB
-A OAB proíbe a mercantilização da profissão, o que significa que você não pode fazer anúncios do tipo *"Faça seu divórcio por R$ 500"*. No entanto, o provimento 205/2021 modernizou o entendimento sobre Marketing Jurídico, permitindo o **marketing de conteúdo**.
+## 1. O Código de Ética do CRP
+A principal trava da maioria das psicólogas é o medo de fazer marketing. O Conselho Regional de Psicologia permite a divulgação dos serviços, desde que seja feita de forma informativa e não sensacionalista. Você não pode garantir cura, nem usar termos mercantilistas agressivos.
 
-A chave aqui é **intenção**. Se o cliente está no Google pesquisando *"advogado empresarial em São Paulo"*, ele não quer ver conteúdo; ele quer contratar alguém. Estar no topo dessa busca através do Google Ads não fere a ética, pois é o cliente que está buscando o serviço (Captação Passiva).
+Mas adivinhe onde os pacientes procuram terapia quando estão no momento de maior necessidade (ex: crise de ansiedade, luto, término de relacionamento)? **No Google.** E estar no Google não fere a ética; é apenas oferecer a porta quando o paciente bate.
 
-## 2. A Estrutura de Vendas Jurídica
-Para parar de atender curiosos no WhatsApp e começar a fechar grandes contas, você precisa de um funil em 4 camadas:
+## 2. A Estrutura de Vendas para Psicólogas
+Para virar o jogo, aplicamos o método de 4 camadas:
 
-### Camada 1: Presença (O Motor de Busca)
-Seu site precisa ser uma Landing Page focada na dor do cliente. Em vez de *"Escritório Full Service"*, use *"Especialistas em Redução de Carga Tributária para Clínicas"*. Quando o cliente pesquisa a dor, ele te encontra.
+### Camada 1: Presença (Sua "Vitrine" Clínica)
+Você precisa de uma Landing Page focada na dor. Não um site dizendo *"Abordagem Cognitivo-Comportamental"*, mas sim um site dizendo *"Terapia focada no tratamento de Ansiedade Generalizada"*. O paciente não compra a abordagem, ele compra o alívio do sintoma.
 
-### Camada 2: Aquisição (O Funil)
-Campanhas de Google Ads na Rede de Pesquisa focadas em palavras-chave de **fundo de funil** (Alta Intenção). Deixamos as redes sociais apenas para construir Autoridade (Topo de Funil).
+### Camada 2: Aquisição (Google Ads Passivo)
+Subimos campanhas focadas na rede de pesquisa. Quando alguém buscar *"psicóloga especialista em ansiedade em [Sua Cidade]"*, o seu consultório aparecerá em primeiro. Ele já quer o atendimento, você não está "forçando" a venda.
 
-### Camada 3: Conversão (O Atendimento)
-O gargalo de 90% dos advogados: demorar 4 horas para responder o WhatsApp. Quem procura advogado tem urgência. Você precisa de um CRM para não perder nenhum contato e um fluxo de atendimento que qualifique o lead antes de você, o sócio, falar com ele.
+### Camada 3: Conversão (O Acolhimento)
+O primeiro contato no WhatsApp não é uma venda, é um **acolhimento**. Sua recepção (ou você) precisa ter um roteiro que gere empatia, valide a dor do paciente e conduza naturalmente para o agendamento da primeira consulta particular, quebrando as objeções de preço.
 
-### Camada 4: Escala (O Processo)
-Padronização da proposta de honorários e uso de automações (sem perder a personalização) para o follow-up de potenciais clientes.
+### Camada 4: Escala (O Controle)
+Uma vez que a agenda particular enche, você começa o processo de "desmame" dos planos de saúde e plataformas baratas. O foco muda para manter uma taxa de evasão baixa e fechar acompanhamentos longos.
 
 ---
 
-> Quer aplicar essa exata estrutura no seu escritório e começar a receber leads qualificados todas as semanas?
+> Quer aplicar essa estrutura no seu consultório e começar a receber contatos de pacientes particulares todos os dias?
 > 
-> 👉 **[Clique aqui para solicitar um diagnóstico comercial gratuito para o seu escritório](/estrutura-de-vendas-para-advogados)**.
+> 👉 **[Clique aqui para solicitar um diagnóstico comercial gratuito para o seu consultório](/estrutura-de-vendas-para-psicologas)**.
 `
   },
   {
-    slug: "limites-marketing-juridico-oab",
-    title: "O que a OAB permite no Marketing Jurídico? (Limites Práticos)",
-    excerpt: "Uma análise prática do Provimento 205/2021. Descubra o que é mercantilização e como estruturar anúncios éticos no Google Ads.",
+    slug: "vender-planos-nutricao-alto-valor",
+    title: "Como Nutricionistas Podem Vender Planos de Alto Valor (Sem Instagram)",
+    excerpt: "Você não precisa fazer dancinhas. Entenda como atrair clientes prontos para fechar acompanhamentos de 6 meses.",
     date: "2026-07-21",
     author: "Leonardo Brasil",
-    category: "Advogados",
-    clusterType: "satellite",
-    pillarSlug: "como-captar-clientes-advocacia",
+    authorAvatar: "/avatar-leonardo-brasil.jpg",
+    category: "Nutricionistas",
+    clusterType: "pillar",
     content: `
-O medo da sanção disciplinar paralisa muitos advogados. A grande dúvida é sempre a mesma: *"Se eu anunciar no Google, o Tribunal de Ética vai me notificar?"*
+A rotina clássica da Nutricionista: postar receita fit no Instagram, fazer 10 stories por dia, e torcer para alguém mandar um *Direct* perguntando "qual o valor da consulta?".
 
-A resposta curta é: **Não, desde que você faça da forma correta.**
+Quando o paciente vem por esse caminho, ele geralmente está buscando **preço**, e não acompanhamento. O resultado? Uma agenda lotada de "consultas avulsas" de pessoas que nunca retornam, prejudicando tanto o faturamento do consultório quanto o resultado clínico do paciente (que precisa de tempo para ter resultados com a dieta).
 
-O Novo Provimento (205/2021) do Conselho Federal da OAB trouxe clareza sobre o marketing jurídico na internet. Vamos desmistificar o que você *pode* e *não pode* fazer na sua estrutura de vendas.
+A solução é focar em **High-Ticket**: vender pacotes e planos de acompanhamento (3 a 6 meses).
 
-## O que é Mercantilização?
-A OAB proíbe a captação ativa imoderada e a mercantilização. Na prática, isso significa:
-- **Proibido:** Prometer causa ganha.
-- **Proibido:** Anunciar preços de honorários em redes sociais.
-- **Proibido:** Frases de efeito puramente comerciais ("Ligue já", "O melhor advogado da cidade").
+## Como Atrair o Cliente High-Ticket
+O cliente que compra um programa completo de emagrecimento ou performance esportiva de R$ 1.500 não escolhe o profissional porque viu uma dancinha. Ele escolhe por **Autoridade e Confiança**.
 
-## O que é Permitido (A Captação Passiva)
-O marketing de conteúdo e a informação são permitidos. Mais importante ainda: **o Google Ads (Links Patrocinados) é expressamente permitido pelo provimento.**
+### 1. Pare de brigar no Instagram, Vá para o Google
+No Google, as pessoas buscam por *"Nutricionista Esportiva perto de mim"* ou *"Especialista em Emagrecimento Feminino"*. Esse é um tráfego de Altíssima Intenção. Ele já decidiu que vai pagar um nutricionista, ele só está escolhendo **qual**.
 
-### Como estruturar o anúncio ético:
-Se você faz um anúncio para a palavra-chave *"advogado trabalhista patronal"*, e o texto do anúncio diz *"Defesa Trabalhista para Empresas - Advocacia Especializada - Fale com um Advogado"*, você está sendo meramente informativo para alguém que ativamente buscou por esse serviço. 
+### 2. O Processo de Fechamento (Consultoria, não Consulta)
+Quando o lead chega no WhatsApp, sua estrutura deve tratar aquele primeiro contato como uma "aplicação". Em vez de jogar o preço imediatamente, você ou sua equipe fazem perguntas qualificatórias: *"Há quanto tempo tenta emagrecer?"*, *"Qual a sua maior dificuldade hoje?"*.
 
-Isso é **Captação Passiva**. O cliente buscou você, você apenas se fez presente.
+Ao entender o contexto, a oferta muda de "Minha consulta é R$ 300" para "O seu caso exige o nosso Programa Metamorfose de 4 meses, que inclui protocolo alimentar, retornos mensais e acesso ao WhatsApp tira-dúvidas".
 
-### Redes Sociais vs. Google
-No Instagram, o usuário está buscando entretenimento. Interromper o feed dele com uma propaganda do seu escritório soa agressivo e esbarra na mercantilização.
-No Google, o usuário está com um problema (ex: recebimento de citação judicial) e busca a solução. Ele é um Lead Quente.
+## O Funil de Vendas Invisível
+Seu consultório precisa funcionar como um relógio:
+- **Anúncios** rodam no Google e atraem a demanda diária.
+- A **Landing Page** cria a autoridade e foca nos benefícios.
+- O **WhatsApp** acolhe, qualifica e fecha o pacote.
 
-## Conclusão
-O Google Ads, aliado a uma Landing Page informativa e sóbria, é o canal de aquisição mais seguro e rentável para a advocacia.
+É dessa forma que você passa a trabalhar menos horas, ganhando mais, com pacientes muito mais engajados no plano alimentar.
 
-> Quer descobrir como montar essa máquina de aquisição no seu escritório dentro das regras da OAB?
+> Pare de viver de consultas avulsas. Vamos estruturar um funil de atração e fechamento de planos de acompanhamento de alto valor para o seu consultório.
 > 
-> 👉 **[Veja o Guia Definitivo de Captação para Advogados](/blog/como-captar-clientes-advocacia)**
+> 👉 **[Faça um diagnóstico do comercial da sua clínica comigo aqui](/estrutura-de-vendas-para-nutricionistas)**
 `
   }
 ];

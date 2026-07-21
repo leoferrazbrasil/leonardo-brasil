@@ -107,5 +107,21 @@ export const NICHES: NicheData[] = [
     ],
     ctaText: "Diagnóstico para seu Escritório",
     waMessage: "Olá, Leonardo! Tenho um escritório de contabilidade e quero atrair contas B2B mais qualificadas."
+  },
+  {
+    slug: "psicologas",
+    title: "Estrutura de Vendas para Psicólogas | Leonardo Brasil",
+    description: "Pare de depender das plataformas de convênio que pagam muito pouco. Estruture seu posicionamento no Google para atrair pacientes particulares de alto valor.",
+    badge: "Psicólogas e Terapeutas",
+    h1: "Agenda refém de convênios e plataformas baratas? Falta ",
+    h1Highlight: "captação particular.",
+    subheadline: "Psi, você não precisa fazer dancinhas no Instagram ou se sujeitar a plataformas que desvalorizam a sua sessão. Com um funil de captação ético no Google, o paciente certo encontra seu consultório no exato momento da necessidade.",
+    painPoints: [
+      "Fuga das plataformas de terapia de baixo custo",
+      "Posicionamento exclusivo para Terapia Particular",
+      "Triagem estruturada no WhatsApp para fechar mais sessões"
+    ],
+    ctaText: "Diagnóstico para seu Consultório",
+    waMessage: "Olá, Leonardo! Sou psicóloga e quero um diagnóstico para atrair mais pacientes particulares."
   }
 ];
