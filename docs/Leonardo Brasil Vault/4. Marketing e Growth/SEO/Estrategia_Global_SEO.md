@@ -38,8 +38,9 @@ O componente genérico `NicheLanding.tsx` mapeia dinamicamente esse dicionário,
 
 Para capturar leads Topo de Funil (dúvidas genéricas) e transferir Autoridade para as LPs de Nicho, implementamos um sistema de Blog focado em performance absoluta.
 - Não usamos Banco de Dados ou CMS pesado; os artigos são lidos em tempo real via Markdown (`react-markdown`).
-- **Arquitetura Hub & Spoke:** O dicionário `blogData.ts` mapeia dois tipos de artigos: **Pilares** (Guias completos e definitivos) e **Satélites** (Dúvidas pontuais, ex: "Limites da OAB no Marketing").
-- Artigos Satélites interlinkam e transferem autoridade automaticamente para o respectivo Artigo Pilar, e o Artigo Pilar encaminha a intenção de compra para a **Landing Page de Nicho**.
+- **Arquitetura Hub & Spoke:** O dicionário `blogData.ts` mapeia dois tipos de artigos: **Pilares** (Guias completos e definitivos) e **Satélites** (Dúvidas pontuais).
+- **Foco Primário (Saúde):** Os artigos iniciais foram pivotados para focar fortemente na captação High-Ticket de **Psicólogas** e **Nutricionistas**, atacando dores profundas (ex: desmame de planos de saúde, venda de programas vs consultas avulsas).
+- **Sinalização E-E-A-T:** Implementamos a exibição dinâmica do **Avatar do Autor** nas páginas do blog para reforçar a Experiência, Especialidade, Autoridade e Confiabilidade (E-E-A-T) exigidas pelo algoritmo atual do Google para nichos *YMYL* (Your Money or Your Life).
 
 ## 4. Sitemaps Inteligentes
 

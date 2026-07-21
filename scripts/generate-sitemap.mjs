@@ -4,6 +4,7 @@ import path from "path";
 const SITEMAP_PATH = path.resolve(process.cwd(), "public/sitemap.xml");
 const NICHES_PATH = path.resolve(process.cwd(), "src/data/niches.ts");
 const BLOG_PATH = path.resolve(process.cwd(), "src/data/blogData.ts");
+const LOCATIONS_PATH = path.resolve(process.cwd(), "src/data/locations.ts");
 
 // Rotas estáticas
 const STATIC_ROUTES = [
@@ -19,9 +20,21 @@ function getDynamicNiches() {
   try {
     const content = fs.readFileSync(NICHES_PATH, "utf8");
     const matches = [...content.matchAll(/slug:\s*"([^"]+)"/g)];
-    return matches.map((m) => `/estrutura-de-vendas-para-${m[1]}`);
+    return matches.map((m) => m[1]); // Retorna apenas o slug cru
   } catch (error) {
     console.error("Erro ao ler niches.ts para o Sitemap", error);
+    return [];
+  }
+}
+
+// Lê o arquivo de cidades usando regex
+function getLocations() {
+  try {
+    const content = fs.readFileSync(LOCATIONS_PATH, "utf8");
+    const matches = [...content.matchAll(/slug:\s*"([^"]+)"/g)];
+    return matches.map((m) => m[1]); // Retorna apenas o slug cru
+  } catch (error) {
+    console.error("Erro ao ler locations.ts para o Sitemap", error);
     return [];
   }
 }
@@ -42,9 +55,20 @@ function generateSitemapXML() {
   const baseUrl = "https://leonardobrasil.com.br";
   const date = new Date().toISOString();
   
-  const dynamicRoutes = getDynamicNiches();
+  const nicheSlugs = getDynamicNiches();
+  const locationSlugs = getLocations();
   const blogRoutes = getDynamicBlogPosts();
-  const allRoutes = [...STATIC_ROUTES, ...dynamicRoutes, ...blogRoutes];
+  
+  const dynamicNicheRoutes = nicheSlugs.map(slug => `/estrutura-de-vendas-para-${slug}`);
+  const programmaticCityRoutes = [];
+  
+  nicheSlugs.forEach(niche => {
+    locationSlugs.forEach(city => {
+      programmaticCityRoutes.push(`/estrutura-de-vendas-para-${niche}-em-${city}`);
+    });
+  });
+
+  const allRoutes = [...STATIC_ROUTES, ...dynamicNicheRoutes, ...programmaticCityRoutes, ...blogRoutes];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;

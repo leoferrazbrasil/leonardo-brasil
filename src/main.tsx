@@ -26,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/blog" element={<BlogIndex />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/estrutura-de-vendas-para-:slug" element={<NicheLanding />} />
+            <Route path="/estrutura-de-vendas-para-:slug-em-:cidade" element={<NicheLanding />} />
             <Route path="/termos" element={<TermsPage />} />
             <Route path="/privacidade" element={<PrivacyPage />} />
             <Route path="/exclusao-de-dados" element={<DataDeletionPage />} />

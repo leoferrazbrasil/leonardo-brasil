@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { SeoHead } from "../components/SeoHead";
 import { NICHES } from "../data/niches";
+import { LOCATIONS } from "../data/locations";
 
 // WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).
 const WHATSAPP_NUMBER = "5551992568861";
@@ -50,17 +51,18 @@ const NAV = [
 ];
 
 export default function NicheLanding() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, cidade } = useParams<{ slug: string; cidade?: string }>();
   const [menu, setMenu] = useState(false);
   const [open, setOpen] = useState<number | null>(0);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]);
+  }, [slug, cidade]);
 
-  // Busca os dados do nicho
+  // Busca os dados do nicho e localização
   const nicheData = NICHES.find((n) => n.slug === slug);
+  const location = cidade ? LOCATIONS.find((l) => l.slug === cidade) : null;
 
   // Se a rota não bater com nenhum nicho registrado, manda pra home
   if (!nicheData) {
@@ -69,6 +71,15 @@ export default function NicheLanding() {
 
   const { badge, h1, h1Highlight, subheadline, painPoints, ctaText, waMessage, title, description } = nicheData;
   const WA_LINK = waLink(waMessage);
+
+  // Montagem Dinâmica com a Cidade
+  const locationSuffix = location ? ` em ${location.name}` : "";
+  const dynamicTitle = location 
+    ? title.replace(" | Leonardo Brasil", `${locationSuffix} | Leonardo Brasil`) 
+    : title;
+  const canonicalUrl = location 
+    ? `https://leonardobrasil.com.br/estrutura-de-vendas-para-${slug}-em-${cidade}`
+    : `https://leonardobrasil.com.br/estrutura-de-vendas-para-${slug}`;
 
   const scrollTo = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
@@ -92,9 +103,9 @@ export default function NicheLanding() {
   return (
     <div className="min-h-screen bg-ink text-text overflow-x-hidden font-sans">
       <SeoHead 
-        title={title} 
+        title={dynamicTitle} 
         description={description} 
-        canonicalUrl={`https://leonardobrasil.com.br/estrutura-de-vendas-para-${slug}`} 
+        canonicalUrl={canonicalUrl} 
         schema={faqSchema} 
       />
       
@@ -142,7 +153,7 @@ export default function NicheLanding() {
                 Especialista em Vendas · {badge}
               </span>
               <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black leading-[1.05] tracking-tight text-balance">
-                {h1}<span className="text-accent-400">{h1Highlight}</span>
+                {h1}<span className="text-accent-400">{h1Highlight}</span>{location && <span className="text-accent-400"> em {location.name}</span>}
               </h1>
               <p className="mt-6 text-lg text-muted leading-relaxed max-w-xl">
                 {subheadline}
