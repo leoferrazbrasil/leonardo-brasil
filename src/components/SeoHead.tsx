@@ -9,9 +9,9 @@ interface SeoHeadProps {
 
 export function SeoHead({ title, description, canonicalUrl, schema }: SeoHeadProps) {
   const defaultTitle = "Leonardo Brasil — Estrutura de Vendas para Negócios Locais";
-  const defaultDescription = "Leonardo Brasil monta a estrutura de vendas do seu negócio local — presença no Google, aquisição, conversão no WhatsApp e escala. Diagnóstico gratuito.";
+  const defaultDescription = "Leonardo Brasil monta a estrutura de vendas do seu negócio local, presença no Google, aquisição, conversão no WhatsApp e escala. Diagnóstico gratuito.";
   const defaultUrl = "https://leonardobrasil.com.br/";
-  
+
   const finalTitle = title ? `${title} | Leonardo Brasil` : defaultTitle;
   const finalDesc = description || defaultDescription;
   const finalUrl = canonicalUrl || defaultUrl;

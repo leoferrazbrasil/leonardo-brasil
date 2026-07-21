@@ -26,35 +26,35 @@ const Chevron = ({ className = "" }: { className?: string }) => (
 );
 
 const CAMADAS = [
-  { n: "01", nome: "Presença", frase: "Ser encontrado", desc: "Site profissional e Google Meu Negócio: quando procuram, é você que aparece — não o concorrente." },
-  { n: "02", nome: "Aquisição", frase: "Atrair clientes", desc: "Anúncios e tráfego que trazem gente certa, com verba que trabalha — não botão impulsionado no escuro." },
+  { n: "01", nome: "Presença", frase: "Ser encontrado", desc: "Site profissional e Google Meu Negócio: quando procuram, é você que aparece, não o concorrente." },
+  { n: "02", nome: "Aquisição", frase: "Atrair clientes", desc: "Anúncios e tráfego que trazem gente certa, com verba que trabalha, não botão impulsionado no escuro." },
   { n: "03", nome: "Conversão", frase: "Fechar mais", desc: "WhatsApp organizado e CRM: cada lead acompanhado do primeiro 'oi' ao fechamento, sem venda perdida na gaveta." },
-  { n: "04", nome: "Escala", frase: "Crescer sem caos", desc: "IA, rotina e processo para o funil rodar todo dia — sem depender de você lembrar de tudo." },
+  { n: "04", nome: "Escala", frase: "Crescer sem caos", desc: "IA, rotina e processo para o funil rodar todo dia, sem depender de você lembrar de tudo." },
 ];
 
 const PASSOS = [
   { t: "Diagnóstico gratuito", d: "Você me chama no WhatsApp e eu identifico exatamente onde o seu negócio está perdendo venda hoje." },
-  { t: "Montagem da estrutura", d: "Montamos camada por camada, começando pelo que mais trava — presença, aquisição, conversão ou escala." },
+  { t: "Montagem da estrutura", d: "Montamos camada por camada, começando pelo que mais trava, presença, aquisição, conversão ou escala." },
   { t: "Acompanhamento", d: "Ajusto até o funil rodar de verdade: cliente te encontra, chama no WhatsApp e fecha com consistência." },
 ];
 
 const SEGMENTOS = [
-  "Nutricionistas", 
-  "Psicólogas", 
-  "Dentistas", 
-  "Fisioterapeutas", 
-  "Terapeutas", 
-  "Massoterapeutas", 
-  "Profissionais Liberais", 
-  "Prestadores de Serviço", 
-  "Autônomos", 
+  "Nutricionistas",
+  "Psicólogas",
+  "Dentistas",
+  "Fisioterapeutas",
+  "Terapeutas",
+  "Massoterapeutas",
+  "Profissionais Liberais",
+  "Prestadores de Serviço",
+  "Autônomos",
   "Comércio Local"
 ];
 
 const FAQ = [
-  { q: "Isso é uma agência de marketing?", a: "Não. Agência entrega postagem. Eu monto estrutura de vendas: o caminho inteiro entre o cliente te encontrar, chamar no WhatsApp e fechar. Presença, aquisição, conversão e escala funcionando juntas." },
+  { q: "Isso é uma agência de marketing?", a: "Não. Agência entrega postagem. Eu monto estrutura de vendas: o caminho inteiro entre o cliente te encontrar, chamar no WhatsApp e comprar de você. Presença, aquisição, conversão e escala funcionando juntas." },
   { q: "Preciso contratar tudo de uma vez?", a: "Não. Começamos pela camada que mais trava o seu negócio hoje. Você entra pelo que precisa agora e evolui no seu ritmo." },
-  { q: "Quanto custa?", a: "O valor é fechado no diagnóstico, conforme o que o seu negócio precisa. Nada de pacote genérico — primeiro entendo o gargalo, depois proponho." },
+  { q: "Quanto custa?", a: "O valor é fechado no diagnóstico, conforme o que o seu negócio precisa. Nada de pacote genérico, primeiro entendo o gargalo, depois proponho." },
   { q: "Funciona pro meu segmento?", a: "Se você é um negócio local ou profissional liberal que recebe cliente pelo WhatsApp, depende de indicação ou precisa aparecer melhor no Google — funciona." },
 ];
 
@@ -137,7 +137,7 @@ export default function App() {
                 Seu concorrente não é melhor.<br />Ele só tem <span className="text-accent-400">estrutura</span>.
               </h1>
               <p className="mt-6 text-lg text-muted leading-relaxed max-w-xl">
-                Sou <strong className="text-text">Leonardo Brasil</strong>. Monto o caminho inteiro entre o cliente te <strong className="text-text">encontrar</strong>, chamar no seu <strong className="text-text">WhatsApp</strong> e <strong className="text-text">fechar</strong> — do Google ao atendimento organizado. O problema quase nunca é qualidade: é falta de estrutura de vendas.
+                Sou <strong className="text-text">Leonardo Brasil</strong>. Monto o caminho inteiro entre o cliente te <strong className="text-text">encontrar</strong>, chamar no seu <strong className="text-text">WhatsApp</strong> e <strong className="text-text">comprar de você</strong>, do Google ao atendimento organizado. O problema quase nunca é qualidade: é falta de estrutura de vendas.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <a href={WA_DIAG} target="_blank" rel="noreferrer" className="inline-flex justify-center items-center gap-2 rounded-full bg-accent px-7 py-4 text-base font-bold text-white hover:bg-accent-600 transition-all active:scale-95 shadow-[0_0_40px_rgba(59,130,246,0.35)]">
@@ -185,7 +185,7 @@ export default function App() {
         <section id="metodo" className="mx-auto max-w-6xl px-5 py-20 scroll-mt-16">
           <div className="max-w-2xl">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight">O método: 4 camadas que vendem juntas</h2>
-            <p className="mt-4 text-muted text-lg">Não é dica solta. É a engrenagem completa da sua estrutura de vendas — você entra pela camada que trava hoje.</p>
+            <p className="mt-4 text-muted text-lg">Não é dica solta. É a engrenagem completa da sua estrutura de vendas, você entra pela camada que trava hoje.</p>
           </div>
           <div className="mt-12 grid sm:grid-cols-2 gap-5">
             {CAMADAS.map((c) => (
@@ -225,7 +225,7 @@ export default function App() {
             <div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight">Você é bom no que faz.<br />Falta estrutura para vender.</h2>
               <p className="mt-5 text-muted text-lg leading-relaxed">
-                Se o seu WhatsApp virou uma gaveta de orçamentos esquecidos, se você depende de indicação e some do Google, ou se anuncia e não vê retorno — o gargalo não é talento. É estrutura. É isso que eu monto.
+                Se o seu WhatsApp virou uma gaveta de orçamentos esquecidos, se você depende de indicação e some do Google, ou se anuncia e não vê retorno, o gargalo não é talento. É estrutura. É isso que eu monto.
               </p>
               <a href={WA_INFO} target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-bold text-white hover:bg-accent-600 transition-all active:scale-95">
                 <WhatsApp className="w-5 h-5" /> Falar comigo
@@ -245,7 +245,7 @@ export default function App() {
         <section className="border-y border-line bg-panel/30">
           <div className="mx-auto max-w-4xl px-5 py-20 text-center">
             <p className="text-2xl sm:text-3xl font-bold leading-snug text-balance">
-              “Quem monta a estrutura, usa a própria estrutura. Não revendo ferramenta dos outros — <span className="text-accent-400">construí o meu próprio CRM</span> e entrego o mesmo método que uso todos os dias.”
+              “Quem monta a estrutura, usa a própria estrutura. Não revendo ferramenta dos outros, <span className="text-accent-400">construí o meu próprio CRM</span> e entrego o mesmo método que uso todos os dias.”
             </p>
             <p className="mt-6 text-muted font-semibold">Leonardo Brasil · Fundador do Funil Comercial</p>
           </div>
