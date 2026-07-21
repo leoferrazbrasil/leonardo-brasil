@@ -19,6 +19,14 @@ export default {
           400: "#60a5fa",
           300: "#93c5fd",
         },
+        // Dourado de destaque — usado com moderação (faixas de anúncio, selos), contraste premium com o navy.
+        gold: {
+          DEFAULT: "#f2b705",
+          600: "#d99e00",
+          500: "#f2b705",
+          400: "#ffcb3d",
+          300: "#ffdd7a",
+        },
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],

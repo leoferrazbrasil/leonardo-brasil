@@ -9,6 +9,7 @@ const LOCATIONS_PATH = path.resolve(process.cwd(), "src/data/locations.ts");
 // Rotas estáticas
 const STATIC_ROUTES = [
   "",
+  "/consultoria",
   "/termos",
   "/privacidade",
   "/exclusao-de-dados",
