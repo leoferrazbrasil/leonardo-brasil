@@ -28,7 +28,7 @@ const Chevron = ({ className = "" }: { className?: string }) => (
 const CAMADAS = [
   { n: "01", nome: "Presença", frase: "Ser encontrado", desc: "Site profissional e Google Meu Negócio otimizado. Quando seu cliente pesquisa pela solução, é você que aparece." },
   { n: "02", nome: "Aquisição", frase: "Atrair clientes", desc: "Anúncios desenhados para capturar pessoas no momento da dor/desejo, trazendo leads de alta intenção." },
-  { n: "03", nome: "Conversão", frase: "Fechar mais", desc: "WhatsApp estruturado e CRM: cada lead acompanhado do primeiro contato até o fechamento (follow-up)." },
+  { n: "03", nome: "Conversão", frase: "Fechar mais", desc: "WhatsApp estruturado e CRM, cada lead acompanhado do primeiro contato até o fechamento (follow-up)." },
   { n: "04", nome: "Escala", frase: "Crescer sem caos", desc: "Processos sistematizados e IA para escalar a captação sem depender 100% do seu tempo." },
 ];
 
@@ -74,10 +74,10 @@ export default function NicheLanding() {
 
   // Montagem Dinâmica com a Cidade
   const locationSuffix = location ? ` em ${location.name}` : "";
-  const dynamicTitle = location 
-    ? title.replace(" | Leonardo Brasil", `${locationSuffix} | Leonardo Brasil`) 
+  const dynamicTitle = location
+    ? title.replace(" | Leonardo Brasil", `${locationSuffix} | Leonardo Brasil`)
     : title;
-  const canonicalUrl = location 
+  const canonicalUrl = location
     ? `https://leonardobrasil.com.br/estrutura-de-vendas-para-${slug}-em-${cidade}`
     : `https://leonardobrasil.com.br/estrutura-de-vendas-para-${slug}`;
 
@@ -102,17 +102,17 @@ export default function NicheLanding() {
 
   return (
     <div className="min-h-screen bg-ink text-text overflow-x-hidden font-sans">
-      <SeoHead 
-        title={dynamicTitle} 
-        description={description} 
-        canonicalUrl={canonicalUrl} 
-        schema={faqSchema} 
+      <SeoHead
+        title={dynamicTitle}
+        description={description}
+        canonicalUrl={canonicalUrl}
+        schema={faqSchema}
       />
-      
+
       {/* HEADER */}
       <header className="sticky top-0 z-40 border-b border-line bg-ink/80 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between">
-          <Link to="/" onClick={() => window.scrollTo(0,0)} className="flex items-center gap-2.5 font-extrabold tracking-tight">
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2.5 font-extrabold tracking-tight">
             <span className="grid place-items-center w-8 h-8 rounded-lg bg-accent/15 border border-accent/30">
               <svg viewBox="0 0 48 48" className="w-[18px] h-[18px]" fill="none"><rect x="6" y="9" width="36" height="9" rx="4" fill="#3b82f6" opacity="0.4" /><rect x="13" y="21" width="22" height="9" rx="4" fill="#3b82f6" opacity="0.7" /><rect x="20" y="33" width="8" height="9" rx="4" fill="#60a5fa" /></svg>
             </span>
@@ -295,7 +295,7 @@ export default function NicheLanding() {
       <footer className="border-t border-line">
         <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-muted">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Link to="/" onClick={() => window.scrollTo(0,0)} className="font-semibold text-text hover:text-accent transition-colors">Leonardo Brasil</Link>
+            <Link to="/" onClick={() => window.scrollTo(0, 0)} className="font-semibold text-text hover:text-accent transition-colors">Leonardo Brasil</Link>
             <a href="mailto:contato@leonardobrasil.com.br" className="hover:text-text transition-colors">contato@leonardobrasil.com.br</a>
           </div>
           <div className="mt-6 pt-6 border-t border-line text-center text-xs leading-relaxed text-muted/80">

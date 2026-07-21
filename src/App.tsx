@@ -26,16 +26,16 @@ const Chevron = ({ className = "" }: { className?: string }) => (
 );
 
 const CAMADAS = [
-  { n: "01", nome: "Presença", frase: "Ser encontrado", desc: "Site profissional e Google Meu Negócio: quando procuram, é você que aparece, não o concorrente." },
+  { n: "01", nome: "Presença", frase: "Ser encontrado", desc: "Site profissional e Google Meu Negócio, quando procuram, é você que aparece, não o concorrente." },
   { n: "02", nome: "Aquisição", frase: "Atrair clientes", desc: "Anúncios e tráfego que trazem gente certa, com verba que trabalha, não botão impulsionado no escuro." },
-  { n: "03", nome: "Conversão", frase: "Fechar mais", desc: "WhatsApp organizado e CRM: cada lead acompanhado do primeiro 'oi' ao fechamento, sem venda perdida na gaveta." },
+  { n: "03", nome: "Conversão", frase: "Fechar mais", desc: "WhatsApp organizado e CRM, cada lead acompanhado do primeiro 'oi' ao fechamento, sem venda perdida na gaveta." },
   { n: "04", nome: "Escala", frase: "Crescer sem caos", desc: "IA, rotina e processo para o funil rodar todo dia, sem depender de você lembrar de tudo." },
 ];
 
 const PASSOS = [
   { t: "Diagnóstico gratuito", d: "Você me chama no WhatsApp e eu identifico exatamente onde o seu negócio está perdendo venda hoje." },
   { t: "Montagem da estrutura", d: "Montamos camada por camada, começando pelo que mais trava, presença, aquisição, conversão ou escala." },
-  { t: "Acompanhamento", d: "Ajusto até o funil rodar de verdade: cliente te encontra, chama no WhatsApp e fecha com consistência." },
+  { t: "Acompanhamento", d: "Ajusto até o funil rodar de verdade, cliente te encontra, chama no WhatsApp e fecha com consistência." },
 ];
 
 const SEGMENTOS = [
@@ -55,7 +55,7 @@ const FAQ = [
   { q: "Isso é uma agência de marketing?", a: "Não. Agência entrega postagem. Eu monto estrutura de vendas: o caminho inteiro entre o cliente te encontrar, chamar no WhatsApp e comprar de você. Presença, aquisição, conversão e escala funcionando juntas." },
   { q: "Preciso contratar tudo de uma vez?", a: "Não. Começamos pela camada que mais trava o seu negócio hoje. Você entra pelo que precisa agora e evolui no seu ritmo." },
   { q: "Quanto custa?", a: "O valor é fechado no diagnóstico, conforme o que o seu negócio precisa. Nada de pacote genérico, primeiro entendo o gargalo, depois proponho." },
-  { q: "Funciona pro meu segmento?", a: "Se você é um negócio local ou profissional liberal que recebe cliente pelo WhatsApp, depende de indicação ou precisa aparecer melhor no Google — funciona." },
+  { q: "Funciona pro meu segmento?", a: "Se você é um negócio local ou profissional liberal que recebe cliente pelo WhatsApp, depende de indicação ou precisa aparecer melhor no Google, funciona." },
 ];
 
 const NAV = [
