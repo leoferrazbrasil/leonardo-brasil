@@ -42,15 +42,18 @@ Donos de negócios locais, profissionais liberais e autônomos que recebem leads
 
 ---
 
-## 🩺 Nichos-Alvo Principais (Saúde e Bem-Estar)
-A estratégia de dominação de tráfego foca nos seguintes profissionais:
-- Dentistas
-- Médicos
-- Psicólogas
+## 🩺 Nichos-Alvo Principais (Saúde e Serviços)
+A estratégia de dominação de tráfego foca nos seguintes segmentos:
 - Nutricionistas
+- Psicólogas
+- Dentistas
 - Fisioterapeutas
 - Terapeutas
 - Massoterapeutas
+- Profissionais Liberais
+- Prestadores de Serviço
+- Autônomos
+- Comércio Local
 
 ---
 
