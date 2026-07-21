@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { SeoHead } from "../components/SeoHead";
+import { Footer } from "../components/Footer";
 import { NICHES } from "../data/niches";
 import { LOCATIONS } from "../data/locations";
 
@@ -292,27 +293,7 @@ export default function NicheLanding() {
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-line">
-        <div className="mx-auto max-w-6xl px-5 py-10 text-sm text-muted">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Link to="/" onClick={() => window.scrollTo(0, 0)} className="font-semibold text-text hover:text-accent transition-colors">Leonardo Brasil</Link>
-            <a href="mailto:contato@leonardobrasil.com.br" className="hover:text-text transition-colors">contato@leonardobrasil.com.br</a>
-          </div>
-          <div className="mt-6 pt-6 border-t border-line text-center text-xs leading-relaxed text-muted/80">
-            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 mb-3">
-              <Link to="/termos" className="hover:text-text transition-colors">Termos</Link>
-              <span className="text-line-strong">·</span>
-              <Link to="/privacidade" className="hover:text-text transition-colors">Privacidade</Link>
-              <span className="text-line-strong">·</span>
-              <Link to="/exclusao-de-dados" className="hover:text-text transition-colors">Exclusão de Dados</Link>
-              <span className="text-line-strong">·</span>
-              <Link to="/brandbook" className="hover:text-text transition-colors">Brandbook</Link>
-            </div>
-            <p>LEONARDO FERRAZ DA SILVA BRASIL · CNPJ 65.993.728/0001-07</p>
-            <p className="mt-1">© {new Date().getFullYear()} · leonardobrasil.com.br</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
