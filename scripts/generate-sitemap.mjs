@@ -3,16 +3,18 @@ import path from "path";
 
 const SITEMAP_PATH = path.resolve(process.cwd(), "public/sitemap.xml");
 const NICHES_PATH = path.resolve(process.cwd(), "src/data/niches.ts");
+const BLOG_PATH = path.resolve(process.cwd(), "src/data/blogData.ts");
 
 // Rotas estáticas
 const STATIC_ROUTES = [
   "",
   "/termos",
   "/privacidade",
-  "/exclusao-de-dados"
+  "/exclusao-de-dados",
+  "/blog"
 ];
 
-// Lê o arquivo de nichos usando regex para extrair os slugs (evita compilar TypeScript no build do node)
+// Lê o arquivo de nichos usando regex
 function getDynamicNiches() {
   try {
     const content = fs.readFileSync(NICHES_PATH, "utf8");
@@ -24,12 +26,25 @@ function getDynamicNiches() {
   }
 }
 
+// Lê o arquivo de blog usando regex
+function getDynamicBlogPosts() {
+  try {
+    const content = fs.readFileSync(BLOG_PATH, "utf8");
+    const matches = [...content.matchAll(/slug:\s*"([^"]+)"/g)];
+    return matches.map((m) => `/blog/${m[1]}`);
+  } catch (error) {
+    console.error("Erro ao ler blogData.ts para o Sitemap", error);
+    return [];
+  }
+}
+
 function generateSitemapXML() {
   const baseUrl = "https://leonardobrasil.com.br";
   const date = new Date().toISOString();
   
   const dynamicRoutes = getDynamicNiches();
-  const allRoutes = [...STATIC_ROUTES, ...dynamicRoutes];
+  const blogRoutes = getDynamicBlogPosts();
+  const allRoutes = [...STATIC_ROUTES, ...dynamicRoutes, ...blogRoutes];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;

@@ -108,6 +108,7 @@ export default function NicheLanding() {
             Leonardo Brasil
           </Link>
           <nav className="hidden md:flex gap-8">
+            <Link to="/blog" className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors">Blog</Link>
             {NAV.map((n) => (
               <a key={n.id} href={`#${n.id}`} onClick={(e) => scrollTo(e, n.id)} className="text-sm font-medium text-muted hover:text-text transition-colors">{n.label}</a>
             ))}
