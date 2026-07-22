@@ -7,6 +7,7 @@ interface SeoHeadProps {
   ogImage?: string;
   ogType?: "website" | "article";
   schema?: Record<string, any> | Record<string, any>[];
+  includeBrandGraph?: boolean;
 }
 
 export function SeoHead({
@@ -16,6 +17,7 @@ export function SeoHead({
   ogImage,
   ogType = "website",
   schema,
+  includeBrandGraph = true,
 }: SeoHeadProps) {
   const defaultTitle = "Leonardo Brasil — Estrutura de Vendas para Negócios Locais";
   const defaultDescription =
@@ -28,11 +30,54 @@ export function SeoHead({
   const finalUrl = canonicalUrl || defaultUrl;
   const finalOgImage = ogImage || defaultOgImage;
 
-  const schemasToRender = schema
+  // Grafo de Entidade Oficial da Marca (Knowledge Graph for Google & AI Engines)
+  const brandGraphSchema = includeBrandGraph
+    ? {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://leonardobrasil.com.br/#organization",
+            name: "Leonardo Brasil",
+            url: "https://leonardobrasil.com.br",
+            logo: "https://leonardobrasil.com.br/logo-completo.png",
+            sameAs: [
+              "https://www.instagram.com/leonardobrasil.com.br/",
+              "https://www.facebook.com/leonardobrasil.com.br",
+              "https://funilcomercial.com",
+            ],
+          },
+          {
+            "@type": "Person",
+            "@id": "https://leonardobrasil.com.br/#person",
+            name: "Leonardo Brasil",
+            jobTitle: "Especialista em Estrutura de Vendas para Negócios Locais",
+            worksFor: { "@id": "https://leonardobrasil.com.br/#organization" },
+            image: "https://leonardobrasil.com.br/avatar-leonardo-brasil.jpg",
+            sameAs: [
+              "https://www.instagram.com/leonardobrasil.com.br/",
+            ],
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://leonardobrasil.com.br/#website",
+            url: "https://leonardobrasil.com.br",
+            name: "Leonardo Brasil",
+            publisher: { "@id": "https://leonardobrasil.com.br/#organization" },
+          },
+        ],
+      }
+    : null;
+
+  const pageSchemas = schema
     ? Array.isArray(schema)
       ? schema
       : [schema]
     : [];
+
+  const schemasToRender = brandGraphSchema
+    ? [brandGraphSchema, ...pageSchemas]
+    : pageSchemas;
 
   return (
     <Helmet>

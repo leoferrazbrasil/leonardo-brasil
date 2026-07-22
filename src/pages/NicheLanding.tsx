@@ -9,6 +9,35 @@ import { SalesBottleneckCalculator } from "../components/SalesBottleneckCalculat
 // WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).
 const WHATSAPP_NUMBER = "5551992568861";
 
+// Dicionário de Contexto de Mercado por Estado (HCS Defense - Conteúdo Único Regional)
+const STATE_MARKET_CONTEXT: Record<string, { title: string; desc: string; highlights: string[] }> = {
+  SC: {
+    title: "Panorama Comercial em Santa Catarina (SC)",
+    desc: "Santa Catarina destaca-se pelo alto poder aquisitivo local e pela busca crescente por serviços de saúde e consultoria particulares sem dependência de convênios.",
+    highlights: ["Ticket médio de consultas e contratos elevado", "Público exigente por atendimento rápido no WhatsApp", "Forte cultura de indicação qualificada na região"]
+  },
+  SP: {
+    title: "Panorama Comercial em São Paulo (SP)",
+    desc: "São Paulo é o mercado mais competitivo do país. Quem anuncia em tráfego pago sem um funil de atendimento estruturado no WhatsApp perde margem com alto custo por lead.",
+    highlights: ["Custo por Clique (CPC) elevado que exige máxima taxa de conversão", "Necessidade de resposta rápida no WhatsApp em menos de 5 minutos", "Alta concorrência local que exige posicionamento de autoridade"]
+  },
+  RJ: {
+    title: "Panorama Comercial no Rio de Janeiro (RJ)",
+    desc: "No mercado fluminense, a diferenciação entre 'orçamento curioso' e 'paciente/cliente comprador' depende de um script de recepção alinhado e follow-up consistente.",
+    highlights: ["Forte busca por conveniência e agilidade de agendamento", "Decisão de compra fortemente influenciada por prova social e presença no Google", "Alta retenção de clientes quando o processo de pós-venda é estruturado"]
+  },
+  MG: {
+    title: "Panorama Comercial em Minas Gerais (MG)",
+    desc: "Em Minas Gerais, a construção de confiança e autoridade profissional precede a negociação. Um atendimento humano e organizado no WhatsApp é a chave da fidelização.",
+    highlights: ["Público valoriza clareza de processo e transparência de valores", "Grande oportunidade de migração de clientes para planos e contratos High-Ticket", "Crescimento acelerado de buscas locais por profissionais liberais em polo de inovação"]
+  },
+  PR: {
+    title: "Panorama Comercial no Paraná (PR)",
+    desc: "O mercado paranaense busca profissionalismo, pontualidade e previsibilidade de caixa. Negócios que estruturam a máquina comercial dominam a concorrência territorial.",
+    highlights: ["Consumidores com foco em previsibilidade e qualidade de atendimento", "Alta eficácia de campanhas de busca local combinadas com CRM", "Fidelidade de longo prazo quando o processo comercial é impecável"]
+  }
+};
+
 const waLink = (msg: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 // --- Ícones ---
@@ -277,6 +306,37 @@ export default function NicheLanding() {
         <section id="calculadora" className="mx-auto max-w-6xl px-5 py-20 scroll-mt-16">
           <SalesBottleneckCalculator defaultNiche={badge} locationName={location?.name} />
         </section>
+
+        {/* PANORAMA REGIONAL (HCS DEFENSE & CONTEXTO LOCAL) */}
+        {location && STATE_MARKET_CONTEXT[location.state] && (
+          <section id="mercado-regional" className="border-t border-line bg-panel/40 py-16">
+            <div className="mx-auto max-w-6xl px-5">
+              <div className="rounded-3xl border border-accent/30 bg-ink p-8 sm:p-12 relative overflow-hidden">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8 border-b border-line pb-6">
+                  <div>
+                    <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/15 px-3 py-1 text-xs font-bold text-accent-400 uppercase tracking-wide mb-3">
+                      Análise Regional · {location.name} - {location.state}
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-text">
+                      {STATE_MARKET_CONTEXT[location.state].title}
+                    </h2>
+                  </div>
+                </div>
+                <p className="text-base text-muted leading-relaxed max-w-3xl mb-8">
+                  {STATE_MARKET_CONTEXT[location.state].desc}
+                </p>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {STATE_MARKET_CONTEXT[location.state].highlights.map((item, idx) => (
+                    <div key={idx} className="rounded-2xl border border-line bg-panel p-5 flex items-start gap-3">
+                      <span className="w-2 h-2 rounded-full bg-accent-400 mt-2 shrink-0" />
+                      <p className="text-xs font-semibold text-text/90 leading-relaxed">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* FAQ */}
         <section id="faq" className="border-y border-line bg-panel/30">

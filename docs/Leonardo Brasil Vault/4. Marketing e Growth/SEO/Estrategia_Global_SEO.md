@@ -84,3 +84,9 @@ Para elevar a retenção de tempo nas páginas (*Dwell Time*) e potencializar a 
 Para garantir o posicionamento da marca em buscadores generativos de IA e maximizar a taxa de cliques (CTR) no compartilhamento social:
 - **Padrão Internacional `llms.txt`:** O arquivo `/public/llms.txt` documenta a entidade Leonardo Brasil, o método dos 4 Pilares (Presença, Aquisição, Conversão, Escala), os Nichos atendidos e o diretório de ferramentas para indexação sintética por IAs (ChatGPT, Perplexity, Claude, Gemini e Google AI Overviews).
 - **Social Open Graph & Twitter Cards:** O componente `SeoHead.tsx` injeta automaticamente tags `og:image`, `og:site_name`, `og:locale` (`pt_BR`), `twitter:card` (`summary_large_image`) e suporte a múltiplos schemas JSON-LD.
+
+## 11. Schema Graph de Entidade (@graph) & HCS Regional Defense
+
+Para consolidar o posicionamento da marca no Google Knowledge Graph e imunizar as 175+ páginas locais contra filtros de conteúdo duplicado do Helpful Content System (HCS):
+- **Brand Knowledge Graph (`@graph`):** Injeção do grafo oficial conectando `Organization` (Leonardo Brasil), `Person` (fundador) e `WebSite` no `<head>` de todas as páginas.
+- **Análise do Mercado Regional por Estado:** Bloco dinâmico `STATE_MARKET_CONTEXT` que rendeira diagnósticos econômicos e comportamentais exclusivos para os estados (`SP`, `RJ`, `SC`, `PR`, `MG`) em `NicheLanding.tsx`.
