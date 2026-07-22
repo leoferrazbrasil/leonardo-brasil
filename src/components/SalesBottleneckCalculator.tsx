@@ -96,7 +96,7 @@ export function SalesBottleneckCalculator({
             <div className="rounded-2xl border border-line bg-ink/60 p-5 space-y-3">
               <div className="flex justify-between items-center text-sm">
                 <label className="font-bold text-text">
-                  Ticket Médio por Venda / Serviço / Consulta
+                  Ticket Médio por Venda / Serviço / Produto
                 </label>
                 <span className="font-extrabold text-accent-400 text-lg tabular-nums">
                   {formatCurrency(ticket)}
