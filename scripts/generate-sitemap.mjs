@@ -12,6 +12,7 @@ const STATIC_ROUTES = [
   "/consultoria",
   "/brandbook",
   "/cidades",
+  "/calculadora",
   "/termos",
   "/privacidade",
   "/exclusao-de-dados",

@@ -4,6 +4,7 @@ import { SeoHead } from "../components/SeoHead";
 import { Footer } from "../components/Footer";
 import { NICHES } from "../data/niches";
 import { LOCATIONS } from "../data/locations";
+import { SalesBottleneckCalculator } from "../components/SalesBottleneckCalculator";
 
 // WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).
 const WHATSAPP_NUMBER = "5551992568861";
@@ -269,6 +270,11 @@ export default function NicheLanding() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* CALCULADORA DE GARGALO COMERCIAL */}
+        <section id="calculadora" className="mx-auto max-w-6xl px-5 py-20 scroll-mt-16">
+          <SalesBottleneckCalculator defaultNiche={badge} locationName={location?.name} />
         </section>
 
         {/* FAQ */}

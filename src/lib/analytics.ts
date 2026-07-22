@@ -59,3 +59,12 @@ export function initAnalytics() {
     }
   });
 }
+
+export function trackLeadConversion(label: string = "WhatsApp") {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "generate_lead", {
+      event_category: "Lead Form",
+      event_label: label,
+    });
+  }
+}

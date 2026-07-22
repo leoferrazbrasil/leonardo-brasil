@@ -71,3 +71,10 @@ Para eliminar o risco de **Páginas Órfãs** (URLs listadas no `sitemap.xml` se
 - **Cross-linking Local nas LPs:** Toda Landing Page de nicho exibe uma grade de links de cidades parceiras no rodapé, permitindo que o *PageRank* flua para todas as 175+ páginas locais.
 - **Atribuição Dinâmica no WhatsApp:** O CTA do WhatsApp das LPs de cidade insere automaticamente a localização (ex: *"em Balneário Camboriú (SC)"*) para identificação imediata do canal gerador.
 - **Microdados Estruturados (`Service` JSON-LD):** Injeção de microdados com o parâmetro `areaServed` indicando Cidade e Estado para enriquecimento de snippets nos motores de busca.
+
+## 9. Calculadora Comercial Interativa (CRO & Lead Magnet)
+
+Para elevar a retenção de tempo nas páginas (*Dwell Time*) e potencializar a taxa de conversão em leads qualificados:
+- **Simulação em Tempo Real:** O componente `SalesBottleneckCalculator.tsx` permite aos visitantes ajustar sliders de Ticket Médio, Leads no WhatsApp e Taxa de Conversão Atual para mensurar o faturamento deixado na mesa.
+- **Duplo Canal no Modelo Híbrido:** Integração de canal direto para o WhatsApp (Lead Quente com mensagem parametrizada pelo valor do gargalo) + formulário inline para envio de relatório detalhado (Lead Morno).
+- **Cobertura Multicanal:** Disponibilizado na Home (`App.tsx`), adaptado por nicho nas LPs (`NicheLanding.tsx`) e em rota dedicada pública (`/calculadora` - ver [[Calculadora_de_Gargalo_Comercial]]).

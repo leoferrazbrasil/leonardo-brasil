@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SeoHead } from "./components/SeoHead";
 import { Footer } from "./components/Footer";
+import { CopyButton } from "./components/CopyButton";
+import { SalesBottleneckCalculator } from "./components/SalesBottleneckCalculator";
 
 // WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).
 const WHATSAPP_NUMBER = "5551992568861";
@@ -253,6 +255,11 @@ export default function App() {
             </p>
             <p className="mt-6 text-muted font-semibold">Leonardo Brasil · Fundador do Funil Comercial</p>
           </div>
+        </section>
+
+        {/* CALCULADORA DE GARGALO COMERCIAL */}
+        <section id="calculadora" className="mx-auto max-w-6xl px-5 py-20 scroll-mt-16">
+          <SalesBottleneckCalculator initialTicket={400} initialLeads={50} initialConversion={15} />
         </section>
 
         {/* FAQ */}

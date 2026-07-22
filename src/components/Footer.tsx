@@ -108,6 +108,8 @@ export function Footer() {
             <Link to="/brandbook" className="hover:text-text transition-colors">Brandbook</Link>
             <span className="text-line-strong">·</span>
             <Link to="/cidades" className="hover:text-text transition-colors">Cidades Atendidas</Link>
+            <span className="text-line-strong">·</span>
+            <Link to="/calculadora" className="hover:text-text transition-colors">Calculadora Comercial</Link>
           </div>
           <p>LEONARDO FERRAZ DA SILVA BRASIL · CNPJ 65.993.728/0001-07</p>
           <p className="mt-1">© {new Date().getFullYear()} · Estrutura de vendas para negócio local · leonardobrasil.com.br</p>
