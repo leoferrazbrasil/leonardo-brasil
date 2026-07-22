@@ -104,6 +104,7 @@ export default function App() {
           </a>
           <nav className="hidden md:flex gap-8">
             <Link to="/consultoria" className="text-sm font-bold text-gold-400 hover:text-gold-300 transition-colors">Consultoria</Link>
+            <Link to="/calculadora" className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors">Calculadora</Link>
             <Link to="/blog" className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors">Blog</Link>
             <Link to="/cidades" className="text-sm font-bold text-muted hover:text-text transition-colors">Cidades</Link>
             {NAV.map((n) => (

@@ -97,6 +97,7 @@ export default function Consultoria() {
             Leonardo Brasil
           </Link>
           <nav className="hidden md:flex gap-8">
+            <Link to="/calculadora" className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors">Calculadora</Link>
             {NAV.map((n) => (
               <a key={n.id} href={`#${n.id}`} onClick={(e) => scrollTo(e, n.id)} className="text-sm font-medium text-muted hover:text-text transition-colors">{n.label}</a>
             ))}

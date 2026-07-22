@@ -57,9 +57,12 @@ export default function BlogPost() {
           <Link to="/" className="flex items-center gap-2.5 font-extrabold tracking-tight hover:text-accent transition-colors">
             Leonardo Brasil
           </Link>
-          <Link to="/blog" className="text-sm font-medium text-muted hover:text-text transition-colors flex items-center gap-2">
-            &larr; Voltar ao Blog
-          </Link>
+          <nav className="flex gap-6 items-center">
+            <Link to="/calculadora" className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors">Calculadora</Link>
+            <Link to="/blog" className="text-sm font-medium text-muted hover:text-text transition-colors flex items-center gap-2">
+              &larr; Voltar ao Blog
+            </Link>
+          </nav>
         </div>
       </header>
 

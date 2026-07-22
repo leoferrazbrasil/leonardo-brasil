@@ -40,9 +40,12 @@ function LegalLayout({ title, children }: { title: string; children: ReactNode }
             <span className="grid place-items-center w-8 h-8 rounded-lg bg-accent/15 border border-accent/30"><Mark /></span>
             Leonardo Brasil
           </Link>
-          <Link to="/" className="flex items-center gap-2 text-sm font-semibold text-muted hover:text-text transition-colors">
-            Voltar ao site
-          </Link>
+          <nav className="flex gap-6 items-center">
+            <Link to="/calculadora" className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors">Calculadora</Link>
+            <Link to="/" className="flex items-center gap-2 text-sm font-semibold text-muted hover:text-text transition-colors">
+              Voltar ao site
+            </Link>
+          </nav>
         </div>
       </header>
 

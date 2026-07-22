@@ -58,7 +58,8 @@ export default function CitiesDirectory() {
             </span>
             Leonardo Brasil
           </Link>
-          <nav className="flex gap-6">
+          <nav className="flex gap-6 items-center">
+            <Link to="/calculadora" className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors">Calculadora</Link>
             <Link to="/" className="text-sm font-medium text-muted hover:text-text transition-colors">
               Voltar ao Início
             </Link>

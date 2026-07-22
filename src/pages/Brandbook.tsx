@@ -167,14 +167,17 @@ export default function Brandbook() {
             </nav>
           </div>
 
-          <div className="border-t border-line p-5 lg:p-6">
-             <Link to="/cidades" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-2.5 text-sm font-bold text-accent-400 hover:bg-line transition-colors">
+           <div className="border-t border-line p-5 lg:p-6 space-y-2">
+             <Link to="/calculadora" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-2.5 text-sm font-bold text-accent-400 hover:bg-line transition-colors">
+                Calculadora Comercial
+             </Link>
+             <Link to="/cidades" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-2.5 text-sm font-bold text-muted hover:text-text hover:bg-line transition-colors">
                 Regiões Atendidas
              </Link>
-             <Link to="/" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-3 text-sm font-bold hover:bg-line transition-colors mt-2">
+             <Link to="/" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-2.5 text-sm font-bold hover:bg-line transition-colors">
                 Voltar ao site
              </Link>
-          </div>
+           </div>
         </div>
       </aside>
 
