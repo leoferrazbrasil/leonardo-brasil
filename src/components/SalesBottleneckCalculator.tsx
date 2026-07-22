@@ -30,8 +30,8 @@ export function SalesBottleneckCalculator({
   const currentSalesCount = Math.round(leads * (conversion / 100));
   const currentRevenue = currentSalesCount * ticket;
 
-  // Benchmark de atendimento estruturado no WhatsApp (~35% de conversão)
-  const potentialConversionRate = 35;
+  // Benchmark de atendimento estruturado no WhatsApp (Eleva a conversão em +15% a +20% com processo e CRM)
+  const potentialConversionRate = Math.min(60, Math.max(35, conversion + 15));
   const potentialSalesCount = Math.round(leads * (potentialConversionRate / 100));
   const potentialRevenue = potentialSalesCount * ticket;
 
@@ -96,7 +96,7 @@ export function SalesBottleneckCalculator({
             <div className="rounded-2xl border border-line bg-ink/60 p-5 space-y-3">
               <div className="flex justify-between items-center text-sm">
                 <label className="font-bold text-text">
-                  Ticket Médio da Consulta / Serviço
+                  Ticket Médio por Venda / Serviço / Consulta
                 </label>
                 <span className="font-extrabold text-accent-400 text-lg tabular-nums">
                   {formatCurrency(ticket)}
@@ -194,7 +194,10 @@ export function SalesBottleneckCalculator({
               </div>
 
               <div className="flex justify-between items-baseline">
-                <span className="text-sm text-muted">Potencial (Atendimento 35%):</span>
+                <div>
+                  <span className="text-sm text-muted block">Potencial com Estrutura Comercial:</span>
+                  <span className="text-[11px] text-emerald-400/80">Projeção para {potentialConversionRate}% de conversão</span>
+                </div>
                 <span className="text-base font-bold text-emerald-400 tabular-nums">
                   {formatCurrency(potentialRevenue)}/mês
                 </span>
