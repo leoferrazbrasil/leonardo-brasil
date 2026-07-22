@@ -10,6 +10,8 @@ const LOCATIONS_PATH = path.resolve(process.cwd(), "src/data/locations.ts");
 const STATIC_ROUTES = [
   "",
   "/consultoria",
+  "/brandbook",
+  "/cidades",
   "/termos",
   "/privacidade",
   "/exclusao-de-dados",

@@ -168,7 +168,10 @@ export default function Brandbook() {
           </div>
 
           <div className="border-t border-line p-5 lg:p-6">
-             <Link to="/" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-3 text-sm font-bold hover:bg-line transition-colors">
+             <Link to="/cidades" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-2.5 text-sm font-bold text-accent-400 hover:bg-line transition-colors">
+                Regiões Atendidas
+             </Link>
+             <Link to="/" className="flex items-center justify-center gap-2 w-full rounded-md bg-panel px-4 py-3 text-sm font-bold hover:bg-line transition-colors mt-2">
                 Voltar ao site
              </Link>
           </div>

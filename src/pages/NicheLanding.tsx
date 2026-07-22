@@ -71,7 +71,12 @@ export default function NicheLanding() {
   }
 
   const { badge, h1, h1Highlight, subheadline, painPoints, ctaText, waMessage, title, description } = nicheData;
-  const WA_LINK = waLink(waMessage);
+
+  // Atribuição de Lead por Cidade no WhatsApp
+  const dynamicWaMessage = location
+    ? `${waMessage} em ${location.name} (${location.state})`
+    : waMessage;
+  const WA_LINK = waLink(dynamicWaMessage);
 
   // Montagem Dinâmica com a Cidade
   const locationSuffix = location ? ` em ${location.name}` : "";
@@ -88,17 +93,22 @@ export default function NicheLanding() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const faqSchema = {
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: f.a,
-      },
-    })),
+    "@type": "Service",
+    name: dynamicTitle,
+    provider: {
+      "@type": "Person",
+      name: "Leonardo Brasil",
+      url: "https://leonardobrasil.com.br",
+    },
+    areaServed: location
+      ? {
+          "@type": "AdministrativeArea",
+          name: `${location.name}, ${location.state}`,
+        }
+      : "Brasil",
+    description: description,
   };
 
   return (
@@ -107,7 +117,7 @@ export default function NicheLanding() {
         title={dynamicTitle}
         description={description}
         canonicalUrl={canonicalUrl}
-        schema={faqSchema}
+        schema={[faqSchema, serviceSchema]}
       />
 
       {/* HEADER */}
@@ -274,6 +284,44 @@ export default function NicheLanding() {
                   </button>
                   {open === i && <p className="px-5 pb-5 -mt-1 text-muted leading-relaxed">{f.a}</p>}
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CIDADES RELACIONADAS (GEO LINK MESH) */}
+        <section className="border-b border-line bg-panel/20 py-16">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight">
+                  Estrutura de Vendas para {badge} em Outras Cidades
+                </h2>
+                <p className="text-sm text-muted">
+                  Atendimento estratégico para negócios locais e consultórios nas principais capitais e regiões.
+                </p>
+              </div>
+              <Link
+                to="/cidades"
+                className="text-sm font-bold text-accent-400 hover:text-accent-300 transition-colors flex items-center gap-1 shrink-0"
+              >
+                Ver todo o diretório &rarr;
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {LOCATIONS.map((loc) => (
+                <Link
+                  key={loc.slug}
+                  to={`/estrutura-de-vendas-para-${slug}-em-${loc.slug}`}
+                  className={`p-3 rounded-xl border text-xs font-semibold transition-all ${
+                    cidade === loc.slug
+                      ? "border-accent bg-accent/15 text-accent-400"
+                      : "border-line bg-panel hover:border-accent/40 text-muted hover:text-text"
+                  }`}
+                >
+                  <span className="block font-bold text-text mb-0.5">{loc.name}</span>
+                  <span className="text-[10px] text-muted uppercase">{badge} · {loc.state}</span>
+                </Link>
               ))}
             </div>
           </div>

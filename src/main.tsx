@@ -14,6 +14,7 @@ const NicheLanding = lazy(() => import("./pages/NicheLanding"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Brandbook = lazy(() => import("./pages/Brandbook"));
+const CitiesDirectory = lazy(() => import("./pages/CitiesDirectory"));
 const Consultoria = lazy(() => import("./pages/Consultoria"));
 const TermsPage = lazy(() => import("./pages/LegalPages").then((m) => ({ default: m.TermsPage })));
 const PrivacyPage = lazy(() => import("./pages/LegalPages").then((m) => ({ default: m.PrivacyPage })));
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/estrutura-de-vendas-para-:slug" element={<NicheLanding />} />
             <Route path="/estrutura-de-vendas-para-:slug-em-:cidade" element={<NicheLanding />} />
             <Route path="/brandbook" element={<Brandbook />} />
+            <Route path="/cidades" element={<CitiesDirectory />} />
             <Route path="/termos" element={<TermsPage />} />
             <Route path="/privacidade" element={<PrivacyPage />} />
             <Route path="/exclusao-de-dados" element={<DataDeletionPage />} />

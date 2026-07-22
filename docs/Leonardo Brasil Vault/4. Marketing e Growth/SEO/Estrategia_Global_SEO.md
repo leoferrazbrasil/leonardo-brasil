@@ -56,3 +56,18 @@ O script `scripts/generate-sitemap.mjs` cruza os 7 nichos da saúde com as 25 ci
 ## 6. Cross-sell interno para a Consultoria Comercial Estratégica
 
 Desde 2026-07-21, uma faixa de anúncio global (topo de todas as páginas) direciona tráfego já capturado pelas Landing Pages de nicho para a nova oferta `/consultoria` (ver [[Consultoria_Comercial_Estrategica]]). É uma rota estática, adicionada manualmente a `STATIC_ROUTES` em `generate-sitemap.mjs` (não é gerada por cruzamento de dicionários como as LPs de nicho).
+
+## 7. Mensuração e Web Analytics (GA4 & GSC)
+
+Para garantir o rastreamento preciso da jornada do lead orgânico, a estrutura agora conta com:
+- **Google Analytics 4 (GA4):** Tag base implementada de forma nativa (`gtag.js`) sem dependências pesadas extras.
+- **Rastreamento de Conversão de Lead:** O interceptador de cliques no WhatsApp (`src/lib/analytics.ts`) agora dispara o evento `generate_lead` automaticamente para o GA4 sempre que o botão de contato é clicado, permitindo a marcação como "Key Event" (Conversão).
+- **Google Search Console:** `sitemap.xml` otimizado está pronto para submissão, com o domínio verificado via a própria tag do GA4. Isso fecha o ciclo de mensuração: do termo pesquisado no Google, à leitura da Landing Page, até o clique no WhatsApp.
+
+## 8. Diretório de Cidades & Malha de Linkagem HTML (Geo-Mesh)
+
+Para eliminar o risco de **Páginas Órfãs** (URLs listadas no `sitemap.xml` sem links HTML internos navegáveis):
+- **Diretório Central de Regiões (`/cidades`):** Uma central de regiões dividida por Estados (SP, RJ, SC, PR, MG) com busca em tempo real, fornecendo aos robôs do Google uma árvore de navegabilidade clara.
+- **Cross-linking Local nas LPs:** Toda Landing Page de nicho exibe uma grade de links de cidades parceiras no rodapé, permitindo que o *PageRank* flua para todas as 175+ páginas locais.
+- **Atribuição Dinâmica no WhatsApp:** O CTA do WhatsApp das LPs de cidade insere automaticamente a localização (ex: *"em Balneário Camboriú (SC)"*) para identificação imediata do canal gerador.
+- **Microdados Estruturados (`Service` JSON-LD):** Injeção de microdados com o parâmetro `areaServed` indicando Cidade e Estado para enriquecimento de snippets nos motores de busca.
