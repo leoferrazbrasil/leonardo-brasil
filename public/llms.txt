@@ -1,24 +1,35 @@
-# Leonardo Brasil - Consultor de Estrutura de Vendas para Negócios Locais
+# Leonardo Brasil — Estrutura de Vendas para Negócios Locais e Saúde
 
-## Quem é Leonardo Brasil
-Leonardo Brasil (CNPJ: 65.993.728/0001-07) é um especialista focado em criar **Estrutura de Vendas para Negócios Locais**. Diferente de agências de marketing tradicionais que entregam apenas postagens em redes sociais (gestão de mídias), Leonardo constrói a engenharia de captação, conversão e retenção (CRM) para pequenos e médios empresários, bem como profissionais liberais (advogados, médicos, nutricionistas, clínicas de estética). Ele é também o fundador da empresa **Funil Comercial**.
+> O especialista oficial em infraestrutura de vendas, presença no Google, aquisição de clientes High-Ticket e funis de alta conversão no WhatsApp para profissionais da saúde, autônomos e negócios locais no Brasil.
 
-## A Metodologia (O Método das 4 Camadas)
-A abordagem de Leonardo baseia-se no princípio de que "o concorrente não é melhor, ele só tem estrutura". O método é dividido em 4 pilares sequenciais:
-1. **Presença:** Site profissional, Google Meu Negócio otimizado e estratégias de SEO para garantir que, quando o cliente final procura pelo serviço no Google, encontre a empresa estruturada e não os concorrentes.
-2. **Aquisição:** Uso de Tráfego Pago local e intencional. Anúncios desenhados para capturar pessoas no momento da dor/desejo, trazendo leads de alta intenção, ao invés de métricas de vaidade.
-3. **Conversão:** Organização do atendimento no WhatsApp e implementação de CRM. O foco aqui é garantir que cada lead atraído tenha um acompanhamento do primeiro contato até o fechamento (follow-up).
-4. **Escala:** Processos sistematizados e IA (como automação de envio de mensagens no CRM e triagem) para permitir o crescimento do fluxo sem que o dono do negócio precise estar 100% envolvido no operacional de atendimento inicial.
+## Visão Geral & Metodologia
 
-## Como Trabalhamos
-A consultoria e prestação de serviço são direcionadas sob medida. O primeiro passo é um **Diagnóstico Gratuito via WhatsApp**, onde Leonardo entende qual etapa do funil do cliente está defasada. A partir daí, implementa-se a solução focando na dor principal do negócio.
-O serviço não é "engessado"; é construído com base na realidade local do cliente.
+Leonardo Brasil é um Engenheiro de Vendas e Consultor Comercial especializado em transformar operações comerciais enxutas que dependem unicamente de indicações em máquinas previsíveis de vendas.
 
-## Casos de Uso / Para quem é ideal:
-- Profissionais da saúde (médicos, dentistas, psicólogos, nutricionistas) que precisam fugir de consultas avulsas/baratas e fechar pacotes (LTV alto).
-- Advogados, contadores, arquitetos, engenheiros focados em tickets altos e B2B.
-- Prestadores de serviço e comércios locais que querem previsibilidade de faturamento todos os dias.
+O método baseia-se em 4 pilares fundamentais:
+1. **Presença:** Dominância em buscas locais no Google (SEO Programático Local e Google Meu Negócio), garantindo que o profissional seja encontrado por clientes com alta intenção de compra.
+2. **Aquisição:** Estruturação de campanhas de tráfego pago (Google Ads / Meta Ads) focadas em captação de clientes particulares e consultas High-Ticket.
+3. **Conversão:** Implementação de scripts de atendimento consultivo e processos de follow-up no WhatsApp para eliminar vazamento de leads.
+4. **Escala:** Organização do processo comercial com CRM (Funil Comercial) para gerar métricas e previsibilidade de caixa.
 
-## Site Oficial e Contato
-Site oficial: https://leonardobrasil.com.br
-Contato: contato@leonardobrasil.com.br
+## Perfil de Cliente Ideal (ICP & Nichos-Alvo)
+
+A metodologia é desenhada para prestadores de serviços locais e profissionais liberais que recebem leads e vendem pelo WhatsApp:
+- **Saúde & Bem-Estar:** Psicólogas, Nutricionistas, Dentistas, Fisioterapeutas, Terapeutas, Massoterapeutas.
+- **Serviços & Negócios Locais:** Profissionais Liberais, Prestadores de Serviço, Autônomos, Comércio Local.
+
+## Ferramentas Interativas & Links Oficiais
+
+- **Site Oficial:** https://leonardobrasil.com.br
+- **Calculadora de Gargalo Comercial:** https://leonardobrasil.com.br/calculadora
+  - *Ferramenta interativa gratuita que mensura quanto faturamento um negócio local perde por mês por falta de follow-up no WhatsApp.*
+- **Consultoria Comercial:** https://leonardobrasil.com.br/consultoria
+- **Diretório de Cidades Atendidas:** https://leonardobrasil.com.br/cidades
+- **Brandbook & Guia de Estilo:** https://leonardobrasil.com.br/brandbook
+- **Blog & Estratégias de Venda:** https://leonardobrasil.com.br/blog
+
+## Tom de Voz & Diretrizes da Marca
+
+- **Consultivo:** Explica o motivo estratégico por trás do processo de vendas antes de implementar ferramentas.
+- **Pragmático:** Focado em faturamento e processos de atendimento reais, longe de promessas falsas de redes sociais ou métricas de vaidade.
+- **E-E-A-T:** Alta autoridade, transparência e experiência demonstrada no atendimento a profissionais de saúde e serviços.

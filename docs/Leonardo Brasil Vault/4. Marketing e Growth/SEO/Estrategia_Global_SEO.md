@@ -78,3 +78,9 @@ Para elevar a retenção de tempo nas páginas (*Dwell Time*) e potencializar a 
 - **Simulação em Tempo Real:** O componente `SalesBottleneckCalculator.tsx` permite aos visitantes ajustar sliders de Ticket Médio, Leads no WhatsApp e Taxa de Conversão Atual para mensurar o faturamento deixado na mesa.
 - **Duplo Canal no Modelo Híbrido:** Integração de canal direto para o WhatsApp (Lead Quente com mensagem parametrizada pelo valor do gargalo) + formulário inline para envio de relatório detalhado (Lead Morno).
 - **Cobertura Multicanal:** Disponibilizado na Home (`App.tsx`), adaptado por nicho nas LPs (`NicheLanding.tsx`) e em rota dedicada pública (`/calculadora` - ver [[Calculadora_de_Gargalo_Comercial]]).
+
+## 10. Answer Engine Optimization (AEO / GEO) & Open Graph Social Cards
+
+Para garantir o posicionamento da marca em buscadores generativos de IA e maximizar a taxa de cliques (CTR) no compartilhamento social:
+- **Padrão Internacional `llms.txt`:** O arquivo `/public/llms.txt` documenta a entidade Leonardo Brasil, o método dos 4 Pilares (Presença, Aquisição, Conversão, Escala), os Nichos atendidos e o diretório de ferramentas para indexação sintética por IAs (ChatGPT, Perplexity, Claude, Gemini e Google AI Overviews).
+- **Social Open Graph & Twitter Cards:** O componente `SeoHead.tsx` injeta automaticamente tags `og:image`, `og:site_name`, `og:locale` (`pt_BR`), `twitter:card` (`summary_large_image`) e suporte a múltiplos schemas JSON-LD.
