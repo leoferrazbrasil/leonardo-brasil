@@ -543,8 +543,21 @@ export function createMainApp(options = {}) {
 
   if (existsSync(distDir)) {
     app.use('/assets', express.static(path.join(distDir, 'assets'), { immutable: true, maxAge: '1y' }));
-    app.use(express.static(distDir, { maxAge: '1h' }));
-    app.get(/.*/, (_request, response) => {
+    // index:false e redirect:false para não servir index.html automaticamente nem
+    // redirecionar para URLs com barra final. As rotas HTML são resolvidas abaixo,
+    // servindo a página pré-renderizada correspondente quando ela existe.
+    app.use(express.static(distDir, { maxAge: '1h', index: false, redirect: false }));
+    app.get(/.*/, (request, response) => {
+      // Serve a página pré-renderizada da rota (dist/<rota>/index.html), quando existir.
+      const cleanPath = request.path.replace(/\/+$/, '');
+      if (cleanPath && cleanPath !== '/') {
+        const prerendered = path.join(distDir, cleanPath, 'index.html');
+        if (prerendered.startsWith(distDir) && existsSync(prerendered)) {
+          response.sendFile(prerendered);
+          return;
+        }
+      }
+      // Fallback (rotas não pré-renderizadas): SPA a partir do index.html raiz.
       response.sendFile(path.join(distDir, 'index.html'));
     });
   }

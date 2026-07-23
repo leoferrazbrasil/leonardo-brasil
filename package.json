@@ -6,7 +6,7 @@
   "description": "Marca pessoal Leonardo Brasil — estrutura de vendas para negócios locais. Projeto independente (leonardobrasil.com.br).",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-sitemap.mjs && node scripts/sync-brasa-subdomain.mjs",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && node scripts/generate-sitemap.mjs && node scripts/sync-brasa-subdomain.mjs",
     "postinstall": "npm run build",
     "start": "node app.js",
     "test": "node --test server/*.test.mjs",

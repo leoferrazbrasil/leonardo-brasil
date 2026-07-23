@@ -91,7 +91,7 @@ Para consolidar o posicionamento da marca no Google Knowledge Graph e imunizar a
 - **Brand Knowledge Graph (`@graph`):** Injeção do grafo oficial conectando `Organization` (Leonardo Brasil), `Person` (fundador) e `WebSite` no `<head>` de todas as páginas.
 - **Análise do Mercado Regional por Estado:** Bloco dinâmico `STATE_MARKET_CONTEXT` que rendeira diagnósticos econômicos e comportamentais exclusivos para os estados (`SP`, `RJ`, `SC`, `PR`, `MG`) em `NicheLanding.tsx`.
 
-## 12. Topic Clusters & Estratégia de Conteúdo AEO/SEO para o Blog
+## 12. Topic Clusters & Estratégia de Conteúdo AEO/SEO por Palavras-Chave
 
 Para estabelecer autoridade temática (*Topical Authority*) nos pilares de atração, conversão e inteligência comercial para negócios locais:
 - **Artigo 1 (`/blog/como-aparecer-no-google-meu-negocio`):** Guia completo de SEO Local, consistência NAP, categorias e gestão de reviews de alto impacto.
@@ -99,3 +99,10 @@ Para estabelecer autoridade temática (*Topical Authority*) nos pilares de atra�
 - **Artigo 3 (`/blog/como-organizar-atendimento-no-whatsapp`):** Guia prático de etiquetas no WhatsApp Business, roteiro de qualificação em 4 etapas e protocolo de follow-up.
 - **Artigo 4 (`/blog/funil-de-vendas-com-inteligencia-artificial`):** Aplicação de IA para automação comercial, AEO/GEO em robôs generativos (ChatGPT, Perplexity, Gemini) e análise de perdas.
 - **Artigo 5 (`/blog/como-converter-leads-em-clientes-locais`):** Roteiros de superação de objeções de preço, fórmula de taxa de fechamento e transição da Landing Page para o WhatsApp.
+- **Artigo 6 (`/blog/como-otimizar-google-meu-negocio-para-vendas`):** Foco na palavra-chave *"Google Meu Negócio"*, postagens ativas, catálogo de serviços e link parametrizado.
+- **Artigo 7 (`/blog/quando-contratar-consultoria-de-vendas-local`):** Foco na palavra-chave *"Consultoria de Vendas"*, 4 sinais de necessidade comercial e engenharia de processos.
+- **Artigo 8 (`/blog/como-aumentar-taxa-de-conversao-de-leads-locais`):** Foco na palavra-chave *"Conversão de Leads"*, fórmula matemática de conversão e eliminação de atritos.
+- **Artigo 9 (`/blog/automacao-de-vendas-para-negocios-locais`):** Foco na palavra-chave *"Automação de Vendas"*, triagem de atendimento 24/7 e disparo de lembretes no CRM.
+- **Artigo 10 (`/blog/boas-praticas-de-atendimento-pelo-whatsapp-para-negocios`):** Foco na palavra-chave *"Atendimento pelo WhatsApp"*, 5 regras de ouro e comunicação consultiva.
+- **Artigo 11 (`/blog/como-escolher-crm-para-pequenas-empresas`):** Foco na palavra-chave *"CRM para pequenas empresas"*, pipeline visual Kanban e histórico centralizado.
+- **Artigo 12 (`/blog/como-aparecer-no-google-primeiras-posicoes`):** Foco na palavra-chave *"Aparecer no Google"*, 4 camadas de ranqueamento e autoridade orgânica permanente.

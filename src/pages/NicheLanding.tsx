@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import { useLocation, Navigate, Link } from "react-router-dom";
 import { SeoHead } from "../components/SeoHead";
 import { Footer } from "../components/Footer";
 import { NICHES } from "../data/niches";
@@ -81,8 +81,43 @@ const NAV = [
   { id: "faq", label: "FAQ" },
 ];
 
+const NICHE_PREFIX = "/estrutura-de-vendas-para-";
+
+/**
+ * Extrai nicho (e cidade opcional) a partir do caminho da URL.
+ * Ex.: /estrutura-de-vendas-para-advogados            -> { slug: "advogados" }
+ *      /estrutura-de-vendas-para-advogados-em-campinas -> { slug: "advogados", cidade: "campinas" }
+ * Usa as listas de dados para resolver corretamente slugs que contenham hífens.
+ */
+export function parseNichePath(pathname: string): { slug: string; cidade?: string } | null {
+  if (!pathname.startsWith(NICHE_PREFIX)) return null;
+  const rest = decodeURIComponent(pathname.slice(NICHE_PREFIX.length).replace(/\/+$/, ""));
+  if (!rest) return null;
+
+  // Nicho puro
+  if (NICHES.some((n) => n.slug === rest)) return { slug: rest };
+
+  // Nicho + cidade: "<nicho>-em-<cidade>" (testa cada ocorrência de "-em-")
+  const marker = "-em-";
+  let idx = rest.indexOf(marker);
+  while (idx !== -1) {
+    const nicheSlug = rest.slice(0, idx);
+    const citySlug = rest.slice(idx + marker.length);
+    if (NICHES.some((n) => n.slug === nicheSlug) && LOCATIONS.some((l) => l.slug === citySlug)) {
+      return { slug: nicheSlug, cidade: citySlug };
+    }
+    idx = rest.indexOf(marker, idx + 1);
+  }
+
+  // Não bateu com dados conhecidos; devolve o slug cru (o componente redireciona pra home).
+  return { slug: rest };
+}
+
 export default function NicheLanding() {
-  const { slug, cidade } = useParams<{ slug: string; cidade?: string }>();
+  const { pathname } = useLocation();
+  const parsed = parseNichePath(pathname);
+  const slug = parsed?.slug;
+  const cidade = parsed?.cidade;
   const [menu, setMenu] = useState(false);
   const [open, setOpen] = useState<number | null>(0);
 
@@ -121,6 +156,19 @@ export default function NicheLanding() {
     e.preventDefault();
     setMenu(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.a,
+      },
+    })),
   };
 
   const serviceSchema = {

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SeoHead } from "./components/SeoHead";
 import { Footer } from "./components/Footer";
-import { CopyButton } from "./components/CopyButton";
 import { SalesBottleneckCalculator } from "./components/SalesBottleneckCalculator";
 
 // WhatsApp pessoal do Leonardo Brasil (só dígitos, DDI 55).

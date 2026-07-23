@@ -25,7 +25,11 @@ export function SeoHead({
   const defaultUrl = "https://leonardobrasil.com.br/";
   const defaultOgImage = "https://leonardobrasil.com.br/logo-completo.png";
 
-  const finalTitle = title ? `${title} | Leonardo Brasil` : defaultTitle;
+  const finalTitle = title
+    ? title.includes("Leonardo Brasil")
+      ? title
+      : `${title} | Leonardo Brasil`
+    : defaultTitle;
   const finalDesc = description || defaultDescription;
   const finalUrl = canonicalUrl || defaultUrl;
   const finalOgImage = ogImage || defaultOgImage;
@@ -39,8 +43,14 @@ export function SeoHead({
             "@type": "Organization",
             "@id": "https://leonardobrasil.com.br/#organization",
             name: "Leonardo Brasil",
+            legalName: "LEONARDO FERRAZ DA SILVA BRASIL",
             url: "https://leonardobrasil.com.br",
             logo: "https://leonardobrasil.com.br/logo-completo.png",
+            image: "https://leonardobrasil.com.br/logo-completo.png",
+            email: "contato@leonardobrasil.com.br",
+            taxID: "65.993.728/0001-07",
+            description:
+              "Estrutura de vendas para negócios locais: presença no Google, aquisição, conversão no WhatsApp e escala.",
             sameAs: [
               "https://www.instagram.com/leonardobrasil.com.br/",
               "https://www.facebook.com/leonardobrasil.com.br",

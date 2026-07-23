@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { initAnalytics } from "./lib/analytics";
 import { AnnouncementBar } from "./components/AnnouncementBar";
@@ -21,6 +21,18 @@ const TermsPage = lazy(() => import("./pages/LegalPages").then((m) => ({ default
 const PrivacyPage = lazy(() => import("./pages/LegalPages").then((m) => ({ default: m.PrivacyPage })));
 const DataDeletionPage = lazy(() => import("./pages/LegalPages").then((m) => ({ default: m.DataDeletionPage })));
 
+/**
+ * Catch-all: as URLs de nicho (/estrutura-de-vendas-para-...) não são um
+ * segmento dinâmico simples do React Router, então resolvemos pelo caminho.
+ */
+function RouteFallback() {
+  const { pathname } = useLocation();
+  if (pathname.startsWith("/estrutura-de-vendas-para-")) {
+    return <NicheLanding />;
+  }
+  return <App />;
+}
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HelmetProvider>
@@ -32,15 +44,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/consultoria" element={<Consultoria />} />
             <Route path="/blog" element={<BlogIndex />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/estrutura-de-vendas-para-:slug" element={<NicheLanding />} />
-            <Route path="/estrutura-de-vendas-para-:slug-em-:cidade" element={<NicheLanding />} />
             <Route path="/brandbook" element={<Brandbook />} />
             <Route path="/cidades" element={<CitiesDirectory />} />
             <Route path="/calculadora" element={<CalculatorPage />} />
             <Route path="/termos" element={<TermsPage />} />
             <Route path="/privacidade" element={<PrivacyPage />} />
             <Route path="/exclusao-de-dados" element={<DataDeletionPage />} />
-            <Route path="*" element={<App />} />
+            <Route path="*" element={<RouteFallback />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
