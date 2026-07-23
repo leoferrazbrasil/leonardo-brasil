@@ -90,3 +90,12 @@ Para garantir o posicionamento da marca em buscadores generativos de IA e maximi
 Para consolidar o posicionamento da marca no Google Knowledge Graph e imunizar as 175+ páginas locais contra filtros de conteúdo duplicado do Helpful Content System (HCS):
 - **Brand Knowledge Graph (`@graph`):** Injeção do grafo oficial conectando `Organization` (Leonardo Brasil), `Person` (fundador) e `WebSite` no `<head>` de todas as páginas.
 - **Análise do Mercado Regional por Estado:** Bloco dinâmico `STATE_MARKET_CONTEXT` que rendeira diagnósticos econômicos e comportamentais exclusivos para os estados (`SP`, `RJ`, `SC`, `PR`, `MG`) em `NicheLanding.tsx`.
+
+## 12. Topic Clusters & Estratégia de Conteúdo AEO/SEO para o Blog
+
+Para estabelecer autoridade temática (*Topical Authority*) nos pilares de atração, conversão e inteligência comercial para negócios locais:
+- **Artigo 1 (`/blog/como-aparecer-no-google-meu-negocio`):** Guia completo de SEO Local, consistência NAP, categorias e gestão de reviews de alto impacto.
+- **Artigo 2 (`/blog/estrutura-de-vendas-para-negocio-local`):** Artigo Pilar detalhando o Método dos 4 Pilares (Presença, Aquisição, Conversão e Escala).
+- **Artigo 3 (`/blog/como-organizar-atendimento-no-whatsapp`):** Guia prático de etiquetas no WhatsApp Business, roteiro de qualificação em 4 etapas e protocolo de follow-up.
+- **Artigo 4 (`/blog/funil-de-vendas-com-inteligencia-artificial`):** Aplicação de IA para automação comercial, AEO/GEO em robôs generativos (ChatGPT, Perplexity, Gemini) e análise de perdas.
+- **Artigo 5 (`/blog/como-converter-leads-em-clientes-locais`):** Roteiros de superação de objeções de preço, fórmula de taxa de fechamento e transição da Landing Page para o WhatsApp.

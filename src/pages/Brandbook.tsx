@@ -75,11 +75,43 @@ function ColorSwatch({ colorClass, name, hex, description }: { colorClass: strin
 
 const SECTIONS = [
   { id: "visao-geral", label: "Visão Geral" },
+  { id: "sobre-negocio", label: "Sobre o Negócio" },
   { id: "logo", label: "Sistema de Logo" },
   { id: "cores", label: "Paleta de Cores" },
   { id: "tipografia", label: "Tipografia" },
   { id: "tom-de-voz", label: "Tom de Voz" },
   { id: "icp-regioes", label: "ICP & Regiões" },
+];
+
+const businessResources = [
+  {
+    title: "Presença digital",
+    description: "Criação de site profissional e otimização do Google Meu Negócio para que o negócio apareça quando os clientes procuram.",
+  },
+  {
+    title: "Aquisição de clientes",
+    description: "Gestão de anúncios e tráfego pago direcionado ao público certo, com orçamento eficiente e sem desperdício.",
+  },
+  {
+    title: "Conversão no WhatsApp",
+    description: "Organização do atendimento via WhatsApp com CRM próprio para acompanhar cada lead desde o primeiro contato até o fechamento.",
+  },
+  {
+    title: "Escala com IA e processos",
+    description: "Implementação de automações, rotinas e inteligência artificial para o funil de vendas funcionar de forma consistente e autônoma.",
+  },
+  {
+    title: "Diagnóstico gratuito",
+    description: "Análise personalizada via WhatsApp para identificar onde o negócio está perdendo vendas e quanto faturamento está sendo desperdiçado.",
+  },
+];
+
+const targetClients = [
+  "Donos de negócios locais que têm qualidade no serviço, mas não conseguem atrair clientes de forma consistente por falta de presença digital.",
+  "Empreendedores que dependem exclusivamente de indicações e não aparecem nos resultados do Google quando potenciais clientes procuram seus serviços.",
+  "Profissionais que investem em anúncios, mas não veem retorno porque não têm uma estrutura de conversão organizada após o clique.",
+  "Negócios locais com o WhatsApp cheio de orçamentos sem resposta e leads perdidos por falta de follow-up sistemático.",
+  "Pequenos empresários que querem escalar as vendas sem depender de memória ou esforço manual diário para gerenciar o processo comercial.",
 ];
 
 export default function Brandbook() {
@@ -217,6 +249,62 @@ export default function Brandbook() {
                 <p className="text-sm leading-relaxed text-muted">
                   O visual reflete sofisticação técnica: fundos escuros (Dark Mode nativo), uso inteligente de espaços negativos, contrastes em azul elétrico e tipografia grotesca sem serifa (Sans) que passa a percepção de um parceiro tecnológico e estruturado.
                 </p>
+              </div>
+            </div>
+          </section>
+
+          {/* SOBRE O NEGÓCIO */}
+          <section id="sobre-negocio" className="scroll-mt-24 space-y-8">
+            <div>
+              <h2 className="text-3xl font-black mb-2 tracking-tight">Sobre o Negócio</h2>
+              <p className="text-muted">A estrutura comercial que sustenta a marca Leonardo Brasil.</p>
+            </div>
+
+            <div className="rounded-3xl border border-line bg-panel p-8 sm:p-10">
+              <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+                <div className="space-y-5">
+                  <h3 className="text-2xl font-black tracking-tight text-text">Funil Comercial como método proprietário</h3>
+                  <p className="text-sm leading-relaxed text-muted">
+                    Leonardo Brasil é um consultor especializado em montar estruturas de vendas completas para negócios locais, cobrindo desde a presença no Google até o fechamento de vendas pelo WhatsApp.
+                  </p>
+                  <p className="text-sm leading-relaxed text-muted">
+                    O método, chamado <strong className="text-text">Funil Comercial</strong>, liga todas as camadas do processo comercial: presença, aquisição, conversão e escala, numa engrenagem integrada e funcional.
+                  </p>
+                  <p className="text-sm leading-relaxed text-muted">
+                    Ao contrário de agências tradicionais, Leonardo constrói e usa a própria estrutura que entrega, incluindo um <strong className="text-text">CRM desenvolvido por ele mesmo</strong>.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-accent/20 bg-accent/10 p-6">
+                  <span className="text-xs font-bold uppercase tracking-wider text-accent-400">Vantagem Competitiva</span>
+                  <p className="mt-4 text-sm leading-relaxed text-text">
+                    Leonardo Brasil não entrega dicas isoladas nem publicações nas redes sociais: monta a engrenagem comercial completa do negócio, usando o mesmo método e CRM que ele próprio utiliza, com acompanhamento direto e personalizado até o funil funcionar de verdade.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold tracking-tight text-text">Principais Recursos</h3>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {businessResources.map((resource) => (
+                  <div key={resource.title} className="rounded-2xl border border-line bg-ink p-6">
+                    <h4 className="mb-2 text-sm font-bold text-accent-400">{resource.title}</h4>
+                    <p className="text-sm leading-relaxed text-muted">{resource.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold tracking-tight text-text">Clientes-Alvo</h3>
+              <div className="grid gap-3">
+                {targetClients.map((client) => (
+                  <div key={client} className="flex items-start gap-3 rounded-2xl border border-line bg-panel p-5">
+                    <Check size={18} className="mt-0.5 shrink-0 text-accent-400" />
+                    <p className="text-sm leading-relaxed text-muted">{client}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
