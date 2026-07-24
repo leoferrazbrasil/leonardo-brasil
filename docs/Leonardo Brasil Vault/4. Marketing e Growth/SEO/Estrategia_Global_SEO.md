@@ -106,3 +106,12 @@ Para estabelecer autoridade temática (*Topical Authority*) nos pilares de atra�
 - **Artigo 10 (`/blog/boas-praticas-de-atendimento-pelo-whatsapp-para-negocios`):** Foco na palavra-chave *"Atendimento pelo WhatsApp"*, 5 regras de ouro e comunicação consultiva.
 - **Artigo 11 (`/blog/como-escolher-crm-para-pequenas-empresas`):** Foco na palavra-chave *"CRM para pequenas empresas"*, pipeline visual Kanban e histórico centralizado.
 - **Artigo 12 (`/blog/como-aparecer-no-google-primeiras-posicoes`):** Foco na palavra-chave *"Aparecer no Google"*, 4 camadas de ranqueamento e autoridade orgânica permanente.
+
+## 13. Favicon Rastreável na SERP (Branding no Resultado de Busca)
+
+Para eliminar o **ícone genérico de globo** que o Google exibia ao lado do domínio nos resultados de busca (prejudicando o reconhecimento visual e o CTR orgânico da marca):
+
+- **Diagnóstico:** o favicon estava embutido como *data-URI* (`<link rel="icon" href="data:image/svg+xml,...">`). O **Googlebot não rastreia data-URIs** — ele exige uma **URL de arquivo real** para buscar e cachear o ícone. O único arquivo real (`/favicon.svg`) estava sob `rel="alternate icon"`, que o Google ignora como sinal de favicon; e faltava o `/favicon.ico` na raiz, que o buscador procura automaticamente.
+- **Ativos raster gerados a partir do SVG da marca:** `favicon.ico` multi-tamanho (16/32/48 — o formato que o Google prioriza), `favicon-96x96.png`, `apple-touch-icon.png` (180, fundo cheio para iOS) e ícones PWA `192`/`512`. Geração via rasterizador próprio em Node (supersampling, sem novas dependências), documentado em [[2. Engenharia]].
+- **`<head>` reescrito com links crawláveis:** `favicon.ico` (`sizes="any"`), `favicon.svg` (navegadores modernos), `favicon-96x96.png`, `apple-touch-icon.png` e `site.webmanifest` (instalação PWA/Android). O `favicon.svg` foi promovido à versão canônica (fundo azul da marca `#2563eb` + barras brancas do funil).
+- **Ativação no Google:** após o deploy, solicitar reindexação da home no **Google Search Console** (*Inspeção de URL → Solicitar indexação*). O Google recacheia o favicon no próximo rastreamento — normalmente alguns dias, não é instantâneo.

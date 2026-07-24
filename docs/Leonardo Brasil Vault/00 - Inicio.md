@@ -25,6 +25,7 @@ Brandbook da marca pessoal, guias de estilo (cores, tipografia), UI/UX e tom de 
 ### [[4. Marketing e Growth]]
 Estratégias de aquisição de clientes (Inbound e Outbound).
 - **SEO & Topic Clusters:** [[Estrategia_Global_SEO]]
+- **Branding na SERP (2026-07-24):** favicon rastreável pelo Google — seção 13 de [[Estrategia_Global_SEO]] (substitui o ícone genérico de globo nos resultados de busca).
 - **Tráfego Pago:** Planejamento de campanhas Meta/Google Ads.
 - **Copywriting:** Dicionário de dores e mapeamento de personas (High-Ticket B2B).
 
