@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "../lib/local-router";
 import { SeoHead } from "../components/SeoHead";
 import { Footer } from "../components/Footer";
 import { BLOG_POSTS } from "../data/blogData";

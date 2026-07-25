@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "../lib/local-router";
 import { SeoHead } from "../components/SeoHead";
 
 // Ícones minimalistas nativos SVG

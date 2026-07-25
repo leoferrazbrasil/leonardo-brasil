@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "./lib/local-router";
 import { HelmetProvider } from "react-helmet-async";
 import { initAnalytics } from "./lib/analytics";
 import { AnnouncementBar } from "./components/AnnouncementBar";

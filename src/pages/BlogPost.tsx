@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate } from "../lib/local-router";
 import ReactMarkdown from "react-markdown";
 import { SeoHead } from "../components/SeoHead";
 import { Footer } from "../components/Footer";

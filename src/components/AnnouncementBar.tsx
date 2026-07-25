@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "../lib/local-router";
 
 const DISMISS_KEY = "lb_announcement_consultoria_v1";
 

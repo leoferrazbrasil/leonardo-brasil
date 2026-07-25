@@ -1,6 +1,5 @@
 import { renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { StaticRouter, Routes, Route, useLocation } from "./lib/local-router";
 import { HelmetProvider, type HelmetServerState } from "react-helmet-async";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import App from "./App";

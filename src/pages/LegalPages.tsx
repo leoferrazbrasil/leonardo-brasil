@@ -4,7 +4,7 @@
 // Site de marca pessoal (sem contas de usuário/CRM) — o contato ocorre via WhatsApp.
 
 import { useEffect, type ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "../lib/local-router";
 import { SeoHead } from "../components/SeoHead";
 import { Footer } from "../components/Footer";
 

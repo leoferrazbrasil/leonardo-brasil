@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "../lib/local-router";
 import { NICHES } from "../data/niches";
 import { LOCATIONS } from "../data/locations";
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, Navigate, Link } from "react-router-dom";
+import { useLocation, Navigate, Link } from "../lib/local-router";
 import { SeoHead } from "../components/SeoHead";
 import { Footer } from "../components/Footer";
 import { NICHES } from "../data/niches";
