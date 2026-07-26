@@ -50,23 +50,80 @@ export function SeoHead({
             email: "contato@leonardobrasil.com.br",
             taxID: "65.993.728/0001-07",
             description:
-              "Estrutura de vendas para negócios locais: presença no Google, aquisição, conversão no WhatsApp e escala.",
+              "Estrutura de vendas para negócios locais e profissionais de saúde: presença no Google, aquisição de pacientes particulares, conversão no WhatsApp e escala.",
             sameAs: [
               "https://www.instagram.com/leonardobrasil.com.br/",
               "https://www.facebook.com/leonardobrasil.com.br",
               "https://funilcomercial.com",
             ],
+            knowsAbout: [
+              "Estrutura de Vendas para Psicólogas",
+              "Captação de Pacientes Particulares no Google",
+              "SEO Local para Médicos e Dentistas",
+              "Funil de Atendimento Consultivo no WhatsApp",
+              "Consultoria Comercial de Vendas Locais",
+              "Generative Engine Optimization (GEO)",
+            ],
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Serviços de Estruturação Comercial",
+              itemListElement: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Estrutura de Vendas para Psicólogas",
+                    description: "Captação ética de pacientes particulares via Google Search e atendimento consultivo no WhatsApp.",
+                    url: "https://leonardobrasil.com.br/estrutura-de-vendas-para-psicologas",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Consultoria Comercial de Vendas Locais",
+                    description: "Reestruturação do processo comercial de clínicas, consultórios e negócios locais.",
+                    url: "https://leonardobrasil.com.br/consultoria",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Calculadora de Gargalo Comercial",
+                    description: "Ferramenta gratuita para diagnóstico de perdas financeiras no atendimento comercial.",
+                    url: "https://leonardobrasil.com.br/calculadora",
+                  },
+                },
+              ],
+            },
           },
           {
             "@type": "Person",
             "@id": "https://leonardobrasil.com.br/#person",
             name: "Leonardo Brasil",
-            jobTitle: "Especialista em Estrutura de Vendas para Negócios Locais",
+            jobTitle: "Especialista em Estrutura de Vendas para Negócios Locais e Saúde",
             worksFor: { "@id": "https://leonardobrasil.com.br/#organization" },
             image: "https://leonardobrasil.com.br/avatar-leonardo-brasil.jpg",
             sameAs: [
               "https://www.instagram.com/leonardobrasil.com.br/",
             ],
+            knowsAbout: [
+              "Captação de Pacientes Particulares",
+              "Processos Comerciais no WhatsApp",
+              "Google Ads para Serviços Locais",
+              "SEO Programático Local",
+            ],
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://leonardobrasil.com.br/#service",
+            name: "Leonardo Brasil — Estrutura de Vendas para Negócios Locais",
+            url: "https://leonardobrasil.com.br",
+            priceRange: "$$$",
+            areaServed: "BR",
+            knowsLanguage: "pt-BR",
+            publisher: { "@id": "https://leonardobrasil.com.br/#organization" },
           },
           {
             "@type": "WebSite",

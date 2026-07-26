@@ -20,3 +20,8 @@ REGRAS DE CÓDIGO:
 3. Escreva componentes modulares, responsivos e focados em UI/UX de alta conversão.
 4. Mantenha as respostas sempre em Português do Brasil (pt-BR).
 5. Antes de sugerir a instalação de novas dependências, avalie se é possível resolver nativamente ou com o que já existe no package.json.
+
+SKILLS LOCAIS DISPONIVEIS:
+- Este projeto inclui skills Agent Skills em `skills/` e uma copia para Claude Code em `.claude/skills/`.
+- Quando uma tarefa mencionar Obsidian, Obsidian Markdown, Bases, JSON Canvas, Obsidian CLI ou Defuddle, a ferramenta de IA deve carregar e seguir o `SKILL.md` correspondente antes de agir.
+- Skills instaladas a partir de `kepano/obsidian-skills`: `obsidian-markdown`, `obsidian-bases`, `json-canvas`, `obsidian-cli` e `defuddle`.

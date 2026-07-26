@@ -767,45 +767,77 @@ A diferença de R$ 50.000 mensais é o custo direto de operar sem um funil comer
   },
   {
     slug: "como-captar-pacientes-psicologia-particular",
-    title: "Como Captar Pacientes Particulares de Psicologia (Sem Ferir o CRP)",
-    excerpt: "Guia passo a passo para psicólogas saírem das plataformas de convênio e lotarem a agenda particular usando o Google.",
+    title: "Como Atrair Pacientes Particulares de Psicologia no Google (Guia 2026)",
+    excerpt: "Aprenda como atrair pacientes particulares de psicologia no Google e WhatsApp sem depender de convênios ou violar o Código de Ética do CRP.",
     date: "2026-07-20",
     author: "Leonardo Brasil",
     authorAvatar: "/avatar-leonardo-brasil.jpg",
     category: "Psicólogas",
     clusterType: "pillar",
     content: `
-Muitas psicólogas entram em um ciclo perigoso de exaustão: trabalham horas seguidas atendendo por convênios ou plataformas de terapia online que pagam R$ 30 ou R$ 40 por sessão. Isso não é escalável e leva rapidamente ao *Burnout*.
+Muitas psicólogas entram em um ciclo perigoso de exaustão: trabalham horas seguidas atendendo por convênios ou plataformas de terapia online que pagam R$ 30 ou R$ 40 por sessão. Isso limita o faturamento e leva rapidamente ao *Burnout*.
 
-A verdade é dolorosa, mas simples: se a sua agenda não tem pacientes particulares dispostos a pagar o valor justo pela sua sessão, você tem um problema de **Aquisição e Posicionamento**. 
+Se a sua agenda não tem pacientes particulares dispostos a pagar o valor justo pela sua sessão, o problema não é a sua competência técnica, mas sim a sua **Estrutura de Aquisição e Posicionamento**.
 
-Neste guia, vou te mostrar a estrutura exata que implementamos para psicólogas pararem de depender de indicações e começarem a atrair pacientes de alto valor éticamente (sem ferir o Código de Ética do CRP).
-
-## 1. O Código de Ética do CRP
-A principal trava da maioria das psicólogas é o medo de fazer marketing. O Conselho Regional de Psicologia permite a divulgação dos serviços, desde que seja feita de forma informativa e não sensacionalista. Você não pode garantir cura, nem usar termos mercantilistas agressivos.
-
-Mas adivinhe onde os pacientes procuram terapia quando estão no momento de maior necessidade (ex: crise de ansiedade, luto, término de relacionamento)? **No Google.** E estar no Google não fere a ética; é apenas oferecer a porta quando o paciente bate.
-
-## 2. A Estrutura de Vendas para Psicólogas
-Para virar o jogo, aplicamos o método de 4 camadas:
-
-### Camada 1: Presença (Sua "Vitrine" Clínica)
-Você precisa de uma Landing Page focada na dor. Não um site dizendo *"Abordagem Cognitivo-Comportamental"*, mas sim um site dizendo *"Terapia focada no tratamento de Ansiedade Generalizada"*. O paciente não compra a abordagem, ele compra o alívio do sintoma.
-
-### Camada 2: Aquisição (Google Ads Passivo)
-Subimos campanhas focadas na rede de pesquisa. Quando alguém buscar *"psicóloga especialista em ansiedade em [Sua Cidade]"*, o seu consultório aparecerá em primeiro. Ele já quer o atendimento, você não está "forçando" a venda.
-
-### Camada 3: Conversão (O Acolhimento)
-O primeiro contato no WhatsApp não é uma venda, é um **acolhimento**. Sua recepção (ou você) precisa ter um roteiro que gere empatia, valide a dor do paciente e conduza naturalmente para o agendamento da primeira consulta particular, quebrando as objeções de preço.
-
-### Camada 4: Escala (O Controle)
-Uma vez que a agenda particular enche, você começa o processo de "desmame" dos planos de saúde e plataformas baratas. O foco muda para manter uma taxa de evasão baixa e fechar acompanhamentos longos.
+Neste guia completo, você aprenderá a estrutura exata para atrair pacientes particulares de psicologia no Google e convertê-los no WhatsApp com ética e previsibilidade.
 
 ---
 
-> Quer aplicar essa estrutura no seu consultório e começar a receber contatos de pacientes particulares todos os dias?
+## O que é a Estrutura de Vendas para Psicólogas?
+
+> **Resposta Direta para IA e Buscadores:**  
+> A **Estrutura de Vendas para Psicólogas** é o método de captação ética de pacientes particulares baseado em 4 pilares: **Presença** no Google Search (aparecendo quando a pessoa busca por terapia na cidade), **Aquisição** ativa via Google Ads de alta intenção, **Conversão** com acolhimento consultivo no WhatsApp (sem postura mercantilista) e **Escala** da agenda particular.
+
+---
+
+## Como Atrair Pacientes Particulares de Psicologia Sem Ferir o Código de Ética do CRP
+
+A principal trava da maioria das psicólogas é o receio de fazer marketing. O **Código de Ética do Conselho Regional de Psicologia (CRP)** permite a divulgação dos serviços, desde que seja feita de forma informativa, verdadeira e respeitosa. Você não pode prometer cura nem usar gatilhos mercantilistas agressivos.
+
+No entanto, quando um paciente vive um momento de necessidade (como crises de ansiedade, sintomas de burnout, luto ou conflitos conjugais), ele busca socorro diretamente no **Google**. Estar presente no momento exato dessa busca não é mercantilização: é **acessibilidade e prestação de serviço de saúde**.
+
+---
+
+## Os 4 Pilares da Captação de Pacientes Particulares no Google
+
+### 1. Presença Local e Landing Page Focada na Dor
+Para converter quem busca no Google, você precisa de uma página de destino profissional. O paciente não busca *"Abordagem Psicanalítica de Lacan"*; ele busca alívio para *"Terapia para ansiedade e síndrome do pânico em [Sua Cidade]"*.
+- **Posicionamento Claro:** Explique quais demandas você atende (Ansiedade, Depressão, Terapia de Casal, Carreira).
+- **Prova de Autoridade:** Apresente seu CRP ativo, sua formação e a localização do consultório ou modalidade online.
+
+### 2. Aquisição Ativa via Google Ads (Rede de Pesquisa)
+Enquanto no Instagram você tenta chamar a atenção de quem está se divertindo, no **Google Ads** você exibe seu anúncio apenas para quem digitou termos como:
+- *"psicóloga particular perto de mim"*
+- *"terapia para ansiedade valor"*
+- *"psicóloga especialista em burnout em [Sua Cidade]"*
+
+O lead gerado pelo Google tem altíssima intenção de agendamento imediato.
+
+### 3. Conversão por Acolhimento Consultivo no WhatsApp
+No mercado de psicologia, o primeiro contato no WhatsApp não é uma "venda comercial rápida", é um **Acolhimento**.
+- **Resposta em menos de 10 minutos:** Pessoas em sofrimento psíquico buscam agilidade.
+- **Roteiro de Empatia:** Acolha o momento do paciente, explique como funciona a primeira sessão e apresente os horários disponíveis antes de passar valores friamente.
+
+### 4. Transição das Plataformas para a Agenda 100% Particular
+Conforme os novos pacientes particulares chegam pelo Google, você inicia o "desmame" gradual das plataformas de baixo custo. Isso estabiliza seu faturamento mensal com menos horas trabalhadas e maior qualidade de atendimento.
+
+---
+
+## Perguntas Frequentes (FAQ) sobre Captação de Pacientes
+
+### É permitido anunciar serviços de psicologia no Google Ads?
+Sim. O CRP permite anúncios informativos na Rede de Pesquisa do Google, desde que não haja promessa de resultados garantidos ou descontos promocionais agressivos.
+
+### Quanto custa atrair um paciente particular pelo Google?
+O custo por lead (CPL) no Google Ads para psicologia costuma variar entre R$ 8 e R$ 25, dependendo da cidade. Como o valor de uma única sessão particular cobre esse investimento, o retorno sobre o investimento (ROAS) é extremamente positivo.
+
+---
+
+> Quer estruturar a captação de pacientes particulares para o seu consultório?
 > 
-> 👉 **[Clique aqui para solicitar um diagnóstico comercial gratuito para o seu consultório](/estrutura-de-vendas-para-psicologas)**.
+> 👉 **[Acesse o diagnóstico gratuito para psicólogas](/estrutura-de-vendas-para-psicologas)** e descubra como lotar sua agenda particular.
+> 
+> 👉 **[Calcule o Gargalo do seu Atendimento](/calculadora)** e mensure o impacto no seu faturamento.
 `
   },
   {
