@@ -14,35 +14,35 @@ export interface NicheData {
 export const NICHES: NicheData[] = [
   {
     slug: "dentistas",
-    title: "Estrutura de Vendas para Clínicas Odontológicas | Leonardo Brasil",
-    description: "Pare de depender apenas de indicações. Estruture o comercial da sua clínica odontológica para atrair tratamentos de alto valor e ter previsibilidade.",
-    badge: "Odontologia",
-    h1: "Sua clínica depende só de indicação? Falta um ",
-    h1Highlight: "processo comercial.",
-    subheadline: "Pare de perder leads no WhatsApp por falta de follow-up. Implementamos um funil focado em previsibilidade, para atrair pacientes particulares para implantes e harmonização, sem depender apenas de convênios.",
+    title: "Como Atrair Pacientes Particulares de Odontologia no Google | Leonardo Brasil",
+    description: "Saia da dependência de convênios. Estruture a captação no Google e o atendimento do WhatsApp para fechar implantes e tratamentos odontológicos particulares.",
+    badge: "Odontologia & Clínicas",
+    h1: "Sua clínica odontológica depende de convênios ou indicações? Crie uma ",
+    h1Highlight: "máquina de pacientes particulares.",
+    subheadline: "Pare de perder orçamentos de alto valor no WhatsApp. Estruturamos o posicionamento no Google e o treinamento comercial da sua recepção para atrair pacientes particulares para implantes, próteses e alinhadores.",
     painPoints: [
-      "Leads perdidos por atendimento disperso no WhatsApp",
-      "Falta de previsibilidade de caixa no fim do mês",
-      "Follow-up falho e orçamentos esquecidos na gaveta"
+      "Leads de implantes e próteses esquecidos sem follow-up na recepção",
+      "Alta taxa de faltas e cancelamentos de consultas avaliativas",
+      "Falta de previsibilidade financeira e margens esmagadas por convênios"
     ],
-    ctaText: "Diagnóstico para sua Clínica",
-    waMessage: "Olá, Leonardo! Tenho uma clínica odontológica e quero parar de depender de indicações."
+    ctaText: "Diagnóstico para sua Clínica Odontológica",
+    waMessage: "Olá, Leonardo! Tenho uma clínica odontológica e quero atrair pacientes particulares para tratamentos de alto valor."
   },
   {
     slug: "medicos",
-    title: "Estrutura de Vendas para Consultórios Médicos | Leonardo Brasil",
-    description: "Conquiste uma agenda particular previsível. Estruturação de marketing e vendas para consultórios e clínicas médicas.",
-    badge: "Medicina",
-    h1: "Agenda refém de convênios que pagam pouco? Falta ",
-    h1Highlight: "atrair pacientes particulares.",
-    subheadline: "Você é um excelente médico, mas sua recepção pode estar perdendo pacientes particulares todos os dias por falta de treinamento em vendas e follow-up.",
+    title: "Como Atrair Pacientes Particulares para Consultórios Médicos | Leonardo Brasil",
+    description: "Conquiste uma agenda médica 100% particular. Estruturação de marketing no Google Ads e treinamento de secretária consultiva para clínicas médicas.",
+    badge: "Medicina & Consultórios",
+    h1: "Agenda médica refém de repasses baixos de convênio? Foque em ",
+    h1Highlight: "consultas particulares.",
+    subheadline: "Você investiu anos na sua formação médica, mas sua recepção perde pacientes particulares diariamente por falta de processo comercial e follow-up no WhatsApp. Estruturamos sua captação High-Ticket.",
     painPoints: [
-      "Dependência extrema de convênios médicos",
-      "Recepcionistas que não sabem vender a consulta particular",
-      "Falta de um CRM para controlar retornos e check-ups"
+      "Dependência de repasses baixos e atrasados de convênios médicos",
+      "Secretárias que passam o valor da consulta friamente sem qualificação",
+      "Ausência de CRM para gerenciar retornos de check-up e procedimentos"
     ],
-    ctaText: "Diagnóstico para seu Consultório",
-    waMessage: "Olá, Leonardo! Sou médico(a) e quero atrair mais pacientes particulares."
+    ctaText: "Diagnóstico para seu Consultório Médico",
+    waMessage: "Olá, Leonardo! Sou médico(a) e quero estruturar a captação de pacientes particulares para o meu consultório."
   },
   {
     slug: "psicologas",
