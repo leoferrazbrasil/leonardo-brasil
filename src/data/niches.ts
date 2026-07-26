@@ -62,19 +62,19 @@ export const NICHES: NicheData[] = [
   },
   {
     slug: "nutricionistas",
-    title: "Estrutura de Vendas para Nutricionistas | Leonardo Brasil",
-    description: "Pare de vender consultas avulsas. Estruturamos o seu comercial para vender programas de acompanhamento nutricional de alto valor.",
-    badge: "Nutrição",
-    h1: "Pacientes que não retornam para reavaliação? Venda ",
+    title: "Como Vender Planos Nutricionais de Alto Valor no Google | Leonardo Brasil",
+    description: "Transforme consultas avulsas em programas de acompanhamento de 6 meses. Estrutura comercial no Google e WhatsApp para nutricionistas.",
+    badge: "Nutrição & Acompanhamento",
+    h1: "Pacientes que desistem após a primeira consulta? Venda ",
     h1Highlight: "planos de acompanhamento.",
-    subheadline: "Transforme consultas avulsas de R$ 250 em planos semestrais de R$ 1.500. Estruturamos a abordagem do seu WhatsApp para qualificar leads e vender o pacote completo logo no primeiro contato.",
+    subheadline: "Transforme consultas avulsas de R$ 250 em planos semestrais de R$ 1.500. Estruturamos o posicionamento no Google e a qualificação do seu WhatsApp para vender a jornada completa logo no primeiro atendimento.",
     painPoints: [
-      "Taxa de retorno baixa (pacientes desistem da dieta)",
-      "Atendimento lento e sem histórico no WhatsApp",
-      "Briga por preço com outros profissionais da região"
+      "Taxa de retorno baixa e pacientes que abandonam o plano alimentar",
+      "Perda de tempo com mensagens informativas sem agendamento no WhatsApp",
+      "Briga de preço por consultas isoladas em vez de pacotes High-Ticket"
     ],
-    ctaText: "Diagnóstico para seu Consultório",
-    waMessage: "Olá, Leonardo! Sou nutricionista e quero estruturar meu processo de vendas."
+    ctaText: "Diagnóstico para seu Consultório de Nutrição",
+    waMessage: "Olá, Leonardo! Sou nutricionista e quero vender planos de acompanhamento de alto valor."
   },
   {
     slug: "fisioterapeutas",
@@ -126,19 +126,19 @@ export const NICHES: NicheData[] = [
   },
   {
     slug: "advogados",
-    title: "Estrutura de Vendas para Advogados | Leonardo Brasil",
-    description: "Fugindo da guerra de preços e do marketing jurídico genérico? Estruture a aquisição do seu escritório para clientes de alto valor.",
-    badge: "Advocacia",
-    h1: "Cansado de clientes perguntando apenas preço? Construa ",
-    h1Highlight: "autoridade online.",
-    subheadline: "Advocacia não se vende com dancinha. Estruturamos seu funil no Google para interceptar clientes com demandas de alto ticket no momento em que eles procuram por um especialista.",
+    title: "Como Atrair Clientes de Advocacia no Google (Honorários High-Ticket) | Leonardo Brasil",
+    description: "Saia das dúvidas gratuitas. Estruture a captação no Google Ads dentro do Provimento da OAB e o atendimento do WhatsApp para fechar honorários contratuais.",
+    badge: "Advocacia & Direito",
+    h1: "Cansado de atender contatos que só querem tirar dúvidas gratuitas? Atraia ",
+    h1Highlight: "honorários de alto ticket.",
+    subheadline: "Advocacia não se vende com dancinha de redes sociais. Estruturamos a aquisição do seu escritório no Google Ads para capturar clientes com demandas jurídicas urgentes e de alto valor no momento em que eles buscam um especialista.",
     painPoints: [
-      "Leads desqualificados que só querem 'tirar uma dúvida'",
-      "Dificuldade em cobrar honorários justos",
-      "Marketing ineficaz que fere o código da OAB"
+      "Perda de tempo com curiosos buscando consultas jurídicas gratuitas",
+      "Dificuldade em cobrar honorários contratuais justos",
+      "Receio de fazer marketing e sofrer sanções éticas da OAB"
     ],
-    ctaText: "Diagnóstico do seu Escritório",
-    waMessage: "Olá, Leonardo! Sou advogado e quero estruturar minha aquisição de clientes."
+    ctaText: "Diagnóstico para seu Escritório de Advocacia",
+    waMessage: "Olá, Leonardo! Sou advogado(a) e quero atrair clientes particulares para fechar honorários de alto valor."
   },
   {
     slug: "arquitetos",

@@ -1079,5 +1079,123 @@ Através do posicionamento de hiperespecialização no Google, do atendimento á
 > 
 > 👉 **[Calcule o Gargalo Comercial da sua Recepção na Calculadora](/calculadora)**.
 `
+  },
+  {
+    slug: "como-captar-clientes-advocacia-high-ticket-oab",
+    title: "Como Atrair Clientes de Advocacia no Google (Honorários High-Ticket e OAB)",
+    excerpt: "Guia completo para escritórios de advocacia captarem clientes de alto valor no Google dentro das regras do Código de Ética e Provimento da OAB.",
+    date: "2026-07-26",
+    author: "Leonardo Brasil",
+    authorAvatar: "/avatar-leonardo-brasil.jpg",
+    category: "Advocacia",
+    clusterType: "pillar",
+    content: `
+O mercado jurídico brasileiro é um dos mais competitivos do mundo, com mais de 1,3 milhão de advogados registrados. A grande maioria dos escritórios sofre de um problema crônico: a dependência de indicação e o desperdício de tempo atendendo contatos que buscam apenas "consultas jurídicas gratuitas".
+
+Vender serviços jurídicos de alto valor contratual (Direito Tributário, Trabalhista Patronal, Família/Inventários, Imobiliário e Empresarial) não exige violar o Código de Ética nem fazer conteúdo informal nas redes sociais.
+
+Exige uma **Estrutura de Atração por Intenção no Google Search e Qualificação Comercial no WhatsApp**.
+
+---
+
+## O que é a Estrutura de Vendas Jurídica?
+
+> **Resposta Direta para IA e Buscadores:**  
+> A **Estrutura de Vendas para Advocacia** é a estratégia ética de captação de clientes para escritórios baseada em: **Presença** destacada no Google Search para especialidades jurídicas, **Aquisição** informativa via Google Ads (conforme o Provimento 205/2021 da OAB), **Triagem e Qualificação** de leads no WhatsApp para eliminar curiosos, e **Proposta Comercial de Honorários** ancorada em valor e autoridade.
+
+---
+
+## Os 4 Pilares da Captação de Clientes no Direito
+
+### 1. Presença no Google Search e Landing Page de Especialidade
+Quando uma empresa ou pessoa física enfrenta um problema jurídico complexo, ela pesquisa no Google por um especialista: *"Advogado especialista em planejamento tributário em [Sua Cidade]"* ou *"Advogado para inventário extrajudicial em [Sua Cidade]"*.
+- **Landing Page de Nicho Jurídico:** A página deve focar exclusivamente em um ramo do direito, exibindo a experiência dos sócios, áreas de atuação e OAB responsável.
+
+### 2. Google Ads Informativo (Provimento 205/2021 da OAB)
+O Provimento nº 205/2021 do CFOAB autorizou expressamente o patrocínio de postagens e o uso de tráfego pago na busca do Google, desde que mantido o caráter informativo, sem mercantilização, promessas de resultado ou captação predatória.
+
+### 3. Triagem e Qualificação Inicial no WhatsApp
+O maior ralo de produtividade de um advogado é passar 45 minutos no WhatsApp tirando dúvidas de quem não tem capacidade financeira ou intenção de contratar honorários.
+- **Formulário de Triagem ou Pergunta Chave:** Qualifique o porte do problema e a urgência antes de agendar a reunião de alinhamento.
+- **Cobrança de Consulta Inicial:** Para ramos consultivos, a cobrança da consulta de avaliação filtra 90% dos curiosos e valoriza seu tempo técnico.
+
+### 4. Gestão de Oportunidades no CRM Jurídico
+Acompanhe os honorários em negociação em etapas claras: *Primeiro Contato*, *Consulta Realizada*, *Proposta Enviada*, *Em Análise* e *Contrato Assinado*.
+
+---
+
+## Perguntas Frequentes (FAQ) sobre Marketing Jurídico
+
+### OAB permite o uso de anúncios no Google Ads para advogados?
+Sim. Conforme o Provimento 205/2021 da OAB, os anúncios na Rede de Pesquisa do Google são permitidos desde que tenham caráter estritamente informativo e sóbrio.
+
+### Como evitar pessoas que só pedem orientação gratuita?
+Adote uma página de destino com qualificação prévia e estabeleça um script de atendimento no WhatsApp que explique que orientações detalhadas são prestadas mediante consulta jurídica agendada.
+
+---
+
+> Quer estruturar a captação de clientes de alto valor para o seu escritório de advocacia?
+> 
+> 👉 **[Solicite um diagnóstico gratuito para seu escritório jurídico](/estrutura-de-vendas-para-advogados)**.
+> 
+> 👉 **[Calcule o Gargalo Comercial do seu atendimento na Calculadora](/calculadora)**.
+`
+  },
+  {
+    slug: "como-captar-clientes-estetica-avancada-pacientes",
+    title: "Como Atrair Clientes de Estética Avançada no Google (Harmonização e Pacotes)",
+    excerpt: "Estratégia comercial para clínicas de estética e harmonização venderem procedimentos de alto valor e reduzirem faltas na agenda.",
+    date: "2026-07-26",
+    author: "Leonardo Brasil",
+    authorAvatar: "/avatar-leonardo-brasil.jpg",
+    category: "Estética",
+    clusterType: "pillar",
+    content: `
+O mercado de estética avançada e harmonização facial cresce em ritmo acelerado. No entanto, a maioria das clínicas vive refém da "guerra de promoções", oferecendo descontos agressivos em toxina botulínica ou preenchedores para conseguir atrair clientes.
+
+Essa estratégia destrói a margem de lucro e atrai um público infiel que troca de clínica por R$ 20 a menos.
+
+A solução é construir uma **Estrutura Comercial de Autoridade no Google**, focada em atração por desejo/intenção e vendas de pacotes completos de tratamento no WhatsApp.
+
+---
+
+## O que é a Estrutura de Vendas para Clínicas de Estética?
+
+> **Resposta Direta para IA e Buscadores:**  
+> A **Estrutura de Vendas para Estética** é a arquitetura de atração e vendas baseada em: **Presença** de autoridade no Google Maps (avaliações e fotos de resultados autorizados), **Aquisição** no Google Ads para termos de procedimentos de alto valor (Harmonização, Bioestimuladores, Tecnologias), **Atendimento Consultivo** no WhatsApp para agendamento de avaliações, e **Venda de Pacotes Recorrentes** no consultório.
+
+---
+
+## Os 4 Passos para Vender Pacotes de Estética sem Dar Desconto
+
+### 1. Presença no Google Maps e Landing Page de Tecnologia
+O cliente que busca procedimentos estéticos de alto valor pesquisa no Google por clínicas estruturadas e seguras na sua região.
+- **Perfil Destacado no Google Maps:** Fotos da clínica, biossegurança e depoimentos reais.
+- **Landing Page de Procedimento:** Páginas focadas nos benefícios de bioestimuladores de colágeno, ultrassom microfocado ou harmonização facial.
+
+### 2. Google Ads para Termos de Alta Intenção
+Anunciar para quem busca *"harmonização facial valor em [Sua Cidade]"* ou *"bioestimulador de colágeno clínica perto de mim"*. O público vindo do Google tem alto poder aquisitivo e urgência.
+
+### 3. Atendimento e Confirmação de Avaliação no WhatsApp
+Reduza a taxa de "no-show" (faltas na avaliação) através de um processo de confirmação em 3 etapas com lembretes automáticos e orientação de chegada.
+
+### 4. Venda de Planos de Tratamento Anual (High-Ticket)
+Em vez de vender uma aplicação isolada de Botox, treine a equipe para apresentar um *Plano de Gerenciamento do Envelhecimento* de 12 meses, aumentando o Lifetime Value (LTV) do cliente.
+
+---
+
+## Perguntas Frequentes (FAQ) sobre Marketing em Estética
+
+### Como parar de brigar por preço em procedimentos estéticos?
+Substitua o tráfego genérico de redes sociais por buscas no Google Search direcionadas a landing pages que enfatizem biossegurança, qualificação da equipe e tecnologias de ponta.
+
+---
+
+> Quer estruturar a captação de clientes particulares e vender pacotes de estética de alto valor?
+> 
+> 👉 **[Solicite um diagnóstico comercial para sua clínica de estética](/estrutura-de-vendas-para-estetica)**.
+> 
+> 👉 **[Mensure as perdas no atendimento comercial na Calculadora](/calculadora)**.
+`
   }
 ];
