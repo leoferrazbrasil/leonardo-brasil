@@ -542,14 +542,41 @@ export function createMainApp(options = {}) {
   });
 
   if (existsSync(distDir)) {
+    // Agent Readiness: API Catalog Endpoint
+    app.get('/.well-known/api-catalog', (request, response) => {
+      const catalogPath = path.join(distDir, '.well-known', 'api-catalog');
+      if (existsSync(catalogPath)) {
+        response.setHeader('Content-Type', 'application/linkset+json');
+        response.sendFile(catalogPath);
+        return;
+      }
+      response.status(404).end();
+    });
+
     app.use('/assets', express.static(path.join(distDir, 'assets'), { immutable: true, maxAge: '1y' }));
     // index:false e redirect:false para não servir index.html automaticamente nem
     // redirecionar para URLs com barra final. As rotas HTML são resolvidas abaixo,
     // servindo a página pré-renderizada correspondente quando ela existe.
     app.use(express.static(distDir, { maxAge: '1h', index: false, redirect: false }));
     app.get(/.*/, (request, response) => {
-      // Serve a página pré-renderizada da rota (dist/<rota>/index.html), quando existir.
       const cleanPath = request.path.replace(/\/+$/, '');
+
+      // Agent Readiness: Markdown Content-Negotiation
+      if (request.headers.accept && request.headers.accept.includes('text/markdown')) {
+        const llmsTxtPath = path.join(distDir, 'llms.txt');
+        if (existsSync(llmsTxtPath)) {
+          response.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+          response.sendFile(llmsTxtPath);
+          return;
+        }
+      }
+
+      // Agent Readiness: Link Headers for Discovery (RFC 8288) no root
+      if (cleanPath === '' || cleanPath === '/') {
+        response.setHeader('Link', '</.well-known/api-catalog>; rel="api-catalog"');
+      }
+
+      // Serve a página pré-renderizada da rota (dist/<rota>/index.html), quando existir.
       if (cleanPath && cleanPath !== '/') {
         const prerendered = path.join(distDir, cleanPath, 'index.html');
         if (prerendered.startsWith(distDir) && existsSync(prerendered)) {

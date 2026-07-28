@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agentskills.io/schema/index.json",
+  "skills": [
+    {
+      "name": "brain",
+      "type": "api",
+      "description": "AI language generation for local businesses.",
+      "url": "https://leonardobrasil.com.br/api/brain",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

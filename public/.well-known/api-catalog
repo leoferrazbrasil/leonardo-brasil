@@ -1,0 +1,28 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://leonardobrasil.com.br/api/brain",
+      "service-doc": [
+        {
+          "href": "https://leonardobrasil.com.br/auth.md",
+          "type": "text/markdown"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://leonardobrasil.com.br/",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "https://leonardobrasil.com.br/api/elevenlabs/tts",
+      "service-doc": [
+        {
+          "href": "https://leonardobrasil.com.br/auth.md",
+          "type": "text/markdown"
+        }
+      ]
+    }
+  ]
+}

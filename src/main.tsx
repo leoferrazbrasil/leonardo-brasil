@@ -9,6 +9,57 @@ import "./index.css";
 // Inicia interceptador global de UTMs para o WhatsApp
 initAnalytics();
 
+// Agent Readiness: WebMCP Integration
+if (typeof navigator !== "undefined" && (navigator as any).modelContext) {
+  try {
+    (navigator as any).modelContext.provideContext({
+      tools: [
+        {
+          name: "calculate_sales_funnel",
+          description: "Calculates the sales funnel bottleneck (leads, calls, sales).",
+          inputSchema: {
+            type: "object",
+            properties: {
+              leads: { type: "number" },
+              calls: { type: "number" },
+              sales: { type: "number" }
+            },
+            required: ["leads", "calls", "sales"]
+          },
+          execute: async (inputs: any) => {
+            const { leads, calls, sales } = inputs;
+            const conversionRate = (sales / leads) * 100;
+            return {
+              content: [{
+                type: "text",
+                text: `Com ${leads} leads e ${sales} vendas, a conversão é de ${conversionRate.toFixed(2)}%.`
+              }]
+            };
+          }
+        },
+        {
+          name: "request_diagnostic",
+          description: "Generates the WhatsApp link to request a free sales funnel diagnostic.",
+          inputSchema: {
+            type: "object",
+            properties: {}
+          },
+          execute: async () => {
+            return {
+              content: [{
+                type: "text",
+                text: "O diagnóstico pode ser solicitado via WhatsApp: https://wa.me/5551992568861?text=Olá,%20Leonardo!%20Quero%20um%20diagnóstico%20gratuito%20da%20estrutura%20de%20vendas%20do%20meu%20negócio."
+              }]
+            };
+          }
+        }
+      ]
+    });
+  } catch (e) {
+    console.error("Failed to provide WebMCP context:", e);
+  }
+}
+
 const App = lazy(() => import("./App"));
 const NicheLanding = lazy(() => import("./pages/NicheLanding"));
 const BlogIndex = lazy(() => import("./pages/BlogIndex"));
