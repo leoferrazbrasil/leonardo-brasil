@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "../lib/local-router";
 
 interface SeoHeadProps {
   title?: string;
@@ -19,10 +20,13 @@ export function SeoHead({
   schema,
   includeBrandGraph = true,
 }: SeoHeadProps) {
+  const location = useLocation();
+  const currentPath = location.pathname === "/" ? "" : location.pathname;
+  
   const defaultTitle = "Leonardo Brasil — Estrutura de Vendas para Negócios Locais";
   const defaultDescription =
     "Leonardo Brasil monta a estrutura de vendas do seu negócio local, presença no Google, aquisição, conversão no WhatsApp e escala. Diagnóstico gratuito.";
-  const defaultUrl = "https://leonardobrasil.com.br/";
+  const autoCanonical = `https://leonardobrasil.com.br${currentPath}`;
   const defaultOgImage = "https://leonardobrasil.com.br/logo-completo.png";
 
   const finalTitle = title
@@ -31,7 +35,7 @@ export function SeoHead({
       : `${title} | Leonardo Brasil`
     : defaultTitle;
   const finalDesc = description || defaultDescription;
-  const finalUrl = canonicalUrl || defaultUrl;
+  const finalUrl = canonicalUrl || autoCanonical;
   const finalOgImage = ogImage || defaultOgImage;
 
   // Grafo de Entidade Oficial da Marca (Knowledge Graph for Google & AI Engines)
@@ -150,7 +154,7 @@ export function SeoHead({
     <Helmet>
       <title>{finalTitle}</title>
       <meta name="description" content={finalDesc} />
-      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+      <link rel="canonical" href={finalUrl} />
 
       {/* Open Graph / Facebook / WhatsApp */}
       <meta property="og:type" content={ogType} />
