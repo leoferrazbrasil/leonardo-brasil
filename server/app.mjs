@@ -553,6 +553,17 @@ export function createMainApp(options = {}) {
       response.status(404).end();
     });
 
+    // Agent Readiness: Web Bot Auth Endpoint
+    app.get('/.well-known/http-message-signatures-directory', (request, response) => {
+      const authPath = path.join(distDir, '.well-known', 'http-message-signatures-directory');
+      if (existsSync(authPath)) {
+        response.setHeader('Content-Type', 'application/jwk-set+json');
+        response.sendFile(authPath);
+        return;
+      }
+      response.status(404).end();
+    });
+
     app.use('/assets', express.static(path.join(distDir, 'assets'), { immutable: true, maxAge: '1y' }));
     // index:false e redirect:false para não servir index.html automaticamente nem
     // redirecionar para URLs com barra final. As rotas HTML são resolvidas abaixo,
