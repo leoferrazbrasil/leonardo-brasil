@@ -11,6 +11,7 @@
     "start": "node app.js",
     "test": "node --test server/*.test.mjs",
     "verify": "npm run typecheck && npm run build && npm test",
+    "verify:porto-alegre": "node scripts/verify-porto-alegre-digital.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },
