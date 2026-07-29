@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, useLocation } from "./lib/local-router";
 import { HelmetProvider } from "react-helmet-async";
 import { initAnalytics } from "./lib/analytics";
-import { AnnouncementBar } from "./components/AnnouncementBar";
+import { RouteAnnouncementBar } from "./components/RouteAnnouncementBar";
 import "./index.css";
 
 // Inicia interceptador global de UTMs para o WhatsApp
@@ -88,7 +88,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <AnnouncementBar />
+        <RouteAnnouncementBar />
         <Suspense fallback={<div className="min-h-screen bg-ink flex items-center justify-center text-accent">Carregando...</div>}>
           <Routes>
             <Route path="/" element={<App />} />

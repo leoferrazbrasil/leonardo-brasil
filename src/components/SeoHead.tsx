@@ -9,6 +9,7 @@ interface SeoHeadProps {
   ogType?: "website" | "article";
   schema?: Record<string, any> | Record<string, any>[];
   includeBrandGraph?: boolean;
+  robots?: string;
 }
 
 export function SeoHead({
@@ -19,6 +20,7 @@ export function SeoHead({
   ogType = "website",
   schema,
   includeBrandGraph = true,
+  robots,
 }: SeoHeadProps) {
   const location = useLocation();
   const currentPath = location.pathname === "/" ? "" : location.pathname;
@@ -154,6 +156,7 @@ export function SeoHead({
     <Helmet>
       <title>{finalTitle}</title>
       <meta name="description" content={finalDesc} />
+      {robots && <meta name="robots" content={robots} />}
       <link rel="canonical" href={finalUrl} />
 
       {/* Open Graph / Facebook / WhatsApp */}

@@ -28,3 +28,14 @@ test("Porto Alegre Digital content keeps the approved commercial contract", asyn
   assert.doesNotMatch(source, /RD Station/i);
   assert.doesNotMatch(source, /resultado garantido/i);
 });
+
+test("private presentation exposes robots control and hides the global announcement", async () => {
+  const seo = await read("../src/components/SeoHead.tsx");
+  const routeBar = await read("../src/components/RouteAnnouncementBar.tsx");
+
+  assert.match(seo, /robots\?: string/);
+  assert.match(seo, /meta name="robots"/);
+  assert.match(routeBar, /porto-alegre-digital/);
+  assert.match(routeBar, /return null/);
+  assert.match(routeBar, /AnnouncementBar/);
+});

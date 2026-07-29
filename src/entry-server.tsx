@@ -1,7 +1,7 @@
 import { renderToString } from "react-dom/server";
 import { StaticRouter, Routes, Route, useLocation } from "./lib/local-router";
 import { HelmetProvider, type HelmetServerState } from "react-helmet-async";
-import { AnnouncementBar } from "./components/AnnouncementBar";
+import { RouteAnnouncementBar } from "./components/RouteAnnouncementBar";
 import App from "./App";
 import NicheLanding from "./pages/NicheLanding";
 import BlogIndex from "./pages/BlogIndex";
@@ -34,7 +34,7 @@ export function render(url: string): { appHtml: string; head: string } {
   const appHtml = renderToString(
     <HelmetProvider context={helmetContext}>
       <StaticRouter location={url}>
-        <AnnouncementBar />
+        <RouteAnnouncementBar />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/consultoria" element={<Consultoria />} />
