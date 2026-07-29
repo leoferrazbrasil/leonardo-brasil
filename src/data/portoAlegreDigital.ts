@@ -37,19 +37,19 @@ export const ECOSYSTEM_PROFILES: readonly EcosystemProfile[] = [
     handle: "@portoalegreoficial",
     followers: 644_000,
     followersLabel: "644 mil",
-    image: "/porto-alegre-digital/perfil-porto-alegre-oficial.png",
+    image: "/porto-alegre-digital/perfil-porto-alegre-oficial.webp",
   },
   {
     handle: "@portoalegre",
     followers: 521_000,
     followersLabel: "521 mil",
-    image: "/porto-alegre-digital/perfil-porto-alegre.png",
+    image: "/porto-alegre-digital/perfil-porto-alegre.webp",
   },
   {
     handle: "@riograndedosul",
     followers: 583_000,
     followersLabel: "583 mil",
-    image: "/porto-alegre-digital/perfil-rio-grande-do-sul.png",
+    image: "/porto-alegre-digital/perfil-rio-grande-do-sul.webp",
   },
 ] as const;
 
