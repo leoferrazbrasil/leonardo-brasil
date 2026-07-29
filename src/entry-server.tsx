@@ -10,6 +10,7 @@ import Brandbook from "./pages/Brandbook";
 import CitiesDirectory from "./pages/CitiesDirectory";
 import CalculatorPage from "./pages/CalculatorPage";
 import Consultoria from "./pages/Consultoria";
+import PortoAlegreDigital from "./pages/PortoAlegreDigital";
 import { TermsPage, PrivacyPage, DataDeletionPage } from "./pages/LegalPages";
 
 /**
@@ -43,6 +44,7 @@ export function render(url: string): { appHtml: string; head: string } {
           <Route path="/brandbook" element={<Brandbook />} />
           <Route path="/cidades" element={<CitiesDirectory />} />
           <Route path="/calculadora" element={<CalculatorPage />} />
+          <Route path="/porto-alegre-digital" element={<PortoAlegreDigital />} />
           <Route path="/termos" element={<TermsPage />} />
           <Route path="/privacidade" element={<PrivacyPage />} />
           <Route path="/exclusao-de-dados" element={<DataDeletionPage />} />

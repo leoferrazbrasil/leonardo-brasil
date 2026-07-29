@@ -61,3 +61,15 @@ test("executive page keeps the meeting flow and local-only acceptance", async ()
   assert.doesNotMatch(page, /wa\.me|WhatsApp/i);
   assert.doesNotMatch(decision, /fetch\(|localStorage|sessionStorage/);
 });
+
+test("executive page is registered in client, SSR, and prerender but not sitemap", async () => {
+  const client = await read("../src/main.tsx");
+  const server = await read("../src/entry-server.tsx");
+  const prerender = await read("../scripts/prerender.mjs");
+  const sitemap = await read("../scripts/generate-sitemap.mjs");
+
+  assert.match(client, /path="\/porto-alegre-digital"/);
+  assert.match(server, /path="\/porto-alegre-digital"/);
+  assert.match(prerender, /"\/porto-alegre-digital"/);
+  assert.doesNotMatch(sitemap, /porto-alegre-digital/);
+});

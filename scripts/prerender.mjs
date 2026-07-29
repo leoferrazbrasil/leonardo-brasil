@@ -40,6 +40,7 @@ function buildRoutes() {
     "/brandbook",
     "/cidades",
     "/calculadora",
+    "/porto-alegre-digital",
     "/termos",
     "/privacidade",
     "/exclusao-de-dados",
